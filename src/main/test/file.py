@@ -1,3 +1,5 @@
+from file2 import kill
+
 def a():
     b()
     return 1
@@ -47,7 +49,7 @@ def l():
     return 1
 
 def main():
-    l()
+    asd = l(1, 2)
 
 main()
 
