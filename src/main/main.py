@@ -10,4 +10,6 @@ if __name__ == "__main__" :
     
     test_path = 'test/file.py'
     # abs_file_path = os.path.join(script_dir, test_path)
+    
     parse(test_path)
+    
