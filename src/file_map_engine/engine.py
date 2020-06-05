@@ -19,6 +19,7 @@ def parse(test_path):
     parent[-1] = 'this_file'
     
     for sent in _file:
+        
         tokens = sent.strip().split(' ')
         # Only consider lines which have actual content
         sent_str = sent.strip()
