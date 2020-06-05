@@ -17,6 +17,7 @@
     <div class="con">
         <div class="row">
           <div class="col-lg-4">
+            <button type="button" class="btn btn-danger" id="back">BACK</button>
             <div id="menu">
                 
 
@@ -50,6 +51,8 @@
         
     }
 
+    
+
     .row{
         height: 100%;
     }
@@ -61,24 +64,50 @@
     }
 
     #container{
-        height: 100%;
+        height: 800px;
         
     }
 
     #menu{
-        height: 100%;
+      padding: 50px;
+      overflow-y: scroll;
+        height: 800px;
         
+    }
+
+    .btn-info{
+      padding: 0px;
+      width: 100%;
     }
 </style>
 
 <script>
 
+  document.getElementById("back").onclick = function() {
+    
+            prev_lev = stack.pop();
+
+            if(prev_lev != root){
+                level(stack.pop());
+            }else{
+              stack.push(prev_lev);
+            }
+            // if (prev_lev!=undefined){
+            //   level(prev_lev);
+            //   curr = prev_lev;
+            // }
+
+            
+    }
+
     function add_directory_to_view(dir_name){
         var element = document.createElement("input");
         element.type = "button";
         element.setAttribute("class", "btn btn-info");
+        // element.setAttribute("id", dir_name);
         element.setAttribute("value", dir_name);
-
+        element.onclick = function () { level(dir_name); };
+        
         var foo = document.getElementById("menu");
         foo.appendChild(element);
         var element = document.createElement("br");
@@ -88,136 +117,152 @@
 
 
 
+      var tree = {{ tree|safe }}
+      var keys = [];
+
+      for (var k in tree){
+        keys.push(k);
+      }
+
+function clear_data(){
+  const myNode = document.getElementById("menu");
+  myNode.innerHTML = '';
+
+  const myNode2 = document.getElementById("container");
+  myNode2.innerHTML = '';
+}
+
+function level(lev, yes_no){
+
+
+  clear_data();
+
+    console.log(lev);
     var new_data = {'nodes': [], 'edges':[]}
+    
+    temp = tree[lev];
 
-    var tree = {{ tree|safe }}
-    // console.log(tree.keys());
-    for (var key in tree){
-        temp_node_dir = {id: key, normal: {
-            fill: '#ffbaba',
-        }, hovered: {
-            fill: '#ff5252'
-        }, selected: {
-            fill: '#ff0000'
-        }}
 
-        new_data['nodes'].push(temp_node_dir);
-        add_directory_to_view(key);
+    temp_node_dir = {id: lev, normal: {
+                fill: '#ffbaba',
+                height: 30
+            }, hovered: {
+                fill: '#ff5252',
+                height: 40
+            }, selected: {
+                fill: '#ff0000',
+                height: 50
+            }}
 
-        if (tree.hasOwnProperty(key)){
-            var temp = tree[key]
-            
-            for (var obj in temp){
-                // console.log(key, temp[obj]);
-                if (temp[obj]['type'] == 'dir'){
-                    console.log('Directory');
-                    temp_edge_dir3 = {'from': key, 'to':temp[obj]['value']}
-                    new_data['edges'].push(temp_edge_dir3);
+            new_data['nodes'].push(temp_node_dir);
+            add_directory_to_view(lev);
+
+
+    // for(var k in temp){
+    
+    
+  // }
+  
+  for(var k in temp){
+
+    if (temp[k]['type'] == 'dir'){
+
+        temp_node_dir = {id: temp[k]['value'], normal: {
+              height: 20,
+              fill: '#ffbaba',
+          }, hovered: {
+            height: 30,
+              fill: '#ff5252'
+          }, selected: {
+            height: 40,
+              fill: '#ff0000'
+          }}
+
+          new_data['nodes'].push(temp_node_dir);
+          add_directory_to_view(temp[k]['value']);
+
+          console.log('Directory');
+          temp_edge_dir3 = {'from': lev, 'to':temp[k]['value']}
+          new_data['edges'].push(temp_edge_dir3);   
+
+      }else if (temp[k]['type'] == 'file'){
                     
-                }
-                // else if (temp[obj]['type'] == 'file'){
-                    
-                //     temp_node_dir4 = {id: temp[obj]['value'], normal: {
-                //                     fill: '#2fff00',
-                //                 }, hovered: {
-                //                     fill: '#72fb89'
-                //                 }, selected: {
-                //                     fill: '#00fff9'
-                //                 }, shape: "diamond"}
-                //     new_data['nodes'].push(temp_node_dir4);
+            temp_node_dir4 = {id: temp[k]['value'], normal: {
+                            fill: '#2fff00',
+                            height: 20
+                        }, hovered: {
+                            fill: '#72fb89',
+                            height: 30
+                        }, selected: {
+                            fill: '#00fff9',
+                            height: 40
+                        }, shape: "diamond"}
 
-                //     console.log('File');
-                //     temp_edge_dir2 = {'from': key, 'to':temp[obj]['value']}
-                //     new_data['edges'].push(temp_edge_dir2);
-                // }
-            }
-            
+            new_data['nodes'].push(temp_node_dir4);
+
+            console.log('File');
+            temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
+            new_data['edges'].push(temp_edge_dir2);
         }
+
+  }
+
+  // return new_data;
+
+  var chart = anychart.graph(new_data);
+// set the container id
+  chart.container("container");
+  chart.layout().iterationCount(1000);
+  chart.nodes().labels().enabled(true);
+  chart.nodes().labels().fontSize(12);
+  chart.nodes().labels().fontWeight(600);
+  // initiate drawing the chart
+  chart.draw();
+  chart.title("root : " + lev);
+
+
+
+  if(yes_no != "no"){
+    if (curr != lev){
+      stack.push(lev);
     }
+    
+  }
+
+  curr = lev;
+
+  console.log(stack);
+
+}
+
+let stack = [];
+let curr = keys[0];
+root = keys[0];
+
+stack.push(keys[0]);
+
+level(keys[0],"no");
+
 
 // console.log(data);
     // create data
 // create data
-var data = {
-  nodes: [
-    {id: "Richard"},
-    {id: "Larry"},
-    {id: "Marta",
-     normal:   { 
-                 height: 40,
-                 shape: "star5",
-                 fill: "#ffa000",
-                 stroke: null
-               },
-     hovered:  {
-                 height: 55,
-                 shape: "star5",
-                 fill: "white",
-                 stroke: "3 #ffa000"
-               },
-     selected: {
-                 height: 55,
-                 shape: "star5",
-                 fill: "#ffa000",
-                 stroke: "3 #333333"
-               }
-    },
-    {id: "Jane"},
-    {id: "Norma"},
-    {id: "Frank"},
-    {id: "Brett"},
-    {id: "Tommy",
-     normal:   {
-                 height: 20,
-                 shape: "diagonal-cross",
-                 fill: "#ff3300",
-                 stroke: null
-               },
-     hovered:  {
-                 height: 27,
-                 shape: "diagonal-cross",
-                 fill: "white",
-                 stroke: "3 #ff3300"
-               },
-     selected: {
-                 height: 27,
-                 shape: "diagonal-cross",
-                 fill: "#ff3300",
-                 stroke: "3 #333333"
-               }
-    }
-  ],
-  edges: [
-    {from: "Richard", to: "Larry"},
-    {from: "Richard", to: "Marta"},
-    {from: "Larry",   to: "Marta"},
-    {from: "Marta",   to: "Jane"},
-    {from: "Jane",    to: "Norma"},
-    {from: "Jane",    to: "Frank"},
-    {from: "Jane",    to: "Brett"},
-    {from: "Brett",   to: "Frank"}
-  ]
-};
 
 // create a chart and set the data
-var chart = anychart.graph(new_data);
-// set the container id
-chart.container("container");
-chart.layout().iterationCount(500);
-// initiate drawing the chart
-chart.draw();
-chart.title("Directory");
+// var chart = anychart.graph(new_dat);
+// // set the container id
+// chart.container("container");
+// chart.layout().iterationCount(1000);
+// chart.nodes().labels().enabled(true);
+// chart.nodes().labels().fontSize(12);
+// chart.nodes().labels().fontWeight(600);
+// // initiate drawing the chart
+// chart.draw();
+// chart.title("Directory");
 
-console.log(chart.nodes)
+// console.log(chart.nodes)
 
 </script>
-
-
-
-
-
-
-
 
 
 </html>
