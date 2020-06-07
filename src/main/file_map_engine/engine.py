@@ -11,7 +11,7 @@ def parse_python_func(test_path):
 
     prev_indent = -1
     cur_indent = 0
-    
+
     parent_dict = {}
     parent = {}
     imp_dict = {}
@@ -73,44 +73,75 @@ def parse_python_func(test_path):
 
             func_name = re.search("[a-zA-Z]+[a-zA-Z0-9_]*\(", sent_str)
             
+            
 
             if func_name:
                 act_func = func_name.group()[:-1]
+                print(act_func)
 
                 # Is a function defintion
-                if tokens[0] == 'def':
+                if tokens[0] == 'def' or tokens[0] == 'with':
                     func_name = re.search("[a-zA-Z]+[a-zA-Z0-9_]*\(", sent_str)
                     # print("function definition: ", func_name.group()[:-1])
                     
-                    
-                    if parent[indent_lev-1] not in parent_dict.keys():
-                        parent_dict[parent[indent_lev-1]] = [act_func]
-                    else:
-                        parent_dict[parent[indent_lev-1]].append(act_func)
-                    # parent_dict[act_func] = parent[indent_lev-1]
-                    parent[indent_lev] = act_func
+                    print("\n\nParent", parent)
+                    try:
+                        if parent[indent_lev-1] not in parent_dict.keys():
+                            parent_dict[parent[indent_lev-1]] = [act_func]
+                        else:
+                            parent_dict[parent[indent_lev-1]].append(act_func)
+                        parent[indent_lev] = act_func
+                        # parent_dict[act_func] = parent[indent_lev-1]
+                    except:
+                        if parent[indent_lev-2] not in parent_dict.keys():
+                            parent_dict[parent[indent_lev-2]] = [act_func]
+                        else:
+                            parent_dict[parent[indent_lev-2]].append(act_func)
+                        # parent_dict[act_func] = parent[indent_lev-1]
+                        parent[indent_lev-1] = act_func
                     
                 
                 else:
                     # print(indent_lev, ' function name: ', func_name.group()[:-1])
 
-                    if parent[indent_lev-1] not in parent_calls.keys():
-                        parent_calls[parent[indent_lev-1]] = [act_func]
-                    else:
-                        parent_calls[parent[indent_lev-1]].append(act_func)
+                    try:
+                        if parent[indent_lev-1] not in parent_calls.keys():
+                            parent_calls[parent[indent_lev-1]] = [act_func]
+                        else:
+                            parent_calls[parent[indent_lev-1]].append(act_func)
+                    
+                    except:
+                        if parent[indent_lev-2] not in parent_calls.keys():
+                            parent_calls[parent[indent_lev-2]] = [act_func]
+                        else:
+                            parent_calls[parent[indent_lev-2]].append(act_func)
+
 
             else: # Is a Condition
-                tok = ['if', 'elif', 'else:', 'for', 'while','switch']
+                tok = ['if', 'elif', 'else:', 'for', 'while','switch', 'with', 'open']
+                print(tokens)
                 if tokens[0] in tok:
+                    
+
+                    
                     act_func = tokens[0]+'_<spc_tok>_'+str(parent[indent_lev-1])
 
                     # print("Condition: ", act_func)
-                    if parent[indent_lev-1] not in parent_dict.keys():
-                        parent_dict[parent[indent_lev-1]] = [act_func]
-                    else:
-                        parent_dict[parent[indent_lev-1]].append(act_func)
-                    # parent_dict[act_func] = parent[indent_lev-1]
-                    parent[indent_lev] = act_func
+                    try:
+                        if parent[indent_lev-1] not in parent_dict.keys():
+                            parent_dict[parent[indent_lev-1]] = [act_func]
+                        else:
+                            parent_dict[parent[indent_lev-1]].append(act_func)
+                        # parent_dict[act_func] = parent[indent_lev-1]
+                        parent[indent_lev] = act_func
+                    except:
+                        if parent[indent_lev-2] not in parent_dict.keys():
+                            parent_dict[parent[indent_lev-2]] = [act_func]
+                        else:
+                            parent_dict[parent[indent_lev-2]].append(act_func)
+                        # parent_dict[act_func] = parent[indent_lev-1]
+                        parent[indent_lev-1] = act_func
+
 
             # if sent_str.find('__main__')!=-1:
                 # print('function name: ', 'main')

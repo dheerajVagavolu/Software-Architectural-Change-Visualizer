@@ -11,41 +11,46 @@ from file_map_engine.engine import get_calls
 from file_map_engine.call_dir import dir_walk
 import networkx as nx
 import matplotlib.pyplot as plt
+from test import make_ast
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
     script_dir = os.getcwd()
-    test_path = 'test/file.py'
-    test_path = 'test'
+    # test_path = 'test/file.py'
+
+    # test_path = 'test'
     new_dir = os.getcwd() + '\\test'
     tree = dir_walk(new_dir)
-    print(tree)
 
-    # G=nx.Graph()
+    # print(tree)
 
-    # # adding just one node:
-    # # a list of nodes:
-    # G.add_nodes_from(tree.keys())
 
-    # for key in tree.keys():
-    #     for te in tree[key]:
-    #         if te['type'] == 'dir':
-    #             G.add_edge(key, te['value'])
-    #         elif te['type'] == 'file':
-    #             G.add_node(te['value'])
-    #             G.add_edge(key, te['value'])
+    # This if for engine of parsing.
 
-    # print("Nodes of graph: ")
-    # print(G.nodes())
-    # print("Edges of graph: ")
-    # print(G.edges())
+    ########################################################################################
 
-    # nx.draw(G)
-    # plt.savefig("test.pdf")
+    new_calls_tree = {}
+
+    for k in tree.keys():
+        print(k, "\n-------------")
+        for i in tree[k]:
+            if i['type'] == 'file':
+                if i['value'].split('.')[-1] == 'py':
+                    print(i['value'])
+                    code = open(i['value'], 'r', encoding='utf-8').read()
+                    make_ast(code)
+                    print("successful")
+                    # temp_tree ,temp_mod = get_calls(i['value'])
+                    # print(temp_mod)
+    
+    ########################################################################################
+            
+
 
     return render_template('index.html', tree = tree)
+    # return "hello_world"
 
 if __name__ == '__main__':
 

@@ -83,7 +83,7 @@
 
 <script>
 
-  document.getElementById("back").onclick = function() {
+document.getElementById("back").onclick = function() {
     
             prev_lev = stack.pop();
 
@@ -95,12 +95,10 @@
             // if (prev_lev!=undefined){
             //   level(prev_lev);
             //   curr = prev_lev;
-            // }
-
-            
+            // }   
     }
 
-    function add_directory_to_view(dir_name){
+function add_directory_to_view(dir_name){
         var element = document.createElement("input");
         element.type = "button";
         element.setAttribute("class", "btn btn-info");
@@ -117,12 +115,12 @@
 
 
 
-      var tree = {{ tree|safe }}
-      var keys = [];
+var tree = {{ tree|safe }}
+var keys = [];
 
-      for (var k in tree){
-        keys.push(k);
-      }
+for (var k in tree){
+  keys.push(k);
+}
 
 function clear_data(){
   const myNode = document.getElementById("menu");
@@ -186,8 +184,13 @@ function level(lev, yes_no){
           new_data['edges'].push(temp_edge_dir3);   
 
       }else if (temp[k]['type'] == 'file'){
-                    
-            temp_node_dir4 = {id: temp[k]['value'], normal: {
+
+        var res = temp[k]['value'].split(".");
+
+        var king = res[res.length-1];
+
+        if (true){
+          temp_node_dir4 = {id: temp[k]['value'], normal: {
                             fill: '#2fff00',
                             height: 20
                         }, hovered: {
@@ -204,6 +207,11 @@ function level(lev, yes_no){
             temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
             new_data['edges'].push(temp_edge_dir2);
         }
+                    
+            
+        }
+
+
 
   }
 
@@ -212,10 +220,10 @@ function level(lev, yes_no){
   var chart = anychart.graph(new_data);
 // set the container id
   chart.container("container");
-  chart.layout().iterationCount(1000);
+  chart.layout().iterationCount(500);
   chart.nodes().labels().enabled(true);
-  chart.nodes().labels().fontSize(12);
-  chart.nodes().labels().fontWeight(600);
+  chart.nodes().labels().fontSize(10);
+  chart.nodes().labels().fontWeight(300);
   // initiate drawing the chart
   chart.draw();
   chart.title("root : " + lev);
