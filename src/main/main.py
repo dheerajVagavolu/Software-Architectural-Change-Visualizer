@@ -9,9 +9,12 @@ from flask import Flask, render_template
 import sys
 from file_map_engine.engine import get_calls
 from file_map_engine.call_dir import dir_walk
+from file_map_engine.ast_engine import make_ast
+from file_map_engine.ast_helper import wrapper_get
+
 import networkx as nx
 import matplotlib.pyplot as plt
-from test import make_ast
+# from test import make_ast
 
 app = Flask(__name__)
 
@@ -40,8 +43,14 @@ def hello_world():
                 if i['value'].split('.')[-1] == 'py':
                     print(i['value'])
                     code = open(i['value'], 'r', encoding='utf-8').read()
-                    make_ast(code)
+                    new_tree = make_ast(code)
+                    final_obj = wrapper_get(new_tree, i['value'])
+                    print(final_obj)
                     print("successful")
+                    if i['value'] not in new_calls_tree.keys():
+                        new_calls_tree[i['value']] = final_obj
+    
+    print(len(new_calls_tree.keys()))
                     # temp_tree ,temp_mod = get_calls(i['value'])
                     # print(temp_mod)
     
@@ -49,7 +58,7 @@ def hello_world():
             
 
 
-    return render_template('index.html', tree = tree)
+    return render_template('index.html', tree = tree, calls = new_calls_tree)
     # return "hello_world"
 
 if __name__ == '__main__':

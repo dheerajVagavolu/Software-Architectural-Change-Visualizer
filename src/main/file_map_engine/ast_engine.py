@@ -43,5 +43,5 @@ def make_ast(code):
     tree = ast.parse(code)
     return jsonify_ast(tree)
 
-print(make_ast(code))
+# print(make_ast(code))
 

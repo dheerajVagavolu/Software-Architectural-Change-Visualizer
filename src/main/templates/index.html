@@ -17,7 +17,11 @@
     <div class="con">
         <div class="row">
           <div class="col-lg-4">
-            <button type="button" class="btn btn-danger" id="back">BACK</button>
+
+              <button type="button" class="btn btn-danger" id="back">BACK</button>
+              <button type="button" class="btn btn-success" id="get_calls">GET CALLS</button>
+
+
             <div id="menu">
                 
 
@@ -83,6 +87,20 @@
 
 <script>
 
+document.getElementById("get_calls").onclick = function() {
+    
+    // prev_lev = stack.pop();
+
+    // if(prev_lev != root){
+    //     level(stack.pop());
+    // }else{
+    //   stack.push(prev_lev);
+    // }
+
+    alert('Working Button')
+ 
+}
+
 document.getElementById("back").onclick = function() {
     
             prev_lev = stack.pop();
@@ -113,9 +131,10 @@ function add_directory_to_view(dir_name){
         foo.appendChild(element);
     }
 
-
-
 var tree = {{ tree|safe }}
+var calls = {{ calls|safe }}
+
+console.log(calls)
 var keys = [];
 
 for (var k in tree){
