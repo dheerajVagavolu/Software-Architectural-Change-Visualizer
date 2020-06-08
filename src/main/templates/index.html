@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-graph.min.js"></script>
-    
+    <script src="//www.amcharts.com/lib/4/core.js"></script>
+  <script src="//www.amcharts.com/lib/4/charts.js"></script>
+  <script src="//www.amcharts.com/lib/4/plugins/forceDirected.js"></script> 
+
     <title>Hello, world!</title>
   </head>
   <body>
@@ -52,7 +55,6 @@
     body {
         padding: 20px;
         height: 100%;
-        
     }
 
     
@@ -68,6 +70,7 @@
     }
 
     #container{
+      
         height: 800px;
         
     }
@@ -89,17 +92,138 @@
 
 document.getElementById("get_calls").onclick = function() {
     
-    // prev_lev = stack.pop();
+  var new_data = {'nodes': [], 'edges':[]}
 
-    // if(prev_lev != root){
-    //     level(stack.pop());
-    // }else{
-    //   stack.push(prev_lev);
-    // }
 
-    alert('Working Button')
- 
+    cur_sup_files.forEach((file) => {
+      console.log(file);
+      new_temp = calls[file];
+      // File
+      group = file;
+
+      
+      // console.log(new_temp);
+      // for( var i = 0; i < new_temp.length ; i++){
+      //   console.log(new_temp[i]);
+      // }
+
+
+      for (var key in new_temp) {
+        if (new_temp.hasOwnProperty(key)){
+          temp_new_dat = Object.values(new_temp[key]);
+          console.log(temp_new_dat);
+          for(var i in temp_new_dat){
+            from = key;
+            to = temp_new_dat[i][0];
+            console.log(from + " : " + to);
+
+
+
+            temp_node_dir = {id: from, normal: {
+                height: 20,
+                fill: '#F0F278',
+            }, hovered: {
+              height: 30,
+                fill: '#B3F278'
+            }, selected: {
+              height: 40,
+                fill: '#78F27A'
+            }, shape: "square"}
+
+            new_data['nodes'].push(temp_node_dir);
+
+
+            temp_node_dir2 = {id: to[0], normal: {
+                height: 20,
+                fill: '#F0F278',
+            }, hovered: {
+              height: 30,
+                fill: '#B3F278'
+            }, selected: {
+              height: 40,
+                fill: '#78F27A'
+            }, shape: "square"}
+
+            new_data['nodes'].push(temp_node_dir2);
+
+            temp_edge_dir = {'from': from, 'to':to[0]}
+            new_data['edges'].push(temp_edge_dir);
+            
+
+
+
+
+          }
+        }
+      }
+
+      // for (var key in new_temp) {
+
+      //   if (new_temp.hasOwnProperty(key)){
+      //     // From
+      //     from = key;
+      //     to = Object.values(new_temp[key])[0];
+      //     type = to[1]
+      //     console.log(from + ': ' + to[0], ' : ' + type);
+
+          
+
+      //     temp_node_dir = {id: from, normal: {
+      //         height: 20,
+      //         fill: '#ffbaba',
+      //     }, hovered: {
+      //       height: 30,
+      //         fill: '#ff5252'
+      //     }, selected: {
+      //       height: 40,
+      //         fill: '#ff0000'
+      //     }}
+
+      //     new_data['nodes'].push(temp_node_dir);
+
+
+      //     temp_node_dir2 = {id: to[0], normal: {
+      //         height: 20,
+      //         fill: '#ffbaba',
+      //     }, hovered: {
+      //       height: 30,
+      //         fill: '#ff5252'
+      //     }, selected: {
+      //       height: 40,
+      //         fill: '#ff0000'
+      //     }}
+
+      //     new_data['nodes'].push(temp_node_dir2);
+
+      //     temp_edge_dir = {'from': from, 'to':to[0]}
+      //     new_data['edges'].push(temp_edge_dir);
+
+
+
+      //   }
+      // }
+    });
+
+    console.log(new_data);
+
+    const myNode2 = document.getElementById("container");
+    myNode2.innerHTML = '';
+
+
+    var chart = anychart.graph(new_data);
+  // set the container id
+    chart.container("container");
+    chart.layout().iterationCount(1000);
+    chart.nodes().labels().enabled(true);
+    chart.nodes().labels().fontSize(10);
+    chart.nodes().labels().fontWeight(300);
+    // initiate drawing the chart
+    chart.draw();
+    chart.title("Call graphs in : " + curr);
+
+
 }
+
 
 document.getElementById("back").onclick = function() {
     
@@ -132,7 +256,8 @@ function add_directory_to_view(dir_name){
     }
 
 var tree = {{ tree|safe }}
-var calls = {{ calls|safe }}
+
+var calls = {{ calls|tojson }}
 
 console.log(calls)
 var keys = [];
@@ -150,6 +275,8 @@ function clear_data(){
 }
 
 function level(lev, yes_no){
+
+  cur_sup_files = [];
 
 
   clear_data();
@@ -208,7 +335,10 @@ function level(lev, yes_no){
 
         var king = res[res.length-1];
 
-        if (true){
+        if (king=='py'){
+
+          cur_sup_files.push(temp[k]['value']);
+          
           temp_node_dir4 = {id: temp[k]['value'], normal: {
                             fill: '#2fff00',
                             height: 20
@@ -236,32 +366,33 @@ function level(lev, yes_no){
 
   // return new_data;
 
-  var chart = anychart.graph(new_data);
-// set the container id
-  chart.container("container");
-  chart.layout().iterationCount(500);
-  chart.nodes().labels().enabled(true);
-  chart.nodes().labels().fontSize(10);
-  chart.nodes().labels().fontWeight(300);
-  // initiate drawing the chart
-  chart.draw();
-  chart.title("root : " + lev);
+    var chart = anychart.graph(new_data);
+  // set the container id
+    chart.container("container");
+    chart.layout().iterationCount(500);
+    chart.nodes().labels().enabled(true);
+    chart.nodes().labels().fontSize(10);
+    chart.nodes().labels().fontWeight(300);
+    // initiate drawing the chart
+    chart.draw();
+    chart.title("root : " + lev);
 
 
 
-  if(yes_no != "no"){
-    if (curr != lev){
-      stack.push(lev);
+    if(yes_no != "no"){
+      if (curr != lev){
+        stack.push(lev);
+      }
+      
     }
-    
-  }
 
-  curr = lev;
+    curr = lev;
 
-  console.log(stack);
+    console.log(stack);
 
 }
 
+let cur_sup_files = [];
 let stack = [];
 let curr = keys[0];
 root = keys[0];

@@ -1,4 +1,5 @@
 from file2 import kill
+import hi
 
 def a():
     b()

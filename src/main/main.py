@@ -11,9 +11,9 @@ from file_map_engine.engine import get_calls
 from file_map_engine.call_dir import dir_walk
 from file_map_engine.ast_engine import make_ast
 from file_map_engine.ast_helper import wrapper_get
+import pickle
 
-import networkx as nx
-import matplotlib.pyplot as plt
+
 # from test import make_ast
 
 app = Flask(__name__)
@@ -24,7 +24,7 @@ def hello_world():
     # test_path = 'test/file.py'
 
     # test_path = 'test'
-    new_dir = os.getcwd() + '\\test'
+    new_dir = os.path.join(os.getcwd(), 'test')
     tree = dir_walk(new_dir)
 
     # print(tree)
@@ -34,23 +34,28 @@ def hello_world():
 
     ########################################################################################
 
-    new_calls_tree = {}
+    # new_calls_tree = {}
 
-    for k in tree.keys():
-        print(k, "\n-------------")
-        for i in tree[k]:
-            if i['type'] == 'file':
-                if i['value'].split('.')[-1] == 'py':
-                    print(i['value'])
-                    code = open(i['value'], 'r', encoding='utf-8').read()
-                    new_tree = make_ast(code)
-                    final_obj = wrapper_get(new_tree, i['value'])
-                    print(final_obj)
-                    print("successful")
-                    if i['value'] not in new_calls_tree.keys():
-                        new_calls_tree[i['value']] = final_obj
+    # for k in tree.keys():
+    #     print(k, "\n-------------")
+    #     for i in tree[k]:
+    #         if i['type'] == 'file':
+    #             if i['value'].split('.')[-1] == 'py':
+    #                 print(i['value'])
+    #                 code = open(i['value'], 'r', encoding='utf-8').read()
+    #                 new_tree = make_ast(code)
+    #                 final_obj = wrapper_get(new_tree, i['value'])
+    #                 print(final_obj)
+    #                 print("successful")
+    #                 if i['value'] not in new_calls_tree.keys():
+    #                     new_calls_tree[i['value']] = dict(final_obj)
     
+    # pickle.dump( new_calls_tree, open( "test.dat", "wb" ))
+    
+    
+    new_calls_tree = pickle.load( open( "test.dat", "rb" ) )
     print(len(new_calls_tree.keys()))
+
                     # temp_tree ,temp_mod = get_calls(i['value'])
                     # print(temp_mod)
     

@@ -11,10 +11,10 @@ def dir_walk(test):
             Tree[root] = []
 
         for name in dirs:
-            Tree[root].append({'type':'dir','value':root + '\\' + name})
+            Tree[root].append({'type':'dir','value':os.path.join(root,name)})
         
         for name in files:
-            Tree[root].append({'type' : 'file', 'value': root + '\\' + name})
+            Tree[root].append({'type' : 'file', 'value': os.path.join(root ,name)})
         
         # print(Tree)
     
