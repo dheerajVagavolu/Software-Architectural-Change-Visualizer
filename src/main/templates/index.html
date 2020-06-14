@@ -23,7 +23,16 @@
 
               <button type="button" class="btn btn-danger" id="back">BACK</button>
               <button type="button" class="btn btn-success" id="get_calls">GET CALLS</button>
-
+              
+              <!-- Example single danger button -->
+              <div class="btn-group">
+                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Tag
+                </button>
+                <div class="dropdown-menu" id="drop">
+                  
+                </div>
+              </div>
 
             <div id="menu">
                 
@@ -31,9 +40,47 @@
             </div>
           </div>
           <div class="col-lg-8">
-            <div id="container"></div>
+            <div id="container">
+              
+
+              
+            </div>
           </div>
         </div>
+        <hr>
+
+
+        <div class="row">
+          <div class="col-lg-4">
+
+              <button type="button" class="btn btn-danger" id="back2">BACK</button>
+              <button type="button" class="btn btn-success" id="get_calls2">GET CALLS</button>
+              
+              <!-- Example single danger button -->
+              <div class="btn-group">
+                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Tag
+                </button>
+                <div class="dropdown-menu" id="drop2">
+                  
+                </div>
+              </div>
+
+            <div id="menu2">
+                
+
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div id="container2">
+              
+
+              
+            </div>
+          </div>
+        </div>
+
+
       </div>
 
     
@@ -60,26 +107,43 @@
     
 
     .row{
-        height: 100%;
+      height: fit-content;
     }
 
     .con{
         width: 100%;
-        height: 100%;
+        height: fit-content;
         
     }
+
 
     #container{
-      
-        height: 800px;
+        
+        height: 500px;
+        border: 1px solid pink;
         
     }
 
+
+
     #menu{
-      padding: 50px;
-      overflow-y: scroll;
-        height: 800px;
+      padding: 20px;
+      
         
+    }
+
+    #container2{
+        
+        height: 500px;
+        border: 1px solid pink;
+        
+    }
+
+
+
+    #menu2{
+      padding: 20px;
+      
     }
 
     .btn-info{
@@ -90,6 +154,66 @@
 
 <script>
 
+let tree;
+
+var ulti_dict = {{ ulti_dict|tojson }}
+
+var ulti_tree = {{ ulti_tree|tojson }}
+
+var tags = {{ tags|safe }}
+
+
+// THE Start of First View
+
+var keys = [];
+
+let cur_sup_files = [];
+
+let stack = [];
+
+// Adding the dropdown
+
+//  Creating tags
+for(var i=0; i<tags.length; i++){
+  var dd = document.createElement('a');
+  // dd.setAttribute('class', 'dropdown-item');
+  // dd.setAttribute('id', i);
+  // dd.setAttribute('value', "tags[i]");
+  // dd.setAttribute('href', '#');
+
+  dd.innerHTML = "<a class=\"dropdown-item\" id="+i+" href=\"#\" onclick='SetTag("+i+")'>"+ tags[i] +"</a>"
+
+  var menu = document.getElementById('drop');
+  menu.appendChild(dd);
+  
+}
+
+// Setting the tag
+function SetTag(i){
+
+  tree = ulti_tree['body'][i+1];
+  calls = ulti_dict["body"][i+1];
+
+  keys = [];
+
+  cur_sup_files = [];
+  stack = [];
+
+  for (var k in tree){
+    keys.push(k);
+  }
+
+  let curr = keys[0];
+  root = keys[0];
+
+  stack.push(keys[0]);
+
+  level(keys[0],"container" , "no");
+
+
+}
+
+// Get calls function
 document.getElementById("get_calls").onclick = function() {
     
   var new_data = {'nodes': [], 'edges':[]}
@@ -98,6 +222,8 @@ document.getElementById("get_calls").onclick = function() {
     cur_sup_files.forEach((file) => {
       console.log(file);
       new_temp = calls[file];
+      console.log("testing");
+      console.log(new_temp);
       // File
       group = file;
 
@@ -106,7 +232,6 @@ document.getElementById("get_calls").onclick = function() {
       // for( var i = 0; i < new_temp.length ; i++){
       //   console.log(new_temp[i]);
       // }
-
 
       for (var key in new_temp) {
         if (new_temp.hasOwnProperty(key)){
@@ -133,7 +258,7 @@ document.getElementById("get_calls").onclick = function() {
             new_data['nodes'].push(temp_node_dir);
 
 
-            temp_node_dir2 = {id: to[0], normal: {
+            temp_node_dir2 = {id: to, normal: {
                 height: 20,
                 fill: '#F0F278',
             }, hovered: {
@@ -146,7 +271,7 @@ document.getElementById("get_calls").onclick = function() {
 
             new_data['nodes'].push(temp_node_dir2);
 
-            temp_edge_dir = {'from': from, 'to':to[0]}
+            temp_edge_dir = {'from': from, 'to':to}
             new_data['edges'].push(temp_edge_dir);
             
 
@@ -204,6 +329,7 @@ document.getElementById("get_calls").onclick = function() {
       // }
     });
 
+    console.log("testing2")
     console.log(new_data);
 
     const myNode2 = document.getElementById("container");
@@ -224,13 +350,13 @@ document.getElementById("get_calls").onclick = function() {
 
 }
 
-
+// Back functiom
 document.getElementById("back").onclick = function() {
     
             prev_lev = stack.pop();
 
             if(prev_lev != root){
-                level(stack.pop());
+                level(stack.pop(), "container");
             }else{
               stack.push(prev_lev);
             }
@@ -240,13 +366,14 @@ document.getElementById("back").onclick = function() {
             // }   
     }
 
+// Adding the directory to view
 function add_directory_to_view(dir_name){
         var element = document.createElement("input");
         element.type = "button";
         element.setAttribute("class", "btn btn-info");
         // element.setAttribute("id", dir_name);
         element.setAttribute("value", dir_name);
-        element.onclick = function () { level(dir_name); };
+        element.onclick = function () { level(dir_name, "container"); };
         
         var foo = document.getElementById("menu");
         foo.appendChild(element);
@@ -254,17 +381,6 @@ function add_directory_to_view(dir_name){
         foo.appendChild(element);
         foo.appendChild(element);
     }
-
-var tree = {{ tree|safe }}
-
-var calls = {{ calls|tojson }}
-
-console.log(calls)
-var keys = [];
-
-for (var k in tree){
-  keys.push(k);
-}
 
 function clear_data(){
   const myNode = document.getElementById("menu");
@@ -274,7 +390,7 @@ function clear_data(){
   myNode2.innerHTML = '';
 }
 
-function level(lev, yes_no){
+function level(lev, cont, yes_no){
 
   cur_sup_files = [];
 
@@ -360,15 +476,13 @@ function level(lev, yes_no){
             
         }
 
-
-
   }
 
   // return new_data;
 
     var chart = anychart.graph(new_data);
   // set the container id
-    chart.container("container");
+    chart.container(cont);
     chart.layout().iterationCount(500);
     chart.nodes().labels().enabled(true);
     chart.nodes().labels().fontSize(10);
@@ -392,35 +506,317 @@ function level(lev, yes_no){
 
 }
 
-let cur_sup_files = [];
-let stack = [];
-let curr = keys[0];
-root = keys[0];
 
-stack.push(keys[0]);
-
-level(keys[0],"no");
+// THE END of First View
 
 
-// console.log(data);
-    // create data
-// create data
 
-// create a chart and set the data
-// var chart = anychart.graph(new_dat);
-// // set the container id
-// chart.container("container");
-// chart.layout().iterationCount(1000);
-// chart.nodes().labels().enabled(true);
-// chart.nodes().labels().fontSize(12);
-// chart.nodes().labels().fontWeight(600);
-// // initiate drawing the chart
-// chart.draw();
-// chart.title("Directory");
 
-// console.log(chart.nodes)
+// THE Start of Second View
+
+let tree2;
+
+var keys2 = [];
+
+let cur_sup_files2 = [];
+
+let stack2 = [];
+
+// Adding the dropdown
+
+//  Creating tags
+for(var i=0; i<tags.length; i++){
+  var dd = document.createElement('a');
+  // dd.setAttribute('class', 'dropdown-item');
+  // dd.setAttribute('id', i);
+  // dd.setAttribute('value', "tags[i]");
+  // dd.setAttribute('href', '#');
+
+  dd.innerHTML = "<a class=\"dropdown-item\" id= \"_"+i.toString(10)+"\" href=\"#\" onclick='SetTag2(2_"+i+")'>"+ tags[i] +"</a>"
+
+  var menu = document.getElementById('drop2');
+  menu.appendChild(dd);
+  
+}
+
+// Setting the tag
+function SetTag2(i){
+
+  // var new_i = i.substring(1,2);
+  // i = toString(i);
+  i = i.toString();
+  i = i.substr(1);
+
+  i = parseInt(i, 10);
+
+  console.log(i)
+
+  tree2 = ulti_tree['body'][i+1];
+  calls2 = ulti_dict["body"][i+1];
+
+  keys2 = [];
+
+  cur_sup_files2 = [];
+  stack2 = [];
+
+  for (var k in tree2){
+    keys2.push(k);
+  }
+
+  let curr2 = keys2[0];
+  root2 = keys2[0];
+
+  stack2.push(keys2[0]);
+
+  level2(keys2[0],"container2" , "no");
+
+}
+
+// Get calls function
+document.getElementById("get_calls2").onclick = function() {
+    
+  var new_data2 = {'nodes': [], 'edges':[]}
+
+
+    cur_sup_files2.forEach((file) => {
+      console.log(file);
+      new_temp = calls2[file];
+      console.log("testing");
+      console.log(new_temp);
+      // File
+      group = file;
+
+
+      for (var key in new_temp) {
+        if (new_temp.hasOwnProperty(key)){
+          temp_new_dat = Object.values(new_temp[key]);
+          console.log(temp_new_dat);
+          for(var i in temp_new_dat){
+            from = key;
+            to = temp_new_dat[i][0];
+            console.log(from + " : " + to);
+
+
+
+            temp_node_dir = {id: from, normal: {
+                height: 20,
+                fill: '#F0F278',
+            }, hovered: {
+              height: 30,
+                fill: '#B3F278'
+            }, selected: {
+              height: 40,
+                fill: '#78F27A'
+            }, shape: "square"}
+
+            new_data['nodes'].push(temp_node_dir);
+
+
+            temp_node_dir2 = {id: to, normal: {
+                height: 20,
+                fill: '#F0F278',
+            }, hovered: {
+              height: 30,
+                fill: '#B3F278'
+            }, selected: {
+              height: 40,
+                fill: '#78F27A'
+            }, shape: "square"}
+
+            new_data2['nodes'].push(temp_node_dir2);
+
+            temp_edge_dir = {'from': from, 'to':to}
+            new_data2['edges'].push(temp_edge_dir);
+
+          }
+        }
+      }
+
+    });
+
+    console.log("testing2")
+    console.log(new_data2);
+
+    const myNode2 = document.getElementById("container2");
+    myNode2.innerHTML = '';
+
+
+    var chart = anychart.graph(new_data2);
+  // set the container id
+    chart.container("container2");
+    chart.layout().iterationCount(1000);
+    chart.nodes().labels().enabled(true);
+    chart.nodes().labels().fontSize(10);
+    chart.nodes().labels().fontWeight(300);
+    // initiate drawing the chart
+    chart.draw();
+    chart.title("Call graphs in 2_: " + curr2);
+
+
+}
+
+// Back functiom
+document.getElementById("back2").onclick = function() {
+    
+            prev_lev = stack2.pop();
+
+            if(prev_lev != root2){
+                level2(stack2.pop(), "container2");
+            }else{
+              stack2.push(prev_lev);
+            }
+            // if (prev_lev!=undefined){
+            //   level(prev_lev);
+            //   curr = prev_lev;
+            // }   
+    }
+
+// Adding the directory to view
+function add_directory_to_view2(dir_name){
+        var element = document.createElement("input");
+        element.type = "button";
+        element.setAttribute("class", "btn btn-info");
+        // element.setAttribute("id", dir_name);
+        element.setAttribute("value", dir_name);
+        element.onclick = function () { level2(dir_name, "container2"); };
+        
+        var foo = document.getElementById("menu2");
+        foo.appendChild(element);
+        var element = document.createElement("br");
+        foo.appendChild(element);
+        foo.appendChild(element);
+    }
+
+function clear_data2(){
+  const myNode = document.getElementById("menu2");
+  myNode.innerHTML = '';
+
+  const myNode2 = document.getElementById("container2");
+  myNode2.innerHTML = '';
+}
+
+function level2(lev, cont, yes_no){
+
+  cur_sup_files2 = [];
+
+
+  clear_data2();
+
+    console.log(lev);
+    var new_data2 = {'nodes': [], 'edges':[]}
+    
+    temp = tree2[lev];
+
+
+    temp_node_dir = {id: lev, normal: {
+                fill: '#ffbaba',
+                height: 30
+            }, hovered: {
+                fill: '#ff5252',
+                height: 40
+            }, selected: {
+                fill: '#ff0000',
+                height: 50
+            }}
+
+            new_data2['nodes'].push(temp_node_dir);
+            add_directory_to_view2(lev);
+
+
+    // for(var k in temp){
+    
+    
+  // }
+  
+  for(var k in temp){
+
+    if (temp[k]['type'] == 'dir'){
+
+        temp_node_dir = {id: temp[k]['value'], normal: {
+              height: 20,
+              fill: '#ffbaba',
+          }, hovered: {
+            height: 30,
+              fill: '#ff5252'
+          }, selected: {
+            height: 40,
+              fill: '#ff0000'
+          }}
+
+          new_data2['nodes'].push(temp_node_dir);
+          add_directory_to_view2(temp[k]['value']);
+
+          console.log('Directory');
+          temp_edge_dir3 = {'from': lev, 'to':temp[k]['value']}
+          new_data2['edges'].push(temp_edge_dir3);   
+
+      }else if (temp[k]['type'] == 'file'){
+
+        var res = temp[k]['value'].split(".");
+
+        var king = res[res.length-1];
+
+        if (king=='py'){
+
+          cur_sup_files.push(temp[k]['value']);
+          
+          temp_node_dir4 = {id: temp[k]['value'], normal: {
+                            fill: '#2fff00',
+                            height: 20
+                        }, hovered: {
+                            fill: '#72fb89',
+                            height: 30
+                        }, selected: {
+                            fill: '#00fff9',
+                            height: 40
+                        }, shape: "diamond"}
+
+            new_data2['nodes'].push(temp_node_dir4);
+
+            console.log('File');
+            temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
+            new_data2['edges'].push(temp_edge_dir2);
+        }
+                    
+            
+        }
+
+  }
+
+  // return new_data;
+
+    var chart = anychart.graph(new_data2);
+  // set the container id
+    chart.container(cont);
+    chart.layout().iterationCount(500);
+    chart.nodes().labels().enabled(true);
+    chart.nodes().labels().fontSize(10);
+    chart.nodes().labels().fontWeight(300);
+    // initiate drawing the chart
+    chart.draw();
+    chart.title("root : " + lev);
+
+
+
+    if(yes_no != "no"){
+      if (curr2 != lev){
+        stack2.push(lev);
+      }
+      
+    }
+
+    curr2 = lev;
+
+    // console.log(stack2);
+
+}
+
+
+// THE END of First View
+
 
 </script>
+
 
 
 </html>
