@@ -22,7 +22,7 @@
           <div class="col-lg-4">
 
               <button type="button" class="btn btn-danger" id="back">BACK</button>
-              <button type="button" class="btn btn-success" id="get_calls">GET CALLS</button>
+              <button type="button" class="btn btn-success" id="get_calls">Extract Python Graphs</button>
               
               <!-- Example single danger button -->
               <div class="btn-group">
@@ -55,7 +55,7 @@
           <div class="col-lg-4">
 
               <button type="button" class="btn btn-danger" id="back2">BACK</button>
-              <button type="button" class="btn btn-success" id="get_calls2">GET CALLS</button>
+              <button type="button" class="btn btn-success" id="get_calls2">Extract Python Graphs</button>
               
               <!-- Example single danger button -->
               <div class="btn-group">
@@ -66,7 +66,7 @@
                   
                 </div>
               </div>
-              <h3><span id="second_tag" class="badge badge-secondary">Select a Tag</span></h3>
+              <h3><span id="second_tag" class="badge badge-secondary">Select Another Tag to Compare</span></h3>
             <div id="menu2">
                 
 
@@ -157,7 +157,9 @@
 
 
 
-var ulti_dict = {{ ulti_dict|tojson }}
+var ulti_dict = JSON.parse({{ ulti_dict|tojson }})
+
+// ulti_dict = JSON.aprse(ulti_dict);
 
 var ulti_tree = {{ ulti_tree|tojson }}
 
@@ -178,7 +180,7 @@ prev_tag = 0;
 
 
 var tree = ulti_tree['body'][i+1];
-var calls = ulti_dict["body"][i+1];
+var calls = ulti_dict[i+1];
 
 
 // Adding the dropdown
@@ -206,7 +208,7 @@ function SetTag(i){
   prev_tag = i;
   
   tree = ulti_tree['body'][i+1];
-  calls = ulti_dict["body"][i+1];
+  calls = ulti_dict[i+1];
 
   keys = [];
 
@@ -232,7 +234,6 @@ document.getElementById("get_calls").onclick = function() {
     
   var new_data = {'nodes': [], 'edges':[]}
 
-
     cur_sup_files.forEach((file) => {
       console.log(file);
       new_temp = calls[file];
@@ -251,39 +252,113 @@ document.getElementById("get_calls").onclick = function() {
         if (new_temp.hasOwnProperty(key)){
           temp_new_dat = Object.values(new_temp[key]);
           console.log(temp_new_dat);
+          
           for(var i in temp_new_dat){
             from = key;
             to = temp_new_dat[i][0];
+            type_ = temp_new_dat[i][1];
             console.log(from + " : " + to);
 
 
 
             temp_node_dir = {id: from, normal: {
-                height: 20,
+                height: 8,
                 fill: '#F0F278',
             }, hovered: {
-              height: 30,
+              height: 10,
                 fill: '#B3F278'
             }, selected: {
-              height: 40,
+              height: 12,
                 fill: '#78F27A'
             }, shape: "square"}
 
             new_data['nodes'].push(temp_node_dir);
 
 
-            temp_node_dir2 = {id: to, normal: {
-                height: 20,
-                fill: '#F0F278',
-            }, hovered: {
-              height: 30,
-                fill: '#B3F278'
-            }, selected: {
-              height: 40,
-                fill: '#78F27A'
-            }, shape: "square"}
+            
+            if(type_ == "funcDef"){
 
-            new_data['nodes'].push(temp_node_dir2);
+                  temp_node_dir2 = {id: to, normal: {
+                          height: 8,
+                          fill: '#2C3E50',
+                      }, hovered: {
+                        height: 10,
+                          fill: '#2C3E50'
+                      }, selected: {
+                        height: 12,
+                          fill: '#2C3E50'
+                      }, shape: "square"}
+
+                      new_data['nodes'].push(temp_node_dir2);
+                  }
+
+                  if(type_ == "ClassDef"){
+
+                      temp_node_dir2 = {id: to, normal: {
+                              height: 8,
+                              fill: '#633974',
+                          }, hovered: {
+                            height: 10,
+                              fill: '#633974'
+                          }, selected: {
+                            height: 12,
+                              fill: '#633974'
+                          }, shape: "circle"}
+
+                          new_data['nodes'].push(temp_node_dir2);
+                      }
+
+                  if(type_ == "func"){
+
+                  temp_node_dir2 = {id: to, normal: {
+                          height: 6,
+                          fill: '#76D7C4',
+                      }, hovered: {
+                        height: 8,
+                          fill: '#76D7C4'
+                      }, selected: {
+                        height: 10,
+                          fill: '#76D7C4'
+                      }, shape: "square"}
+
+                      new_data['nodes'].push(temp_node_dir2);
+                  }
+
+                  if(type_ == "module"){
+
+                    temp_node_dir2 = {id: to, normal: {
+                            height: 3,
+                            fill: '#2980B9',
+                        }, hovered: {
+                          height: 4,
+                            fill: '#2980B9'
+                        }, selected: {
+                          height: 5,
+                            fill: '#2980B9'
+                        }, shape: "square"}
+
+                        new_data['nodes'].push(temp_node_dir2);
+                    }
+
+
+                    if(type_ == "file"){
+
+                      temp_node_dir2 = {id: to, normal: {
+                              height: 3,
+                              fill: '#7B7D7D',
+                          }, hovered: {
+                            height: 4,
+                              fill: '#7B7D7D'
+                          }, selected: {
+                            height: 5,
+                              fill: '#7B7D7D'
+                          }, shape: "square"}
+
+                          new_data['nodes'].push(temp_node_dir2);
+                      }
+
+
+
 
             temp_edge_dir = {'from': from, 'to':to}
             new_data['edges'].push(temp_edge_dir);
@@ -309,10 +384,10 @@ document.getElementById("get_calls").onclick = function() {
     var chart = anychart.graph(new_data);
   // set the container id
     chart.container("container");
-    chart.layout().iterationCount(1000);
-    chart.nodes().labels().enabled(true);
-    chart.nodes().labels().fontSize(10);
-    chart.nodes().labels().fontWeight(300);
+    chart.layout().iterationCount(2000);
+    // chart.nodes().labels().enabled(true);
+    // chart.nodes().labels().fontSize(10);
+    // chart.nodes().labels().fontWeight(300);
     // initiate drawing the chart
     chart.draw();
     chart.title("Call graphs in : " + curr);
@@ -374,13 +449,13 @@ function level(lev, cont, yes_no){
 
 
     temp_node_dir = {id: lev, normal: {
-                fill: '#ffbaba',
+                fill: '#F7DC6F',
                 height: 30
             }, hovered: {
-                fill: '#ff5252',
+                fill: '#F7DC6F',
                 height: 40
             }, selected: {
-                fill: '#ff0000',
+                fill: '#F7DC6F',
                 height: 50
             }}
 
@@ -399,13 +474,13 @@ function level(lev, cont, yes_no){
 
         temp_node_dir = {id: temp[k]['value'], normal: {
               height: 20,
-              fill: '#ffbaba',
+              fill: '#85C1E9',
           }, hovered: {
             height: 30,
-              fill: '#ff5252'
+              fill: '#85C1E9'
           }, selected: {
             height: 40,
-              fill: '#ff0000'
+              fill: '#85C1E9'
           }}
 
           new_data['nodes'].push(temp_node_dir);
@@ -426,13 +501,13 @@ function level(lev, cont, yes_no){
           cur_sup_files.push(temp[k]['value']);
           
           temp_node_dir4 = {id: temp[k]['value'], normal: {
-                            fill: '#2fff00',
+                            fill: '#3498DB',
                             height: 20
                         }, hovered: {
-                            fill: '#72fb89',
+                            fill: '#3498DB',
                             height: 30
                         }, selected: {
-                            fill: '#00fff9',
+                            fill: '#3498DB',
                             height: 40
                         }, shape: "diamond"}
 
@@ -446,15 +521,15 @@ function level(lev, cont, yes_no){
           // cur_sup_files.push(temp[k]['value']);
           
           temp_node_dir4 = {id: temp[k]['value'], normal: {
-                            fill: '#5D6D7E',
+                            fill: '#1B4F72',
                             height: 10
                         }, hovered: {
-                            fill: '#34495E',
+                            fill: '#1B4F72',
                             height: 15
                         }, selected: {
-                            fill: '##2E4053',
+                            fill: '#1B4F72',
                             height: 20
-                        }, shape: "diamond"}
+                        }, shape: "square"}
 
             new_data['nodes'].push(temp_node_dir4);
 
@@ -474,10 +549,10 @@ function level(lev, cont, yes_no){
     var chart = anychart.graph(new_data);
   // set the container id
     chart.container(cont);
-    chart.layout().iterationCount(500);
-    chart.nodes().labels().enabled(true);
-    chart.nodes().labels().fontSize(10);
-    chart.nodes().labels().fontWeight(300);
+    chart.layout().iterationCount(1000);
+    // chart.nodes().labels().enabled(true);
+    // chart.nodes().labels().fontSize(10);
+    // chart.nodes().labels().fontWeight(300);
     // initiate drawing the chart
     chart.draw();
     chart.title("root : " + lev);
@@ -546,7 +621,7 @@ function SetTag2(i){
   console.log(i)
 
   tree2 = ulti_tree['body'][i+1];
-  calls2 = ulti_dict["body"][i+1];
+  calls2 = ulti_dict[i+1];
 
   keys2 = [];
 
@@ -585,39 +660,118 @@ document.getElementById("get_calls2").onclick = function() {
         if (new_temp.hasOwnProperty(key)){
           temp_new_dat = Object.values(new_temp[key]);
           console.log(temp_new_dat);
+
           for(var i in temp_new_dat){
             from = key;
             to = temp_new_dat[i][0];
+
+            type_ = temp_new_dat[i][1];
+            // alert(type_);
             console.log(from + " : " + to);
 
 
-
+            
             temp_node_dir = {id: from, normal: {
-                height: 20,
-                fill: '#F0F278',
+                height: 6,
+                fill: '#F4D03F',
             }, hovered: {
-              height: 30,
-                fill: '#B3F278'
+              height: 8,
+                fill: '#F4D03F'
             }, selected: {
-              height: 40,
-                fill: '#78F27A'
+              height: 10,
+                fill: '#F4D03F'
             }, shape: "square"}
 
             new_data2['nodes'].push(temp_node_dir);
 
 
-            temp_node_dir2 = {id: to, normal: {
-                height: 20,
-                fill: '#F0F278',
-            }, hovered: {
-              height: 30,
-                fill: '#B3F278'
-            }, selected: {
-              height: 40,
-                fill: '#78F27A'
-            }, shape: "square"}
+            
 
-            new_data2['nodes'].push(temp_node_dir2);
+            if(type_ == "funcDef"){
+
+              temp_node_dir2 = {id: to, normal: {
+                      height: 8,
+                      fill: '#2C3E50',
+                  }, hovered: {
+                    height: 10,
+                      fill: '#2C3E50'
+                  }, selected: {
+                    height: 12,
+                      fill: '#2C3E50'
+                  }, shape: "square"}
+
+                  new_data2['nodes'].push(temp_node_dir2);
+              }
+
+              if(type_ == "ClassDef"){
+
+                  temp_node_dir2 = {id: to, normal: {
+                          height: 8,
+                          fill: '#633974',
+                      }, hovered: {
+                        height: 10,
+                          fill: '#633974'
+                      }, selected: {
+                        height: 12,
+                          fill: '#633974'
+                      }, shape: "circle"}
+
+                      new_data2['nodes'].push(temp_node_dir2);
+                  }
+
+              if(type_ == "func"){
+
+              temp_node_dir2 = {id: to, normal: {
+                      height: 6,
+                      fill: '#76D7C4',
+                  }, hovered: {
+                    height: 8,
+                      fill: '#76D7C4'
+                  }, selected: {
+                    height: 10,
+                      fill: '#76D7C4'
+                  }, shape: "square"}
+
+                  new_data2['nodes'].push(temp_node_dir2);
+              }
+
+              if(type_ == "module"){
+
+                temp_node_dir2 = {id: to, normal: {
+                        height: 3,
+                        fill: '#2980B9',
+                    }, hovered: {
+                      height: 4,
+                        fill: '#2980B9'
+                    }, selected: {
+                      height: 5,
+                        fill: '#2980B9'
+                    }, shape: "square"}
+
+                    new_data2['nodes'].push(temp_node_dir2);
+                }
+
+
+                if(type_ == "file"){
+
+                  temp_node_dir2 = {id: to, normal: {
+                          height: 3,
+                          fill: '#7B7D7D',
+                      }, hovered: {
+                        height: 4,
+                          fill: '#7B7D7D'
+                      }, selected: {
+                        height: 5,
+                          fill: '#7B7D7D'
+                      }, shape: "square"}
+
+                      new_data2['nodes'].push(temp_node_dir2);
+                  }
+
+
+
+
+
 
             temp_edge_dir = {'from': from, 'to':to}
             new_data2['edges'].push(temp_edge_dir);
@@ -638,10 +792,10 @@ document.getElementById("get_calls2").onclick = function() {
     var chart = anychart.graph(new_data2);
   // set the container id
     chart.container("container2");
-    chart.layout().iterationCount(1000);
-    chart.nodes().labels().enabled(true);
-    chart.nodes().labels().fontSize(10);
-    chart.nodes().labels().fontWeight(300);
+    chart.layout().iterationCount(2000);
+    // chart.nodes().labels().enabled(true);
+    // chart.nodes().labels().fontSize(10);
+    // chart.nodes().labels().fontWeight(300);
     // initiate drawing the chart
     chart.draw();
     chart.title("Call graphs in 2_: " + curr2);
@@ -788,15 +942,15 @@ function level2(lev, cont, yes_no){
               new_data2['edges'].push(temp_edge_dir2);
           }else{
             temp_node_dir4 = {id: temp2[kk]['value'], normal: {
-              fill: '#5D6D7E',
+              fill: '#DC143C',
                             height: 10
                         }, hovered: {
-                            fill: '#34495E',
+                            fill: '#800000',
                             height: 15
                         }, selected: {
-                            fill: '#2E4053',
+                            fill: '#800000',
                             height: 20
-                        }, shape: "diamond"} 
+                        }, shape: "square"} 
 
               new_data2['nodes'].push(temp_node_dir4);
 
@@ -814,21 +968,19 @@ function level2(lev, cont, yes_no){
 
   var run = 1;
   for(var k in temp){
-
-
     for(var kk in temp2){
       if (temp[k]['value'] == temp2[kk]['value']){
         if (temp[k]['type'] == 'dir'){
-
+          
         temp_node_dir = {id: temp[k]['value'], normal: {
               height: 20,
-              fill: '#ffbaba',
+              fill: '#85C1E9',
           }, hovered: {
             height: 30,
-              fill: '#ff5252'
+              fill: '#85C1E9'
           }, selected: {
             height: 40,
-              fill: '#ff0000'
+              fill: '#85C1E9'
           }}
 
           new_data2['nodes'].push(temp_node_dir);
@@ -849,13 +1001,13 @@ function level2(lev, cont, yes_no){
               cur_sup_files2.push(temp[k]['value']);
               
               temp_node_dir4 = {id: temp[k]['value'], normal: {
-                                fill: '#2fff00',
+                                fill: '#3498DB',
                                 height: 20
                             }, hovered: {
-                                fill: '#72fb89',
+                                fill: '#3498DB',
                                 height: 30
                             }, selected: {
-                                fill: '#00fff9',
+                                fill: '#3498DB',
                                 height: 40
                             }, shape: "diamond"}
 
@@ -866,15 +1018,15 @@ function level2(lev, cont, yes_no){
                 new_data2['edges'].push(temp_edge_dir2);
             }else{
               temp_node_dir4 = {id: temp[k]['value'], normal: {
-                fill: '#5D6D7E',
+                fill: '#1B4F72',
                             height: 10
                         }, hovered: {
-                            fill: '#34495E',
+                            fill: '#1B4F72',
                             height: 15
                         }, selected: {
-                            fill: '#2E4053',
+                            fill: '#1B4F72',
                             height: 20
-                        }, shape: "diamond"} 
+                        }, shape: "square"} 
 
                 new_data2['nodes'].push(temp_node_dir4);
 
@@ -898,17 +1050,17 @@ function level2(lev, cont, yes_no){
     }
 
 
-        if (temp[k]['type'] == 'dir'){
+if (temp[k]['type'] == 'dir'){
 
         temp_node_dir = {id: temp[k]['value'], normal: {
               height: 20,
-              fill: '#00a86b',
+              fill: '#2ECC71',
           }, hovered: {
             height: 30,
-              fill: '#3f704d'
+              fill: '#2ECC71'
           }, selected: {
             height: 40,
-              fill: '#0b6623'
+              fill: '#2ECC71'
           }}
 
           new_data2['nodes'].push(temp_node_dir);
@@ -929,13 +1081,13 @@ function level2(lev, cont, yes_no){
               cur_sup_files2.push(temp[k]['value']);
               
               temp_node_dir4 = {id: temp[k]['value'], normal: {
-                                fill: '#00a86b',
+                                fill: '#2ECC71',
                                 height: 20
                             }, hovered: {
-                                fill: '#3f704d',
+                                fill: '#2ECC71',
                                 height: 30
                             }, selected: {
-                                fill: '#0b6623',
+                                fill: '#2ECC71',
                                 height: 40
                             }, shape: "diamond"}
 
@@ -946,15 +1098,15 @@ function level2(lev, cont, yes_no){
                 new_data2['edges'].push(temp_edge_dir2);
             }else{
               temp_node_dir4 = {id: temp[k]['value'], normal: {
-                fill: '#5D6D7E',
+                          fill: '#2ECC71',
                             height: 10
                         }, hovered: {
-                            fill: '#34495E',
+                            fill: '#2ECC71',
                             height: 15
                         }, selected: {
-                            fill: '#2E4053',
+                            fill: '#2ECC71',
                             height: 20
-                        }, shape: "diamond"} 
+                        }, shape: "square"} 
 
                 new_data2['nodes'].push(temp_node_dir4);
 
@@ -981,10 +1133,10 @@ function level2(lev, cont, yes_no){
     var chart = anychart.graph(new_data2);
   // set the container id
     chart.container(cont);
-    chart.layout().iterationCount(500);
-    chart.nodes().labels().enabled(true);
-    chart.nodes().labels().fontSize(10);
-    chart.nodes().labels().fontWeight(300);
+    chart.layout().iterationCount(1000);
+    // chart.nodes().labels().enabled(true);
+    // chart.nodes().labels().fontSize(10);
+    // chart.nodes().labels().fontWeight(300);
     // initiate drawing the chart
     chart.draw();
     chart.title("root : " + lev);

@@ -1,3 +1,4 @@
 *.pyc
 *.pyo
-src/main/test
+src/main/test/python-semantic-release
+src/main/test/class.py

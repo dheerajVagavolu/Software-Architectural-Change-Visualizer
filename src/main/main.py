@@ -18,71 +18,71 @@ cur_dir = os.getcwd()
 
 app = Flask(__name__)
 
+# @app.route('/')
+# def new_page():
+#     return render_template('home.html')
+
+# @app.route('/download_data', methods=['POST'])
+# def download():
+#     github = request.form['github']
+#     print(github)
+
+#     cmd = "git clone "+github
+#     cmd2 = 'git tag --sort=committerdate > ../tags.txt'
+
+
+#     test_dir = cur_dir+'/test'
+#     os.chdir(test_dir)
+#     os.system(cmd)
+
+#     cur = os.getcwd()
+#     repo_dir = cur + '\\' + github.split('/')[-1].split('.')[0]
+#     os.chdir(repo_dir)
+#     os.system(cmd2)
+#     os.chdir(test_dir)
+
+#     tags = open('tags.txt').readlines()
+
+#     os.chdir(repo_dir)
+    
+#     ulti_dict = {}
+#     ulti_tree = {}
+    
+#     num = 0
+
+#     for i in tags:
+#         num += 1
+#         print("\n\n\n New Tag: ", i, "\n\n")
+
+        
+#         cmd3 = 'git checkout ' + i
+#         os.system(cmd3)
+        
+
+#         os.chdir(cur_dir)
+
+
+#         new_dir = os.path.join(os.getcwd(), 'test')
+#         tree = dir_walk(new_dir)
+
+
+#         #https://github.com/kupferlauncher/kupfer.git
+#         returned_tree = get_dictionary(tree)
+
+#         ulti_tree[str(num)] = tree
+#         ulti_dict[str(num)] = returned_tree
+        
+#         os.chdir(repo_dir)
+    
+        
+    
+#     os.chdir(cur_dir)
+#     pickle.dump( ulti_dict, open( "ulti_dict2.dat", "wb" ))
+#     pickle.dump( ulti_tree, open( "ulti_tree2.dat", "wb" ))
+    
+#     return redirect('/run')
+
 @app.route('/')
-def new_page():
-    return render_template('home.html')
-
-@app.route('/download_data', methods=['POST'])
-def download():
-    github = request.form['github']
-    print(github)
-
-    cmd = "git clone "+github
-    cmd2 = 'git tag --sort=committerdate > ../tags.txt'
-
-
-    test_dir = cur_dir+'/test'
-    os.chdir(test_dir)
-    os.system(cmd)
-
-    cur = os.getcwd()
-    repo_dir = cur + '\\' + github.split('/')[-1].split('.')[0]
-    os.chdir(repo_dir)
-    os.system(cmd2)
-    os.chdir(test_dir)
-
-    tags = open('tags.txt').readlines()
-
-    os.chdir(repo_dir)
-    
-    ulti_dict = {}
-    ulti_tree = {}
-    
-    num = 0
-
-    for i in tags:
-        num += 1
-        print("\n\n\n New Tag: ", i, "\n\n")
-
-        
-        cmd3 = 'git checkout ' + i
-        os.system(cmd3)
-        
-
-        os.chdir(cur_dir)
-
-
-        new_dir = os.path.join(os.getcwd(), 'test')
-        tree = dir_walk(new_dir)
-
-
-        #https://github.com/poise/python.git
-        returned_tree = get_dictionary(tree)
-
-        ulti_tree[str(num)] = tree
-        ulti_dict[str(num)] = returned_tree
-        
-        os.chdir(repo_dir)
-    
-        
-    
-    os.chdir(cur_dir)
-    pickle.dump( ulti_dict, open( "ulti_dict2.dat", "wb" ))
-    pickle.dump( ulti_tree, open( "ulti_tree2.dat", "wb" ))
-    
-    return redirect('/run')
-
-@app.route('/run')
 def hello_world():
     
     script_dir = os.getcwd()
@@ -103,8 +103,10 @@ def hello_world():
     ########################################################################################
     new_calls_tree = pickle.load( open( "test2.dat", "rb" ) )
     ulti_dict = pickle.load( open( "ulti_dict2.dat", "rb" ) )
+    new_ulti_dict = json.dumps(ulti_dict)
+    # print(new_ulti_dict['1']['D:\\Code\\AC2\\AC2\\src\\main\\test\\class.py'])
     ulti_tree = pickle.load( open( "ulti_tree2.dat", "rb" ) )
-
+    print(new_ulti_dict)
     tags = open('test/tags.txt').readlines()
 
     # print(ulti_dict['51'])
@@ -121,7 +123,7 @@ def hello_world():
             
 
 
-    return render_template('index.html', tags = tags, ulti_tree = {'body': ulti_tree} ,ulti_dict = {'body': ulti_dict}, tree = tree, calls = new_calls_tree)
+    return render_template('index.html', tags = tags, ulti_tree = {'body': ulti_tree} ,ulti_dict = new_ulti_dict, tree = tree, calls = new_calls_tree)
     # return "hello_world"
 
 def get_dictionary(tree):

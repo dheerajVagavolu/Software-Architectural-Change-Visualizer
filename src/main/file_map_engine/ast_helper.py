@@ -11,6 +11,13 @@ def get_call_tree(objects, par):
     for i in objects:
         keys = list(i.keys())
         type_ = keys[0]
+        if keys[0] =='ClassDef':
+            from_3 = i['ClassDef']['name']
+            if from_3 in new_data.keys():
+                new_data[par].append((from_3, 'ClassDef'))
+            else:
+                new_data[par] = [(from_3, 'ClassDef')]
+
         if keys[0] == 'FunctionDef':
             # print(i['FunctionDef']['name'], "defined in", par)
             retrieve_inner_functions(i, par)
