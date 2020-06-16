@@ -32,8 +32,9 @@
                 <div class="dropdown-menu" id="drop">
                   
                 </div>
+                
               </div>
-
+              <h3><span id="first_tag" class="badge badge-secondary">Select a Tag</span></h3>
             <div id="menu">
                 
 
@@ -65,7 +66,7 @@
                   
                 </div>
               </div>
-
+              <h3><span id="second_tag" class="badge badge-secondary">Select a Tag</span></h3>
             <div id="menu2">
                 
 
@@ -104,8 +105,8 @@
         height: 100%;
     }
 
-    
 
+  
     .row{
       height: fit-content;
     }
@@ -154,7 +155,7 @@
 
 <script>
 
-let tree;
+
 
 var ulti_dict = {{ ulti_dict|tojson }}
 
@@ -170,6 +171,15 @@ var keys = [];
 let cur_sup_files = [];
 
 let stack = [];
+
+
+// If none selected use 0 as normal
+prev_tag = 0;
+
+
+var tree = ulti_tree['body'][i+1];
+var calls = ulti_dict["body"][i+1];
+
 
 // Adding the dropdown
 
@@ -191,6 +201,10 @@ for(var i=0; i<tags.length; i++){
 // Setting the tag
 function SetTag(i){
 
+  
+  document.getElementById('first_tag').innerHTML = tags[i];
+  prev_tag = i;
+  
   tree = ulti_tree['body'][i+1];
   calls = ulti_dict["body"][i+1];
 
@@ -212,7 +226,7 @@ function SetTag(i){
 
 
 }
-
+SetTag(0);
 // Get calls function
 document.getElementById("get_calls").onclick = function() {
     
@@ -282,51 +296,7 @@ document.getElementById("get_calls").onclick = function() {
         }
       }
 
-      // for (var key in new_temp) {
 
-      //   if (new_temp.hasOwnProperty(key)){
-      //     // From
-      //     from = key;
-      //     to = Object.values(new_temp[key])[0];
-      //     type = to[1]
-      //     console.log(from + ': ' + to[0], ' : ' + type);
-
-          
-
-      //     temp_node_dir = {id: from, normal: {
-      //         height: 20,
-      //         fill: '#ffbaba',
-      //     }, hovered: {
-      //       height: 30,
-      //         fill: '#ff5252'
-      //     }, selected: {
-      //       height: 40,
-      //         fill: '#ff0000'
-      //     }}
-
-      //     new_data['nodes'].push(temp_node_dir);
-
-
-      //     temp_node_dir2 = {id: to[0], normal: {
-      //         height: 20,
-      //         fill: '#ffbaba',
-      //     }, hovered: {
-      //       height: 30,
-      //         fill: '#ff5252'
-      //     }, selected: {
-      //       height: 40,
-      //         fill: '#ff0000'
-      //     }}
-
-      //     new_data['nodes'].push(temp_node_dir2);
-
-      //     temp_edge_dir = {'from': from, 'to':to[0]}
-      //     new_data['edges'].push(temp_edge_dir);
-
-
-
-      //   }
-      // }
     });
 
     console.log("testing2")
@@ -471,6 +441,27 @@ function level(lev, cont, yes_no){
             console.log('File');
             temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
             new_data['edges'].push(temp_edge_dir2);
+        }else{
+
+          // cur_sup_files.push(temp[k]['value']);
+          
+          temp_node_dir4 = {id: temp[k]['value'], normal: {
+                            fill: '#5D6D7E',
+                            height: 10
+                        }, hovered: {
+                            fill: '#34495E',
+                            height: 15
+                        }, selected: {
+                            fill: '##2E4053',
+                            height: 20
+                        }, shape: "diamond"}
+
+            new_data['nodes'].push(temp_node_dir4);
+
+            console.log('File');
+            temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
+            new_data['edges'].push(temp_edge_dir2);
+
         }
                     
             
@@ -515,6 +506,7 @@ function level(lev, cont, yes_no){
 // THE Start of Second View
 
 let tree2;
+let calls2;
 
 var keys2 = [];
 
@@ -548,6 +540,8 @@ function SetTag2(i){
   i = i.substr(1);
 
   i = parseInt(i, 10);
+
+  document.getElementById('second_tag').innerHTML = tags[i];
 
   console.log(i)
 
@@ -609,7 +603,7 @@ document.getElementById("get_calls2").onclick = function() {
                 fill: '#78F27A'
             }, shape: "square"}
 
-            new_data['nodes'].push(temp_node_dir);
+            new_data2['nodes'].push(temp_node_dir);
 
 
             temp_node_dir2 = {id: to, normal: {
@@ -706,17 +700,21 @@ function level2(lev, cont, yes_no){
     var new_data2 = {'nodes': [], 'edges':[]}
     
     temp = tree2[lev];
+    temp2 = tree[lev];
+
+    console.log(temp2);
+    console.log(temp);
 
 
     temp_node_dir = {id: lev, normal: {
-                fill: '#ffbaba',
+                fill: '#F7DC6F',
                 height: 30
             }, hovered: {
-                fill: '#ff5252',
+                fill: '#F1C40F',
                 height: 40
             }, selected: {
-                fill: '#ff0000',
-                height: 50
+                fill: '#D4AC0D',
+                height: 40
             }}
 
             new_data2['nodes'].push(temp_node_dir);
@@ -727,10 +725,100 @@ function level2(lev, cont, yes_no){
     
     
   // }
-  
+
+  let runn = 1;
+
+  for(var kk in temp2){
+    for(var k in temp){
+      if (temp[k]['value'] == temp2[kk]['value']){
+          runn = 0;
+          break;
+      }
+    }
+
+    if (runn==0){
+      runn = 1;
+      continue;
+    }
+    if (temp2[kk]['type'] == 'dir'){
+
+    temp_node_dir = {id: temp2[kk]['value'], normal: {
+          height: 20,
+          fill: '#DC143C',
+      }, hovered: {
+        height: 30,
+          fill: '#800000'
+      }, selected: {
+        height: 40,
+          fill: '#800000'
+      }}
+
+        new_data2['nodes'].push(temp_node_dir);
+        // add_directory_to_view2(temp2[kk]['value']);
+
+        console.log('Directory');
+        temp_edge_dir3 = {'from': lev, 'to':temp2[kk]['value']}
+        new_data2['edges'].push(temp_edge_dir3);   
+
+      }else if (temp2[kk]['type'] == 'file'){
+
+      var res = temp2[kk]['value'].split(".");
+
+      var king = res[res.length-1];
+
+          if (king=='py'){
+
+            cur_sup_files2.push(temp2[kk]['value']);
+            
+            temp_node_dir4 = {id: temp2[kk]['value'], normal: {
+                              fill: '#DC143C',
+                              height: 20
+                          }, hovered: {
+                              fill: '#800000',
+                              height: 30
+                          }, selected: {
+                              fill: '#800000',
+                              height: 40
+                          }, shape: "diamond"}
+
+              new_data2['nodes'].push(temp_node_dir4);
+
+              console.log('File');
+              temp_edge_dir2 = {'from': lev, 'to':temp2[kk]['value']}
+              new_data2['edges'].push(temp_edge_dir2);
+          }else{
+            temp_node_dir4 = {id: temp2[kk]['value'], normal: {
+              fill: '#5D6D7E',
+                            height: 10
+                        }, hovered: {
+                            fill: '#34495E',
+                            height: 15
+                        }, selected: {
+                            fill: '#2E4053',
+                            height: 20
+                        }, shape: "diamond"} 
+
+              new_data2['nodes'].push(temp_node_dir4);
+
+              console.log('File');
+              temp_edge_dir2 = {'from': lev, 'to':temp2[kk]['value']}
+              new_data2['edges'].push(temp_edge_dir2);
+          }
+              
+          
+      
+    }
+  }
+
+
+
+  var run = 1;
   for(var k in temp){
 
-    if (temp[k]['type'] == 'dir'){
+
+    for(var kk in temp2){
+      if (temp[k]['value'] == temp2[kk]['value']){
+        if (temp[k]['type'] == 'dir'){
 
         temp_node_dir = {id: temp[k]['value'], normal: {
               height: 20,
@@ -750,36 +838,141 @@ function level2(lev, cont, yes_no){
           temp_edge_dir3 = {'from': lev, 'to':temp[k]['value']}
           new_data2['edges'].push(temp_edge_dir3);   
 
-      }else if (temp[k]['type'] == 'file'){
+        }else if (temp[k]['type'] == 'file'){
 
         var res = temp[k]['value'].split(".");
 
         var king = res[res.length-1];
 
-        if (king=='py'){
+            if (king=='py'){
 
-          cur_sup_files.push(temp[k]['value']);
-          
-          temp_node_dir4 = {id: temp[k]['value'], normal: {
-                            fill: '#2fff00',
-                            height: 20
+              cur_sup_files2.push(temp[k]['value']);
+              
+              temp_node_dir4 = {id: temp[k]['value'], normal: {
+                                fill: '#2fff00',
+                                height: 20
+                            }, hovered: {
+                                fill: '#72fb89',
+                                height: 30
+                            }, selected: {
+                                fill: '#00fff9',
+                                height: 40
+                            }, shape: "diamond"}
+
+                new_data2['nodes'].push(temp_node_dir4);
+
+                console.log('File');
+                temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
+                new_data2['edges'].push(temp_edge_dir2);
+            }else{
+              temp_node_dir4 = {id: temp[k]['value'], normal: {
+                fill: '#5D6D7E',
+                            height: 10
                         }, hovered: {
-                            fill: '#72fb89',
-                            height: 30
+                            fill: '#34495E',
+                            height: 15
                         }, selected: {
-                            fill: '#00fff9',
-                            height: 40
-                        }, shape: "diamond"}
+                            fill: '#2E4053',
+                            height: 20
+                        }, shape: "diamond"} 
 
-            new_data2['nodes'].push(temp_node_dir4);
+                new_data2['nodes'].push(temp_node_dir4);
 
-            console.log('File');
-            temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
-            new_data2['edges'].push(temp_edge_dir2);
-        }
+                console.log('File');
+                temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
+                new_data2['edges'].push(temp_edge_dir2);
+            }
+            
                     
             
         }
+        run = 0;
+        break;
+        
+      }
+    }
+
+    if (run == 0){
+      run = 1;
+      continue;
+    }
+
+
+        if (temp[k]['type'] == 'dir'){
+
+        temp_node_dir = {id: temp[k]['value'], normal: {
+              height: 20,
+              fill: '#00a86b',
+          }, hovered: {
+            height: 30,
+              fill: '#3f704d'
+          }, selected: {
+            height: 40,
+              fill: '#0b6623'
+          }}
+
+          new_data2['nodes'].push(temp_node_dir);
+          add_directory_to_view2(temp[k]['value']);
+
+          console.log('Directory');
+          temp_edge_dir3 = {'from': lev, 'to':temp[k]['value']}
+          new_data2['edges'].push(temp_edge_dir3);   
+
+        }else if (temp[k]['type'] == 'file'){
+
+        var res = temp[k]['value'].split(".");
+
+        var king = res[res.length-1];
+
+            if (king=='py'){
+
+              cur_sup_files2.push(temp[k]['value']);
+              
+              temp_node_dir4 = {id: temp[k]['value'], normal: {
+                                fill: '#00a86b',
+                                height: 20
+                            }, hovered: {
+                                fill: '#3f704d',
+                                height: 30
+                            }, selected: {
+                                fill: '#0b6623',
+                                height: 40
+                            }, shape: "diamond"}
+
+                new_data2['nodes'].push(temp_node_dir4);
+
+                console.log('File');
+                temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
+                new_data2['edges'].push(temp_edge_dir2);
+            }else{
+              temp_node_dir4 = {id: temp[k]['value'], normal: {
+                fill: '#5D6D7E',
+                            height: 10
+                        }, hovered: {
+                            fill: '#34495E',
+                            height: 15
+                        }, selected: {
+                            fill: '#2E4053',
+                            height: 20
+                        }, shape: "diamond"} 
+
+                new_data2['nodes'].push(temp_node_dir4);
+
+                console.log('File');
+                temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
+                new_data2['edges'].push(temp_edge_dir2);
+            }
+                    
+            
+        }
+
+
+
+
+
+
+
+    
 
   }
 
