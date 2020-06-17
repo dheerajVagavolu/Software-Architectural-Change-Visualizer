@@ -51,15 +51,31 @@ def make_ast(code):
 
     new_code = re.sub(r'print .*(\\\n.*)+', 'print("pass")\n',  code)
     
-    new_code = re.sub(r'print .*\n', 'print("pass")\n',  new_code)
+    # new_code = re.sub(r'print .*\n', 'print("pass")\n',  new_code)
  
-    new_code = re.sub(r'except.*:', 'except:',  new_code)
+    # new_code = re.sub(r'except.*:', 'except:',  new_code)
+
+    new_code = re.sub(r'except:.*', 'except:',  new_code)
+
+    new_code = re.sub(r'ur"', 'r"',  new_code)
  
     new_code = re.sub(r'0700', '\'0700\'',  new_code)
 
+    new_code = re.sub(r'05\'0700\'98', '05070098',  new_code)
+
     new_code = re.sub(r'%\(.*\)s', 'continue',  new_code)
 
-    new_code = re.sub(r'% var', '',  new_code)
+    new_code = re.sub(r'%s_loss"', '%s_loss",',  new_code)
+
+    new_code = re.sub(r'% var_', ' var_',  new_code)
+
+    # new_code = re.sub(r'variable_target_shapes', ', variable_target_shapes',  new_code)
+
+    new_code = re.sub(r'% \(n, loss_key\)', '',  new_code)
+
+    new_code = re.sub(r'd/%s_loss", % ', 'd/%s_loss", ',  new_code)
+    
+    # new_code = re.sub(r'flags.DEFINE_bool.*)', '',  new_code)
 
     # new_code = re.sub(r'""")', ')"""',  new_code)
 

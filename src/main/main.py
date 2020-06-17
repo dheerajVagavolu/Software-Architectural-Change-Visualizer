@@ -101,12 +101,12 @@ def hello_world():
     # This if for engine of parsing.
 
     ########################################################################################
-    new_calls_tree = pickle.load( open( "test2.dat", "rb" ) )
+    # new_calls_tree = pickle.load( open( "test2.dat", "rb" ) )
     ulti_dict = pickle.load( open( "ulti_dict2.dat", "rb" ) )
     new_ulti_dict = json.dumps(ulti_dict)
     # print(new_ulti_dict['1']['D:\\Code\\AC2\\AC2\\src\\main\\test\\class.py'])
     ulti_tree = pickle.load( open( "ulti_tree2.dat", "rb" ) )
-    print(new_ulti_dict)
+    # print(new_ulti_dict)
     tags = open('test/tags.txt').readlines()
 
     # print(ulti_dict['51'])
@@ -123,7 +123,7 @@ def hello_world():
             
 
 
-    return render_template('index.html', tags = tags, ulti_tree = {'body': ulti_tree} ,ulti_dict = new_ulti_dict, tree = tree, calls = new_calls_tree)
+    return render_template('index.html', tags = tags, ulti_tree = {'body': ulti_tree} ,ulti_dict = new_ulti_dict, tree = tree)
     # return "hello_world"
 
 def get_dictionary(tree):

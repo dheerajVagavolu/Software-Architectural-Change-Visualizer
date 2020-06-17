@@ -191,12 +191,14 @@ def retrieve_inner_with(obj, from_):
 
     
     
-    
-    if obj[keys[0]]['items'][0]['withitem']['optional_vars']:
-        file_name = obj[keys[0]]['items'][0]['withitem']['optional_vars']['Name']['id']
-    else:
-        file_name = "None"
-    # print("\n\n")
+    try:
+        if obj[keys[0]]['items'][0]['withitem']['optional_vars']:
+            file_name = obj[keys[0]]['items'][0]['withitem']['optional_vars']['Name']['id']
+        else:
+            file_name = "None"
+    except:
+        file_name = "file"
+        # print("\n\n")
     
 #     print(obj[keys[0]]['items'][0]['withitem']['context_expr']['Call']['args'][0]['Constant']['value'])
     # print("\n\n")
