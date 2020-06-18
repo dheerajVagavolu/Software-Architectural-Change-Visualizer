@@ -12,7 +12,9 @@
     <script src="//www.amcharts.com/lib/4/core.js"></script>
   <script src="//www.amcharts.com/lib/4/charts.js"></script>
   <script src="//www.amcharts.com/lib/4/plugins/forceDirected.js"></script> 
-
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Hello, world!</title>
   </head>
   <body>
@@ -22,11 +24,27 @@
           <div class="col-lg-4">
 
               <button type="button" class="btn btn-danger" id="back">BACK</button>
+              <!-- <button type="button" class="btn btn-success" id="get_calls_dir">Directory View</button>
               <button type="button" class="btn btn-success" id="get_calls">Extract Python Graphs</button>
-              
+               -->
+
+              <div class="btn-group">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  View
+                </button>
+                
+              <div class="dropdown-menu" id="drop_type0">
+                  <a class="dropdown-item" id="dir_view0">dir_View</a>
+                  <a class="dropdown-item" id="integ_view0">integ_View</a>
+                  <a class="dropdown-item" id="collab_view0">collab_View</a>
+                  <a class="dropdown-item" id="call_view0">call_View</a>              
+                </div>
+
+              </div>
+
               <!-- Example single danger button -->
               <div class="btn-group">
-                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Tag
                 </button>
                 <div class="dropdown-menu" id="drop">
@@ -34,13 +52,36 @@
                 </div>
                 
               </div>
-              <h3><span id="first_tag" class="badge badge-secondary">Select a Tag</span></h3>
+              <a><span id="first_tag">Select a Tag</span></a>
             <div id="menu">
                 
 
             </div>
           </div>
           <div class="col-lg-8">
+            
+            
+            
+            <div class="container mast">
+              <span class="PFile">(.py) File</span>
+              <span class="Func">Function Call</span>
+              <span class="FuncDef">Function Definition</span>
+              <span class="Class">Class Definition</span>
+              <span class="Module">Module</span>
+              <span class="File">File</span>
+              <span class="HomeDir">Root Directory</span>
+              <span class="Directory">Directory</span>
+              <span class="Added">Added</span>
+              <span class="Deleted">Deleted</span>
+              
+            </div>
+
+            <hr>
+
+
+
+
+
             <div id="container">
               
 
@@ -55,29 +96,54 @@
           <div class="col-lg-4">
 
               <button type="button" class="btn btn-danger" id="back2">BACK</button>
-              <button type="button" class="btn btn-success" id="get_calls2">Extract Python Graphs</button>
+              <!-- <button type="button" class="btn btn-success" id="get_calls2">Extract Python Graphs</button>
+               -->
+              
+              <div class="btn-group">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  View
+                </button>
+                
+              <div class="dropdown-menu" id="drop_type">
+                  <a class="dropdown-item" id="dir_view">dir_View</a>
+                  <a class="dropdown-item" id="integ_view">integ_View</a>
+                  <a class="dropdown-item" id="collab_view">collab_View</a>
+                  <a class="dropdown-item" id="call_view">call_View</a>
+              
+                </div>
+
+              </div>
+              
               
               <!-- Example single danger button -->
               <div class="btn-group">
-                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Tag
                 </button>
+                
                 <div class="dropdown-menu" id="drop2">
                   
                 </div>
               </div>
-              <h3><span id="second_tag" class="badge badge-secondary">Select Another Tag to Compare</span></h3>
+              <a><span id="second_tag">Select Another Tag to Compare</span></a>
             <div id="menu2">
                 
 
             </div>
+
+            <a id="num_added"></a>
+            <a id="num_deleted"></a>
+
+            <!-- <a id="funcDef_added"></a>
+            <a id="classes_added"></a>
+            <a id="func_added"></a>
+            <a id="modules_added"></a>
+            <a id="files_added"></a> -->
+
+
           </div>
           <div class="col-lg-8">
-            <div id="container2">
-              
-
-              
-            </div>
+            <div id="container2"> </div>
           </div>
         </div>
 
@@ -99,16 +165,114 @@
 
   <style>
 
+    #num_added{
+      color: white;
+      border-radius: 5px;
+      padding: 5px;
+      background-color: green;
+    }
+
+    
+    #num_deleted{
+      color: white;
+      border-radius: 5px;
+      padding: 5px;
+      background-color: red;
+    }
+
+    .mast{
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .PFile{
+      background-color: #0099ff;
+      color: white;
+      padding:5px;
+      border-radius: 5px;
+      
+    }
+
+    .File{
+    background-color: #c1e04d;
+    color: rgb(46, 6, 6);
+    padding:5px;
+    border-radius: 5px;
+    width: 8%;
+    text-align: center;
+    }
+
+    .HomeDir{
+     
+      background-color: #cea70a;
+      color: white;
+    padding:5px;
+    border-radius: 5px;
+    }
+    .Directory{
+      background-color: #794a04;
+      color: white;
+    padding:5px;
+    border-radius: 5px;
+    }
+
+    .FuncDef{
+      background-color: #030e4efa;
+      color: white;
+    padding:5px;
+    border-radius: 5px;
+    }
+    .Module{
+      background-color: #e71fc6;
+      color: white;
+    padding:5px;
+    border-radius: 5px;
+    }
+    .Class{
+      background-color: #920be0;
+      color: white;
+    padding:5px;
+    border-radius: 5px;
+    }
+
+    .Func{
+      background-color: #e27979;
+      color: white;
+    padding:5px;
+    border-radius: 5px;
+    }
+
+    .Added{
+      background-color: #0be016;
+      color: white;
+    padding:5px;
+    border-radius: 5px;
+    }
+
+    .Deleted{
+      background-color: #f50a0a;
+      color: white;
+    padding:5px;
+    border-radius: 5px;
+    }
+
+    
+
     html, 
     body {
         padding: 20px;
         height: 100%;
+        /* background: rgb(255, 245, 255); */
     }
 
 
   
     .row{
       height: fit-content;
+    }
+
+    #first_tag, #second_tag{
+      padding: 10px;
     }
 
     .con{
@@ -121,7 +285,8 @@
     #container{
         
         height: 500px;
-        border: 1px solid pink;
+        /* border: 1px solid pink; */
+        border-radius: 10px;
         
     }
 
@@ -130,13 +295,13 @@
     #menu{
       padding: 20px;
       
-        
     }
 
     #container2{
         
         height: 500px;
-        border: 1px solid pink;
+        /* border: 1px solid pink; */
+        border-radius: 10px;
         
     }
 
@@ -224,13 +389,13 @@ function SetTag(i){
 
   stack.push(keys[0]);
 
-  level(keys[0],"container" , "no");
+  level(keys[0], "container" , "no");
 
 
 }
 SetTag(0);
 // Get calls function
-document.getElementById("get_calls").onclick = function() {
+document.getElementById("integ_view0").onclick = function() {
     
   var new_data = {'nodes': [], 'edges':[]}
 
@@ -261,15 +426,15 @@ document.getElementById("get_calls").onclick = function() {
 
 
 
-            temp_node_dir = {id: from, normal: {
+            temp_node_dir = {id: from, group:'python_File(.py)', normal: {
                 height: 8,
-                fill: '#F0F278',
+                fill: '#0099ff',
             }, hovered: {
               height: 10,
-                fill: '#B3F278'
+                fill: '#0099ff'
             }, selected: {
               height: 12,
-                fill: '#78F27A'
+                fill: '#0099ff'
             }, shape: "square"}
 
             new_data['nodes'].push(temp_node_dir);
@@ -278,15 +443,15 @@ document.getElementById("get_calls").onclick = function() {
             
             if(type_ == "funcDef"){
 
-                  temp_node_dir2 = {id: to, normal: {
+                  temp_node_dir2 = {id: to, group:'func_Def', normal: {
                           height: 8,
-                          fill: '#2C3E50',
+                          fill: '#030e4efa',
                       }, hovered: {
                         height: 10,
-                          fill: '#2C3E50'
+                          fill: '#030e4efa'
                       }, selected: {
                         height: 12,
-                          fill: '#2C3E50'
+                          fill: '#030e4efa'
                       }, shape: "square"}
 
                       new_data['nodes'].push(temp_node_dir2);
@@ -294,15 +459,15 @@ document.getElementById("get_calls").onclick = function() {
 
                   if(type_ == "ClassDef"){
 
-                      temp_node_dir2 = {id: to, normal: {
+                      temp_node_dir2 = {id: to,group:'class_Def', normal: {
                               height: 8,
-                              fill: '#633974',
+                              fill: '#920be0',
                           }, hovered: {
                             height: 10,
-                              fill: '#633974'
+                              fill: '#920be0'
                           }, selected: {
                             height: 12,
-                              fill: '#633974'
+                              fill: '#920be0'
                           }, shape: "circle"}
 
                           new_data['nodes'].push(temp_node_dir2);
@@ -310,15 +475,15 @@ document.getElementById("get_calls").onclick = function() {
 
                   if(type_ == "func"){
 
-                  temp_node_dir2 = {id: to, normal: {
+                  temp_node_dir2 = {id: to, group:'func_Call',normal: {
                           height: 6,
-                          fill: '#76D7C4',
+                          fill: '#e27979',
                       }, hovered: {
                         height: 8,
-                          fill: '#76D7C4'
+                          fill: '#e27979'
                       }, selected: {
                         height: 10,
-                          fill: '#76D7C4'
+                          fill: '#e27979'
                       }, shape: "square"}
 
                       new_data['nodes'].push(temp_node_dir2);
@@ -326,15 +491,15 @@ document.getElementById("get_calls").onclick = function() {
 
                   if(type_ == "module"){
 
-                    temp_node_dir2 = {id: to, normal: {
+                    temp_node_dir2 = {id: to,group:'module', normal: {
                             height: 3,
-                            fill: '#2980B9',
+                            fill: '#e71fc6',
                         }, hovered: {
                           height: 4,
-                            fill: '#2980B9'
+                            fill: '#e71fc6'
                         }, selected: {
                           height: 5,
-                            fill: '#2980B9'
+                            fill: '#e71fc6'
                         }, shape: "square"}
 
                         new_data['nodes'].push(temp_node_dir2);
@@ -343,15 +508,15 @@ document.getElementById("get_calls").onclick = function() {
 
                     if(type_ == "file"){
 
-                      temp_node_dir2 = {id: to, normal: {
+                      temp_node_dir2 = {id: to, group:'file',normal: {
                               height: 3,
-                              fill: '#7B7D7D',
+                              fill: '#c1e04d',
                           }, hovered: {
                             height: 4,
-                              fill: '#7B7D7D'
+                              fill: '#c1e04d'
                           }, selected: {
                             height: 5,
-                              fill: '#7B7D7D'
+                              fill: '#c1e04d'
                           }, shape: "square"}
 
                           new_data['nodes'].push(temp_node_dir2);
@@ -389,6 +554,12 @@ document.getElementById("get_calls").onclick = function() {
     // chart.nodes().labels().fontSize(10);
     // chart.nodes().labels().fontWeight(300);
     // initiate drawing the chart
+    chart.nodes().tooltip().useHtml(true);
+        chart.nodes().tooltip().format(
+          "<span style='font-weight:bold'>{{ '{%id}' }} </span><br>type: {{ '{%group}' }}"
+        );
+        chart.interactivity().hoverGap(30);  
+        chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
     chart.draw();
     chart.title("Call graphs in : " + curr);
 
@@ -448,14 +619,14 @@ function level(lev, cont, yes_no){
     temp = tree[lev];
 
 
-    temp_node_dir = {id: lev, normal: {
-                fill: '#F7DC6F',
+    temp_node_dir = {id: lev, group: 'root directory', normal: {
+                fill: '#cea70a',
                 height: 30
             }, hovered: {
-                fill: '#F7DC6F',
+                fill: '#cea70a',
                 height: 40
             }, selected: {
-                fill: '#F7DC6F',
+                fill: '#cea70a',
                 height: 50
             }}
 
@@ -472,15 +643,15 @@ function level(lev, cont, yes_no){
 
     if (temp[k]['type'] == 'dir'){
 
-        temp_node_dir = {id: temp[k]['value'], normal: {
+        temp_node_dir = {id: temp[k]['value'], group: 'directory', normal: {
               height: 20,
-              fill: '#85C1E9',
+              fill: '#794a04',
           }, hovered: {
             height: 30,
-              fill: '#85C1E9'
+              fill: '#794a04'
           }, selected: {
             height: 40,
-              fill: '#85C1E9'
+              fill: '#794a04'
           }}
 
           new_data['nodes'].push(temp_node_dir);
@@ -500,14 +671,14 @@ function level(lev, cont, yes_no){
 
           cur_sup_files.push(temp[k]['value']);
           
-          temp_node_dir4 = {id: temp[k]['value'], normal: {
-                            fill: '#3498DB',
+          temp_node_dir4 = {id: temp[k]['value'], group: 'python_File(.py)',normal: {
+                            fill: '#0099ff',
                             height: 20
                         }, hovered: {
-                            fill: '#3498DB',
+                            fill: '#0099ff',
                             height: 30
                         }, selected: {
-                            fill: '#3498DB',
+                            fill: '#0099ff',
                             height: 40
                         }, shape: "diamond"}
 
@@ -520,14 +691,14 @@ function level(lev, cont, yes_no){
 
           // cur_sup_files.push(temp[k]['value']);
           
-          temp_node_dir4 = {id: temp[k]['value'], normal: {
-                            fill: '#1B4F72',
+          temp_node_dir4 = {id: temp[k]['value'], group: 'file', normal: {
+                            fill: '#c1e04d',
                             height: 10
                         }, hovered: {
-                            fill: '#1B4F72',
+                            fill: '#c1e04d',
                             height: 15
                         }, selected: {
-                            fill: '#1B4F72',
+                            fill: '#c1e04d',
                             height: 20
                         }, shape: "square"}
 
@@ -550,9 +721,20 @@ function level(lev, cont, yes_no){
   // set the container id
     chart.container(cont);
     chart.layout().iterationCount(1000);
-    // chart.nodes().labels().enabled(true);
-    // chart.nodes().labels().fontSize(10);
-    // chart.nodes().labels().fontWeight(300);
+    chart.nodes().labels().enabled(true);
+    chart.nodes().labels().fontSize(10);
+    chart.nodes().labels().fontWeight(300);
+
+    chart.nodes().tooltip().useHtml(true);
+    chart.nodes().tooltip().format(
+          "<span style='font-weight:bold'>{{ '{%id}' }} </span><br>type: {{ '{%group}' }}"
+        );
+
+        chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
+        chart.interactivity().hoverGap(30);  
+
+      // chart.legend().useHtml(true);
+
     // initiate drawing the chart
     chart.draw();
     chart.title("root : " + lev);
@@ -573,8 +755,8 @@ function level(lev, cont, yes_no){
 }
 
 
-// THE END of First View
 
+// THE END of First View
 
 
 
@@ -642,162 +824,559 @@ function SetTag2(i){
 }
 
 // Get calls function
-document.getElementById("get_calls2").onclick = function() {
-    
+document.getElementById("integ_view").onclick = function() {
+
+  // Making the actual dict
+  var numa = 0;
+  var numd = 0;
+
+  // var a_ = 0;
+  // var b_ = 0;
+  // var c_ = 0;
+  // var d_ = 0;
+  // var e_ = 0;
+  // var f_ = 0;
+  // var g_ = 0;
+  // var h_ = 0;
+  // var i_ = 0;
+  // var j_ = 0;
+
   var new_data2 = {'nodes': [], 'edges':[]}
 
-
+//  Got current files in this view
     cur_sup_files2.forEach((file) => {
       console.log(file);
       new_temp = calls2[file];
-      console.log("testing");
-      console.log(new_temp);
-      // File
-      group = file;
+
+//  Check if previous version has the same file
+      if (calls.hasOwnProperty(file)){
+        
+              // Get the call graph of previous version
+              new_temp2 = calls[file];
 
 
-      for (var key in new_temp) {
-        if (new_temp.hasOwnProperty(key)){
-          temp_new_dat = Object.values(new_temp[key]);
-          console.log(temp_new_dat);
+              console.log("testing");
+              console.log(new_temp);
+              // File
+              group = file;
 
-          for(var i in temp_new_dat){
-            from = key;
-            to = temp_new_dat[i][0];
+// Iterate through the current files call graph
+              for (var key in new_temp) {
+                console.log(key);
+                console.log("hey");
+                      if (new_temp.hasOwnProperty(key)){
+                        // The graph of current file
+                        temp_new_dat = Object.values(new_temp[key]);
+                        
+                        // Check if the node (.py file) is also present in the previous version of call graphs
+                                    if (new_temp2.hasOwnProperty(key)){
+                                      // Get the graph of previous vals too.
+                                      temp_new_dat2 = Object.values(new_temp2[key]);
+                                      
+                                      obje = getdiff(temp_new_dat, temp_new_dat2);
 
-            type_ = temp_new_dat[i][1];
-            // alert(type_);
-            console.log(from + " : " + to);
+                                      numa = numa + obje[0];
+                                      numd = numd + obje[1];
+
+                                      // a_ = a_ + obje[2][0];
+                                      // b_ = b_ + obje[2][1];
+                                      // c_ = c_ + obje[3][0];
+                                      // d_ = d_ + obje[3][1];
+                                      // e_ = e_ + obje[4][0];
+                                      // f_ = f_ + obje[4][1];
+                                      // g_ = g_ + obje[5][0];
+                                      // h_ = h_ + obje[5][1];
+                                      // i_ = i_ + obje[6][0];
+                                      // j_ = j_ + obje[6][1];
 
 
-            
-            temp_node_dir = {id: from, normal: {
-                height: 6,
-                fill: '#F4D03F',
-            }, hovered: {
-              height: 8,
-                fill: '#F4D03F'
-            }, selected: {
-              height: 10,
-                fill: '#F4D03F'
-            }, shape: "square"}
+                                      from = key;
+                                      // Adding 'from' node
+                                      temp_node_dir = {id: from,  group: 'python_File(.py)', normal: {
+                                          height: 6,
+                                          fill: '#0099ff',
+                                      }, hovered: {
+                                        height: 8,
+                                          fill: '#0099ff'
+                                      }, selected: {
+                                        height: 10,
+                                          fill: '#0099ff'
+                                      }, shape: "square"}
 
-            new_data2['nodes'].push(temp_node_dir);
+                                      new_data2['nodes'].push(temp_node_dir);
 
 
-            
 
-            if(type_ == "funcDef"){
+                                        // var num_green = 0;
+                                        // iterate for graph nodes in current node. 
+                                            for(var i in temp_new_dat){
+                                              from = key;
+                                              to = temp_new_dat[i][0];
+                                              type_ = temp_new_dat[i][1];
+                                              var run = 0;
+                                              //  Check if exist in older version.
+                                                for(var k in temp_new_dat2){
+                                                      tp = temp_new_dat2[k][0];
+                                                            if(to == tp){
+                                                              // alert("true" + tp);
 
-              temp_node_dir2 = {id: to, normal: {
-                      height: 8,
-                      fill: '#2C3E50',
-                  }, hovered: {
-                    height: 10,
-                      fill: '#2C3E50'
-                  }, selected: {
-                    height: 12,
-                      fill: '#2C3E50'
-                  }, shape: "square"}
+                                                          if(type_ == "funcDef"){
 
-                  new_data2['nodes'].push(temp_node_dir2);
-              }
+                                                            temp_node_dir2 = {id: to, group: 'func_Def', normal: {
+                                                                    height: 8,
+                                                                    fill: '#030e4efa',
+                                                                }, hovered: {
+                                                                  height: 10,
+                                                                    fill: '#030e4efa'
+                                                                }, selected: {
+                                                                  height: 12,
+                                                                    fill: '#030e4efa'
+                                                                }, shape: "square"}
 
-              if(type_ == "ClassDef"){
+                                                                new_data2['nodes'].push(temp_node_dir2);
+                                                            }
 
-                  temp_node_dir2 = {id: to, normal: {
-                          height: 8,
-                          fill: '#633974',
-                      }, hovered: {
-                        height: 10,
-                          fill: '#633974'
-                      }, selected: {
-                        height: 12,
-                          fill: '#633974'
-                      }, shape: "circle"}
+                                                            if(type_ == "ClassDef"){
 
-                      new_data2['nodes'].push(temp_node_dir2);
-                  }
+                                                                temp_node_dir2 = {id: to, group: 'class_Def', normal: {
+                                                                        height: 8,
+                                                                        fill: '#920be0',
+                                                                    }, hovered: {
+                                                                      height: 10,
+                                                                        fill: '#920be0'
+                                                                    }, selected: {
+                                                                      height: 12,
+                                                                        fill: '#920be0'
+                                                                    }, shape: "circle"}
 
-              if(type_ == "func"){
+                                                                    new_data2['nodes'].push(temp_node_dir2);
+                                                                }
 
-              temp_node_dir2 = {id: to, normal: {
-                      height: 6,
-                      fill: '#76D7C4',
-                  }, hovered: {
-                    height: 8,
-                      fill: '#76D7C4'
-                  }, selected: {
-                    height: 10,
-                      fill: '#76D7C4'
-                  }, shape: "square"}
+                                                            if(type_ == "func"){
 
-                  new_data2['nodes'].push(temp_node_dir2);
-              }
+                                                            temp_node_dir2 = {id: to, group: 'func_Call', normal: {
+                                                                    height: 6,
+                                                                    fill: '#e27979',
+                                                                }, hovered: {
+                                                                  height: 8,
+                                                                    fill: '#e27979'
+                                                                }, selected: {
+                                                                  height: 10,
+                                                                    fill: '#e27979'
+                                                                }, shape: "square"}
 
-              if(type_ == "module"){
+                                                                new_data2['nodes'].push(temp_node_dir2);
+                                                            }
 
-                temp_node_dir2 = {id: to, normal: {
-                        height: 3,
-                        fill: '#2980B9',
-                    }, hovered: {
-                      height: 4,
-                        fill: '#2980B9'
-                    }, selected: {
-                      height: 5,
-                        fill: '#2980B9'
-                    }, shape: "square"}
+                                                            if(type_ == "module"){
 
-                    new_data2['nodes'].push(temp_node_dir2);
+                                                              temp_node_dir2 = {id: to, group: 'module', normal: {
+                                                                      height: 3,
+                                                                      fill: '#e71fc6',
+                                                                  }, hovered: {
+                                                                    height: 4,
+                                                                      fill: '#e71fc6'
+                                                                  }, selected: {
+                                                                    height: 5,
+                                                                      fill: '#e71fc6'
+                                                                  }, shape: "square"}
+
+                                                                  new_data2['nodes'].push(temp_node_dir2);
+                                                              }
+
+                                                              if(type_ == "file"){
+
+                                                  temp_node_dir2 = {id: to, group: 'file', normal: {
+                                                          height: 3,
+                                                          fill: '#c1e04d',
+                                                      }, hovered: {
+                                                        height: 4,
+                                                          fill: '#c1e04d'
+                                                      }, selected: {
+                                                        height: 5,
+                                                          fill: '#c1e04d'
+                                                      }, shape: "square"}
+
+                                                      new_data2['nodes'].push(temp_node_dir2);
+                                                  }
+
+
+                                                          temp_edge_dir = {'from': from, 'to':to}
+                                                          new_data2['edges'].push(temp_edge_dir);
+
+                                                            run = 1;
+                                                            break;
+                                                            }
+                                                    }
+                                                      // If doesnt exist in older version color green.
+                                                    if(run==0) {
+
+
+
+                                                      if(type_ == "funcDef"){
+
+                                                        temp_node_dir2 = {id: to,  group: 'func_Def', normal: {
+                                                                height: 8,
+                                                                fill: '#0be016',
+                                                            }, hovered: {
+                                                              height: 10,
+                                                                fill: '#0be016'
+                                                            }, selected: {
+                                                              height: 12,
+                                                                fill: '#0be016'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+                                                        if(type_ == "ClassDef"){
+
+                                                            temp_node_dir2 = {id: to, group: 'class_Def', normal: {
+                                                                    height: 8,
+                                                                    fill: '#0be016',
+                                                                }, hovered: {
+                                                                  height: 10,
+                                                                    fill: '#0be016'
+                                                                }, selected: {
+                                                                  height: 12,
+                                                                    fill: '#0be016'
+                                                                }, shape: "circle"}
+
+                                                                new_data2['nodes'].push(temp_node_dir2);
+                                                            }
+
+                                                        if(type_ == "func"){
+
+                                                        temp_node_dir2 = {id: to, group: 'func_Call', normal: {
+                                                                height: 6,
+                                                                fill: '#0be016',
+                                                            }, hovered: {
+                                                              height: 8,
+                                                                fill: '#0be016'
+                                                            }, selected: {
+                                                              height: 10,
+                                                                fill: '#0be016'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+                                                        if(type_ == "module"){
+
+                                                          temp_node_dir2 = {id: to, group: 'module', normal: {
+                                                                  height: 3,
+                                                                  fill: '#0be016',
+                                                              }, hovered: {
+                                                                height: 4,
+                                                                  fill: '#0be016'
+                                                              }, selected: {
+                                                                height: 5,
+                                                                  fill: '#0be016'
+                                                              }, shape: "square"}
+
+                                                              new_data2['nodes'].push(temp_node_dir2);
+                                                          }
+
+                                                          if(type_ == "file"){
+
+                                                            temp_node_dir2 = {id: to, group: 'file', normal: {
+                                                            height: 3,
+                                                            fill: '#0be016',
+                                                            }, hovered: {
+                                                            height: 4,
+                                                            fill: '#0be016'
+                                                            }, selected: {
+                                                            height: 5,
+                                                            fill: '#0be016'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+
+                                                        temp_edge_dir = {'from': from, 'to':to}
+                                                        new_data2['edges'].push(temp_edge_dir);
+                                                    }
+                                                   
+
+                                            }
+
+                                            // alert(num_green);
+
+
+                                            // Iterate through older nodes.
+                                          // var num_red = 0;
+                                        for(var k in temp_new_dat2){
+                                            from = key;
+                                              to = temp_new_dat2[k][0];
+                                              type_ = temp_new_dat2[k][1];
+                                              run = 0;
+                                              //  Iterate through current nodes.
+                                              for(var i in temp_new_dat){
+                                                tp = temp_new_dat[i][0];
+                                                if (tp == to){
+                                                  run = 1;
+                                                  break;
+                                                }
+                                              }
+                                              //  Add red if present in older and not present in current.
+                                              if(run == 0){
+                                                
+                                                
+                                                if(type_ == "funcDef"){
+
+                                                        temp_node_dir2 = {id: to,  group: 'func_Def', to, normal: {
+                                                                height: 8,
+                                                                fill: '#f50a0a',
+                                                            }, hovered: {
+                                                              height: 10,
+                                                                fill: '#f50a0a'
+                                                            }, selected: {
+                                                              height: 12,
+                                                                fill: '#f50a0a'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+                                                        if(type_ == "ClassDef"){
+
+                                                            temp_node_dir2 = {id: to, normal: {
+                                                                    height: 8,
+                                                                    fill: '#f50a0a',
+                                                                }, hovered: {
+                                                                  height: 10,
+                                                                    fill: '#f50a0a'
+                                                                }, selected: {
+                                                                  height: 12,
+                                                                    fill: '#f50a0a'
+                                                                }, shape: "circle"}
+
+                                                                new_data2['nodes'].push(temp_node_dir2);
+                                                            }
+
+                                                        if(type_ == "func"){
+
+                                                        temp_node_dir2 = {id: to, normal: {
+                                                                height: 6,
+                                                                fill: '#f50a0a',
+                                                            }, hovered: {
+                                                              height: 8,
+                                                                fill: '#f50a0a'
+                                                            }, selected: {
+                                                              height: 10,
+                                                                fill: '#f50a0a'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+                                                        if(type_ == "module"){
+
+                                                          temp_node_dir2 = {id: to, normal: {
+                                                                  height: 3,
+                                                                  fill: '#f50a0a',
+                                                              }, hovered: {
+                                                                height: 4,
+                                                                  fill: '#f50a0a'
+                                                              }, selected: {
+                                                                height: 5,
+                                                                  fill: '#f50a0a'
+                                                              }, shape: "square"}
+
+                                                              new_data2['nodes'].push(temp_node_dir2);
+                                                          }
+
+                                                          if(type_ == "file"){
+
+                                                        temp_node_dir2 = {id: to, normal: {
+                                                        height: 3,
+                                                        fill: '#f50a0a',
+                                                        }, hovered: {
+                                                        height: 4,
+                                                        fill: '#f50a0a'
+                                                        }, selected: {
+                                                        height: 5,
+                                                        fill: '#f50a0a'
+                                                        }, shape: "square"}
+
+                                                        new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+
+                                                        temp_edge_dir = {'from': from, 'to':to}
+                                                        new_data2['edges'].push(temp_edge_dir);
+
+
+                                              }
+
+
+                                            }
+                                            // alert(num_red);
+
+                                    }
+
+                        }
                 }
+              // If the file doesnt exist in older version.
+      }else{
+        group = file;    
+        for (var key in new_temp) {
+                  if (new_temp.hasOwnProperty(key)){
+                          temp_new_dat = Object.values(new_temp[key]);
 
-                if(type_ == "file"){
+                          numa = numa + temp_new_dat.length;
 
-                  temp_node_dir2 = {id: to, normal: {
-                          height: 3,
-                          fill: '#7B7D7D',
-                      }, hovered: {
-                        height: 4,
-                          fill: '#7B7D7D'
-                      }, selected: {
-                        height: 5,
-                          fill: '#7B7D7D'
-                      }, shape: "square"}
+                            from = key;
+                            // Adding 'from' node
+                            temp_node_dir = {id: from, group: 'python_File(.py)', normal: {
+                                height: 6,
+                                fill: '#0be016',
+                            }, hovered: {
+                              height: 8,
+                                fill: '#0be016'
+                            }, selected: {
+                              height: 10,
+                                fill: '#0be016'
+                            }, shape: "square"}
 
-                      new_data2['nodes'].push(temp_node_dir2);
-                  }
+                            new_data2['nodes'].push(temp_node_dir);
+
+                            
+
+                                  for(var i in temp_new_dat){
+                                    from = key;
+                                    to = temp_new_dat[i][0];
+                                    type_ = temp_new_dat[i][1];
+
+                                    //  Check if exist in older version.
+                                        
+                                          // If doesnt exist in older version color green.
+
+                                          if(type_ == "funcDef"){
+
+                                            temp_node_dir2 = {id: to, group: 'func_Def',normal: {
+                                                    height: 8,
+                                                    fill: '#0be016',
+                                                }, hovered: {
+                                                  height: 10,
+                                                    fill: '#0be016'
+                                                }, selected: {
+                                                  height: 12,
+                                                    fill: '#0be016'
+                                                }, shape: "square"}
+
+                                                new_data2['nodes'].push(temp_node_dir2);
+                                            }
+
+                                            if(type_ == "ClassDef"){
+
+                                                temp_node_dir2 = {id: to, group: 'class_Def', normal: {
+                                                        height: 8,
+                                                        fill: '#0be016',
+                                                    }, hovered: {
+                                                      height: 10,
+                                                        fill: '#0be016'
+                                                    }, selected: {
+                                                      height: 12,
+                                                        fill: '#0be016'
+                                                    }, shape: "circle"}
+
+                                                    new_data2['nodes'].push(temp_node_dir2);
+                                                }
+
+                                            if(type_ == "func"){
+
+                                            temp_node_dir2 = {id: to, group: 'func_Call', normal: {
+                                                    height: 6,
+                                                    fill: '#0be016',
+                                                }, hovered: {
+                                                  height: 8,
+                                                    fill: '#0be016'
+                                                }, selected: {
+                                                  height: 10,
+                                                    fill: '#0be016'
+                                                }, shape: "square"}
+
+                                                new_data2['nodes'].push(temp_node_dir2);
+                                            }
+
+                                            if(type_ == "module"){
+
+                                              temp_node_dir2 = {id: to, group: 'module', normal: {
+                                                      height: 3,
+                                                      fill: '#0be016',
+                                                  }, hovered: {
+                                                    height: 4,
+                                                      fill: '#0be016'
+                                                  }, selected: {
+                                                    height: 5,
+                                                      fill: '#0be016'
+                                                  }, shape: "square"}
+
+                                                  new_data2['nodes'].push(temp_node_dir2);
+                                              }
+
+                                              if(type_ == "file"){
+
+                                            temp_node_dir2 = {id: to, group: 'file', normal: {
+                                            height: 3,
+                                            fill: '#0be016',
+                                            }, hovered: {
+                                            height: 4,
+                                            fill: '#0be016'
+                                            }, selected: {
+                                            height: 5,
+                                            fill: '#0be016'
+                                            }, shape: "square"}
+
+                                            new_data2['nodes'].push(temp_node_dir2);
+                                            }
 
 
+                                            temp_edge_dir = {'from': from, 'to':to}
+                                            new_data2['edges'].push(temp_edge_dir);
 
 
+                                  }
 
 
-            temp_edge_dir = {'from': from, 'to':to}
-            new_data2['edges'].push(temp_edge_dir);
-
-          }
-        }
+                        }
+                }
+              
+        
       }
 
-    });
 
-    console.log("testing2")
-    console.log(new_data2);
+        });
 
-    const myNode2 = document.getElementById("container2");
-    myNode2.innerHTML = '';
+        console.log("testing2")
+        console.log(new_data2);
 
 
-    var chart = anychart.graph(new_data2);
-  // set the container id
-    chart.container("container2");
-    chart.layout().iterationCount(2000);
-    // chart.nodes().labels().enabled(true);
-    // chart.nodes().labels().fontSize(10);
-    // chart.nodes().labels().fontWeight(300);
-    // initiate drawing the chart
-    chart.draw();
-    chart.title("Call graphs in 2_: " + curr2);
+        set_diff(numa, numd);
+        // set_diff_ult(a_, b_, c_, d_, e_, f_, g_, h_, i_, j_);
+        const myNode2 = document.getElementById("container2");
+        myNode2.innerHTML = '';
+        
+
+        var chart = anychart.graph(new_data2);
+      // set the container id
+        chart.container("container2");
+        chart.layout().iterationCount(2000);
+        // chart.nodes().labels().enabled(true);
+        // chart.nodes().labels().fontSize(10);
+        // chart.nodes().labels().fontWeight(300);
+        // initiate drawing the chart
+        chart.nodes().tooltip().useHtml(true);
+        chart.nodes().tooltip().format(
+          "<span style='font-weight:bold'>{{ '{%id}' }} </span><br>type: {{ '{%group}' }}"
+        );
+
+        chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
+        chart.interactivity().hoverGap(30);    
+        chart.draw();
+        chart.title("Call graphs in 2_: " + curr2);
 
 
 }
@@ -855,18 +1434,21 @@ function level2(lev, cont, yes_no){
     temp = tree2[lev];
     temp2 = tree[lev];
 
+    obje = getdiff(temp, temp2);
+    set_diff(obje[0], obje[1]);
+
     console.log(temp2);
     console.log(temp);
 
 
-    temp_node_dir = {id: lev, normal: {
-                fill: '#F7DC6F',
+    temp_node_dir = {id: lev, group:'root directory', normal: {
+                fill: '#cea70a',
                 height: 30
             }, hovered: {
-                fill: '#F1C40F',
+                fill: '#cea70a',
                 height: 40
             }, selected: {
-                fill: '#D4AC0D',
+                fill: '#cea70a',
                 height: 40
             }}
 
@@ -895,15 +1477,15 @@ function level2(lev, cont, yes_no){
     }
     if (temp2[kk]['type'] == 'dir'){
 
-    temp_node_dir = {id: temp2[kk]['value'], normal: {
+    temp_node_dir = {id: temp2[kk]['value'], group:'directory', normal: {
           height: 20,
-          fill: '#DC143C',
+          fill: '#f50a0a',
       }, hovered: {
         height: 30,
-          fill: '#800000'
+          fill: '#f50a0a'
       }, selected: {
         height: 40,
-          fill: '#800000'
+          fill: '#f50a0a'
       }}
 
         new_data2['nodes'].push(temp_node_dir);
@@ -923,14 +1505,14 @@ function level2(lev, cont, yes_no){
 
             cur_sup_files2.push(temp2[kk]['value']);
             
-            temp_node_dir4 = {id: temp2[kk]['value'], normal: {
-                              fill: '#DC143C',
+            temp_node_dir4 = {id: temp2[kk]['value'], group:'python_File(.py)', normal: {
+                              fill: '#f50a0a',
                               height: 20
                           }, hovered: {
-                              fill: '#800000',
+                              fill: '#f50a0a',
                               height: 30
                           }, selected: {
-                              fill: '#800000',
+                              fill: '#f50a0a',
                               height: 40
                           }, shape: "diamond"}
 
@@ -940,14 +1522,14 @@ function level2(lev, cont, yes_no){
               temp_edge_dir2 = {'from': lev, 'to':temp2[kk]['value']}
               new_data2['edges'].push(temp_edge_dir2);
           }else{
-            temp_node_dir4 = {id: temp2[kk]['value'], normal: {
-              fill: '#DC143C',
+            temp_node_dir4 = {id: temp2[kk]['value'],group:'file', normal: {
+              fill: '#f50a0a',
                             height: 10
                         }, hovered: {
-                            fill: '#800000',
+                            fill: '#f50a0a',
                             height: 15
                         }, selected: {
-                            fill: '#800000',
+                            fill: '#f50a0a',
                             height: 20
                         }, shape: "square"} 
 
@@ -971,15 +1553,15 @@ function level2(lev, cont, yes_no){
       if (temp[k]['value'] == temp2[kk]['value']){
         if (temp[k]['type'] == 'dir'){
           
-        temp_node_dir = {id: temp[k]['value'], normal: {
+        temp_node_dir = {id: temp[k]['value'], group:'directory', normal: {
               height: 20,
-              fill: '#85C1E9',
+              fill: '#794a04',
           }, hovered: {
             height: 30,
-              fill: '#85C1E9'
+              fill: '#794a04'
           }, selected: {
             height: 40,
-              fill: '#85C1E9'
+              fill: '#794a04'
           }}
 
           new_data2['nodes'].push(temp_node_dir);
@@ -999,14 +1581,14 @@ function level2(lev, cont, yes_no){
 
               cur_sup_files2.push(temp[k]['value']);
               
-              temp_node_dir4 = {id: temp[k]['value'], normal: {
-                                fill: '#3498DB',
+              temp_node_dir4 = {id: temp[k]['value'], group:'python_File(.py)',normal: {
+                                fill: '#0099ff',
                                 height: 20
                             }, hovered: {
-                                fill: '#3498DB',
+                                fill: '#0099ff',
                                 height: 30
                             }, selected: {
-                                fill: '#3498DB',
+                                fill: '#0099ff',
                                 height: 40
                             }, shape: "diamond"}
 
@@ -1016,14 +1598,14 @@ function level2(lev, cont, yes_no){
                 temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
                 new_data2['edges'].push(temp_edge_dir2);
             }else{
-              temp_node_dir4 = {id: temp[k]['value'], normal: {
-                fill: '#1B4F72',
+              temp_node_dir4 = {id: temp[k]['value'], group:'file', normal: {
+                fill: '#c1e04d',
                             height: 10
                         }, hovered: {
-                            fill: '#1B4F72',
+                            fill: '#c1e04d',
                             height: 15
                         }, selected: {
-                            fill: '#1B4F72',
+                            fill: '#c1e04d',
                             height: 20
                         }, shape: "square"} 
 
@@ -1051,15 +1633,15 @@ function level2(lev, cont, yes_no){
 
 if (temp[k]['type'] == 'dir'){
 
-        temp_node_dir = {id: temp[k]['value'], normal: {
+        temp_node_dir = {id: temp[k]['value'], group:'directory', normal: {
               height: 20,
-              fill: '#2ECC71',
+              fill: '#0be016',
           }, hovered: {
             height: 30,
-              fill: '#2ECC71'
+              fill: '#0be016'
           }, selected: {
             height: 40,
-              fill: '#2ECC71'
+              fill: '#0be016'
           }}
 
           new_data2['nodes'].push(temp_node_dir);
@@ -1079,14 +1661,14 @@ if (temp[k]['type'] == 'dir'){
 
               cur_sup_files2.push(temp[k]['value']);
               
-              temp_node_dir4 = {id: temp[k]['value'], normal: {
-                                fill: '#2ECC71',
+              temp_node_dir4 = {id: temp[k]['value'], group:'python_File(.py)', normal: {
+                                fill: '#0be016',
                                 height: 20
                             }, hovered: {
-                                fill: '#2ECC71',
+                                fill: '#0be016',
                                 height: 30
                             }, selected: {
-                                fill: '#2ECC71',
+                                fill: '#0be016',
                                 height: 40
                             }, shape: "diamond"}
 
@@ -1096,14 +1678,14 @@ if (temp[k]['type'] == 'dir'){
                 temp_edge_dir2 = {'from': lev, 'to':temp[k]['value']}
                 new_data2['edges'].push(temp_edge_dir2);
             }else{
-              temp_node_dir4 = {id: temp[k]['value'], normal: {
-                          fill: '#2ECC71',
+              temp_node_dir4 = {id: temp[k]['value'], group:'file', normal: {
+                          fill: '#0be016',
                             height: 10
                         }, hovered: {
-                            fill: '#2ECC71',
+                            fill: '#0be016',
                             height: 15
                         }, selected: {
-                            fill: '#2ECC71',
+                            fill: '#0be016',
                             height: 20
                         }, shape: "square"} 
 
@@ -1133,9 +1715,21 @@ if (temp[k]['type'] == 'dir'){
   // set the container id
     chart.container(cont);
     chart.layout().iterationCount(1000);
-    // chart.nodes().labels().enabled(true);
-    // chart.nodes().labels().fontSize(10);
-    // chart.nodes().labels().fontWeight(300);
+    chart.nodes().labels().enabled(true);
+    chart.nodes().labels().fontSize(10);
+    chart.nodes().labels().fontWeight(300);
+
+
+    chart.nodes().tooltip().useHtml(true);
+    chart.nodes().tooltip().format(
+          "<span style='font-weight:bold'>{{ '{%id}' }} </span><br>type: {{ '{%group}' }}"
+        );
+
+        chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
+        chart.interactivity().hoverGap(30);   
+        
+
+
     // initiate drawing the chart
     chart.draw();
     chart.title("root : " + lev);
@@ -1156,9 +1750,1551 @@ if (temp[k]['type'] == 'dir'){
 }
 
 
+document.getElementById('dir_view').onclick = function() {
+  prev_lev = stack2.pop();
+  // alert(prev_lev);
+  stack2.push(prev_lev);
+  level2(prev_lev, "container2" , "no");
+}
+
+document.getElementById('collab_view').onclick = function() {
+
+  var new_data2 = {'nodes': [], 'edges':[]}
+
+//  Got current files in this view
+    cur_sup_files2.forEach((file) => {
+      console.log(file);
+      new_temp = calls2[file];
+
+//  Check if previous version has the same file
+      if (calls.hasOwnProperty(file)){
+        
+              // Get the call graph of previous version
+              new_temp2 = calls[file];
+
+
+              console.log("testing");
+              console.log(new_temp);
+              // File
+              group = file;
+
+// Iterate through the current files call graph
+              for (var key in new_temp) {
+                console.log(key);
+                console.log("hey");
+                      if (new_temp.hasOwnProperty(key)){
+                        // The graph of current file
+                        temp_new_dat = Object.values(new_temp[key]);
+                        
+                        // Check if the node (.py file) is also present in the previous version of call graphs
+                                    if (new_temp2.hasOwnProperty(key)){
+                                      // Get the graph of previous vals too.
+                                      temp_new_dat2 = Object.values(new_temp2[key]);
+
+                                      from = key;
+                                      // Adding 'from' node
+                                      temp_node_dir = {id: from,  group: 'python_File(.py)', normal: {
+                                          height: 6,
+                                          fill: '#0099ff',
+                                      }, hovered: {
+                                        height: 8,
+                                          fill: '#0099ff'
+                                      }, selected: {
+                                        height: 10,
+                                          fill: '#0099ff'
+                                      }, shape: "square"}
+
+                                      new_data2['nodes'].push(temp_node_dir);
+
+
+
+                                        // var num_green = 0;
+                                        // iterate for graph nodes in current node. 
+                                            for(var i in temp_new_dat){
+                                              from = key;
+                                              to = temp_new_dat[i][0];
+                                              type_ = temp_new_dat[i][1];
+                                              var run = 0;
+                                              //  Check if exist in older version.
+                                                for(var k in temp_new_dat2){
+                                                      tp = temp_new_dat2[k][0];
+                                                            if(to == tp){
+                                                              // alert("true" + tp);
+
+                                                          
+                                                            if(type_ == "ClassDef"){
+
+                                                                temp_node_dir2 = {id: to, group: 'class_Def', normal: {
+                                                                        height: 8,
+                                                                        fill: '#920be0',
+                                                                    }, hovered: {
+                                                                      height: 10,
+                                                                        fill: '#920be0'
+                                                                    }, selected: {
+                                                                      height: 12,
+                                                                        fill: '#920be0'
+                                                                    }, shape: "circle"}
+
+                                                                    new_data2['nodes'].push(temp_node_dir2);
+                                                                }
+
+                                                            // if(type_ == "func"){
+
+                                                            // temp_node_dir2 = {id: to, group: 'func_Call', normal: {
+                                                            //         height: 6,
+                                                            //         fill: '#76D7C4',
+                                                            //     }, hovered: {
+                                                            //       height: 8,
+                                                            //         fill: '#76D7C4'
+                                                            //     }, selected: {
+                                                            //       height: 10,
+                                                            //         fill: '#76D7C4'
+                                                            //     }, shape: "square"}
+
+                                                            //     new_data2['nodes'].push(temp_node_dir2);
+                                                            // }
+
+                                                            if(type_ == "module"){
+
+                                                              temp_node_dir2 = {id: to, group: 'module', normal: {
+                                                                      height: 3,
+                                                                      fill: '#e71fc6',
+                                                                  }, hovered: {
+                                                                    height: 4,
+                                                                      fill: '#e71fc6'
+                                                                  }, selected: {
+                                                                    height: 5,
+                                                                      fill: '#e71fc6'
+                                                                  }, shape: "square"}
+
+                                                                  new_data2['nodes'].push(temp_node_dir2);
+                                                              }
+
+                                                              if(type_ == "file"){
+
+                                                  temp_node_dir2 = {id: to, group: 'file', normal: {
+                                                          height: 3,
+                                                          fill: '#c1e04d',
+                                                      }, hovered: {
+                                                        height: 4,
+                                                          fill: '#c1e04d'
+                                                      }, selected: {
+                                                        height: 5,
+                                                          fill: '#c1e04d'
+                                                      }, shape: "square"}
+
+                                                      new_data2['nodes'].push(temp_node_dir2);
+                                                  }
+
+
+                                                          temp_edge_dir = {'from': from, 'to':to}
+                                                          new_data2['edges'].push(temp_edge_dir);
+
+                                                            run = 1;
+                                                            break;
+                                                            }
+                                                    }
+                                                      // If doesnt exist in older version color green.
+                                                    if(run==0) {
+
+
+
+                                                      // if(type_ == "funcDef"){
+
+                                                      //   temp_node_dir2 = {id: to, group: 'func_Def', normal: {
+                                                      //           height: 8,
+                                                      //           fill: '#2ECC71',
+                                                      //       }, hovered: {
+                                                      //         height: 10,
+                                                      //           fill: '#2ECC71'
+                                                      //       }, selected: {
+                                                      //         height: 12,
+                                                      //           fill: '#2ECC71'
+                                                      //       }, shape: "square"}
+
+                                                      //       new_data2['nodes'].push(temp_node_dir2);
+                                                      //   }
+
+                                                        if(type_ == "ClassDef"){
+
+                                                            temp_node_dir2 = {id: to,group: 'class_Def', normal: {
+                                                                    height: 8,
+                                                                    fill: '#0be016',
+                                                                }, hovered: {
+                                                                  height: 10,
+                                                                    fill: '#0be016'
+                                                                }, selected: {
+                                                                  height: 12,
+                                                                    fill: '#0be016'
+                                                                }, shape: "circle"}
+
+                                                                new_data2['nodes'].push(temp_node_dir2);
+                                                            }
+
+                                                        // if(type_ == "func"){
+
+                                                        // temp_node_dir2 = {id: to, group: 'func_Call', normal: {
+                                                        //         height: 6,
+                                                        //         fill: '#2ECC71',
+                                                        //     }, hovered: {
+                                                        //       height: 8,
+                                                        //         fill: '#2ECC71'
+                                                        //     }, selected: {
+                                                        //       height: 10,
+                                                        //         fill: '#2ECC71'
+                                                        //     }, shape: "square"}
+
+                                                        //     new_data2['nodes'].push(temp_node_dir2);
+                                                        // }
+
+                                                        if(type_ == "module"){
+
+                                                          temp_node_dir2 = {id: to, group: 'module', normal: {
+                                                                  height: 3,
+                                                                  fill: '#0be016',
+                                                              }, hovered: {
+                                                                height: 4,
+                                                                  fill: '#0be016'
+                                                              }, selected: {
+                                                                height: 5,
+                                                                  fill: '#0be016'
+                                                              }, shape: "square"}
+
+                                                              new_data2['nodes'].push(temp_node_dir2);
+                                                          }
+
+                                                          if(type_ == "file"){
+
+                                                            temp_node_dir2 = {id: to, group: 'file', normal: {
+                                                            height: 3,
+                                                            fill: '#0be016',
+                                                            }, hovered: {
+                                                            height: 4,
+                                                            fill: '#0be016'
+                                                            }, selected: {
+                                                            height: 5,
+                                                            fill: '#0be016'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+
+                                                        temp_edge_dir = {'from': from, 'to':to}
+                                                        new_data2['edges'].push(temp_edge_dir);
+                                                    }
+                                                   
+
+                                            }
+
+                                            // alert(num_green);
+
+
+                                            // Iterate through older nodes.
+                                          // var num_red = 0;
+                                          for(var k in temp_new_dat2){
+                                              from = key;
+                                              to = temp_new_dat2[i][0];
+                                              type_ = temp_new_dat2[i][1];
+                                              run = 0;
+                                              //  Iterate through current nodes.
+                                              for(var i in temp_new_dat){
+                                                tp = temp_new_dat[k][0];
+                                                if (tp == to){
+                                                  run = 1;
+                                                  break;
+                                                }
+                                              }
+                                              //  Add red if present in older and not present in current.
+                                              if(run == 0){
+                                                
+                                                
+                                                // if(type_ == "funcDef"){
+
+                                                //         temp_node_dir2 = {id: to, normal: {
+                                                //                 height: 8,
+                                                //                 fill: '#FF0000',
+                                                //             }, hovered: {
+                                                //               height: 10,
+                                                //                 fill: '#FF0000'
+                                                //             }, selected: {
+                                                //               height: 12,
+                                                //                 fill: '#FF0000'
+                                                //             }, shape: "square"}
+
+                                                //             new_data2['nodes'].push(temp_node_dir2);
+                                                //         }
+
+                                                        if(type_ == "ClassDef"){
+
+                                                            temp_node_dir2 = {id: to, normal: {
+                                                                    height: 8,
+                                                                    fill: '#f50a0a',
+                                                                }, hovered: {
+                                                                  height: 10,
+                                                                    fill: '#f50a0a'
+                                                                }, selected: {
+                                                                  height: 12,
+                                                                    fill: '#f50a0a'
+                                                                }, shape: "circle"}
+
+                                                                new_data2['nodes'].push(temp_node_dir2);
+                                                            }
+
+                                                        // if(type_ == "func"){
+
+                                                        // temp_node_dir2 = {id: to, normal: {
+                                                        //         height: 6,
+                                                        //         fill: '#FF0000',
+                                                        //     }, hovered: {
+                                                        //       height: 8,
+                                                        //         fill: '#FF0000'
+                                                        //     }, selected: {
+                                                        //       height: 10,
+                                                        //         fill: '#FF0000'
+                                                        //     }, shape: "square"}
+
+                                                        //     new_data2['nodes'].push(temp_node_dir2);
+                                                        // }
+
+                                                        if(type_ == "module"){
+
+                                                          temp_node_dir2 = {id: to, normal: {
+                                                                  height: 3,
+                                                                  fill: '#f50a0a',
+                                                              }, hovered: {
+                                                                height: 4,
+                                                                  fill: '#f50a0a'
+                                                              }, selected: {
+                                                                height: 5,
+                                                                  fill: '#f50a0a'
+                                                              }, shape: "square"}
+
+                                                              new_data2['nodes'].push(temp_node_dir2);
+                                                          }
+
+                                                          if(type_ == "file"){
+
+                                                        temp_node_dir2 = {id: to, normal: {
+                                                        height: 3,
+                                                        fill: '#f50a0a',
+                                                        }, hovered: {
+                                                        height: 4,
+                                                        fill: '#f50a0a'
+                                                        }, selected: {
+                                                        height: 5,
+                                                        fill: '#f50a0a'
+                                                        }, shape: "square"}
+
+                                                        new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+
+                                                        temp_edge_dir = {'from': from, 'to':to}
+                                                        new_data2['edges'].push(temp_edge_dir);
+
+
+                                              }
+
+
+                                            }
+                                            // alert(num_red);
+
+                                    }
+
+                        }
+                }
+              // If the file doesnt exist in older version.
+      }else{
+        group = file;    
+        for (var key in new_temp) {
+                  if (new_temp.hasOwnProperty(key)){
+                          temp_new_dat = Object.values(new_temp[key]);
+                      
+                            from = key;
+                            // Adding 'from' node
+                            temp_node_dir = {id: from, group: 'python_File(.py)', normal: {
+                                height: 6,
+                                fill: '#0be016',
+                            }, hovered: {
+                              height: 8,
+                                fill: '#0be016'
+                            }, selected: {
+                              height: 10,
+                                fill: '#0be016'
+                            }, shape: "square"}
+
+                            new_data2['nodes'].push(temp_node_dir);
+
+
+
+                                  for(var i in temp_new_dat){
+                                    from = key;
+                                    to = temp_new_dat[i][0];
+                                    type_ = temp_new_dat[i][1];
+
+                                    //  Check if exist in older version.
+                                        
+                                          // If doesnt exist in older version color green.
+
+                                          // if(type_ == "funcDef"){
+
+                                          //   temp_node_dir2 = {id: to, group: 'func_Def',normal: {
+                                          //           height: 8,
+                                          //           fill: '#2ECC71',
+                                          //       }, hovered: {
+                                          //         height: 10,
+                                          //           fill: '#2ECC71'
+                                          //       }, selected: {
+                                          //         height: 12,
+                                          //           fill: '#2ECC71'
+                                          //       }, shape: "square"}
+
+                                          //       new_data2['nodes'].push(temp_node_dir2);
+                                          //   }
+
+                                            if(type_ == "ClassDef"){
+
+                                                temp_node_dir2 = {id: to, group: 'class_Def', normal: {
+                                                        height: 8,
+                                                        fill: '#0be016',
+                                                    }, hovered: {
+                                                      height: 10,
+                                                        fill: '#0be016'
+                                                    }, selected: {
+                                                      height: 12,
+                                                        fill: '#0be016'
+                                                    }, shape: "circle"}
+
+                                                    new_data2['nodes'].push(temp_node_dir2);
+                                                }
+
+                                            // if(type_ == "func"){
+
+                                            // temp_node_dir2 = {id: to, group: 'func_Call', normal: {
+                                            //         height: 6,
+                                            //         fill: '#2ECC71',
+                                            //     }, hovered: {
+                                            //       height: 8,
+                                            //         fill: '#2ECC71'
+                                            //     }, selected: {
+                                            //       height: 10,
+                                            //         fill: '#2ECC71'
+                                            //     }, shape: "square"}
+
+                                            //     new_data2['nodes'].push(temp_node_dir2);
+                                            // }
+
+                                            if(type_ == "module"){
+
+                                              temp_node_dir2 = {id: to, group: 'module', normal: {
+                                                      height: 3,
+                                                      fill: '#0be016',
+                                                  }, hovered: {
+                                                    height: 4,
+                                                      fill: '#0be016'
+                                                  }, selected: {
+                                                    height: 5,
+                                                      fill: '#0be016'
+                                                  }, shape: "square"}
+
+                                                  new_data2['nodes'].push(temp_node_dir2);
+                                              }
+
+                                              if(type_ == "file"){
+
+                                            temp_node_dir2 = {id: to, group: 'file', normal: {
+                                            height: 3,
+                                            fill: '#0be016',
+                                            }, hovered: {
+                                            height: 4,
+                                            fill: '#0be016'
+                                            }, selected: {
+                                            height: 5,
+                                            fill: '#0be016'
+                                            }, shape: "square"}
+
+                                            new_data2['nodes'].push(temp_node_dir2);
+                                            }
+
+
+                                            temp_edge_dir = {'from': from, 'to':to}
+                                            new_data2['edges'].push(temp_edge_dir);
+
+
+                                  }
+
+
+                        }
+                }
+              
+        
+      }
+
+
+        });
+
+        console.log("testing2")
+        console.log(new_data2);
+
+        const myNode2 = document.getElementById("container2");
+        myNode2.innerHTML = '';
+        
+
+        var chart = anychart.graph(new_data2);
+      // set the container id
+        chart.container("container2");
+        chart.layout().iterationCount(2000);
+        // chart.nodes().labels().enabled(true);
+        // chart.nodes().labels().fontSize(10);
+        // chart.nodes().labels().fontWeight(300);
+        // initiate drawing the chart
+        chart.nodes().tooltip().useHtml(true);
+        chart.nodes().tooltip().format(
+          "<span style='font-weight:bold'>{{ '{%id}' }} </span><br>type: {{ '{%group}' }}"
+        );
+
+        chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
+        chart.interactivity().hoverGap(30);    
+        chart.draw();
+        chart.title("Collab graphs in 2_: " + curr2);
+  
+
+}
+
+document.getElementById('call_view').onclick = function() {
+
+  var new_data2 = {'nodes': [], 'edges':[]}
+
+//  Got current files in this view
+    cur_sup_files2.forEach((file) => {
+      console.log(file);
+      new_temp = calls2[file];
+
+//  Check if previous version has the same file
+      if (calls.hasOwnProperty(file)){
+        
+              // Get the call graph of previous version
+              new_temp2 = calls[file];
+
+
+              console.log("testing");
+              console.log(new_temp);
+              // File
+              group = file;
+
+// Iterate through the current files call graph
+              for (var key in new_temp) {
+                console.log(key);
+                console.log("hey");
+                      if (new_temp.hasOwnProperty(key)){
+                        // The graph of current file
+                        temp_new_dat = Object.values(new_temp[key]);
+                        
+                        // Check if the node (.py file) is also present in the previous version of call graphs
+                                    if (new_temp2.hasOwnProperty(key)){
+                                      // Get the graph of previous vals too.
+                                      temp_new_dat2 = Object.values(new_temp2[key]);
+
+                                      from = key;
+                                      // Adding 'from' node
+                                      temp_node_dir = {id: from,  group: 'python_File(.py)', normal: {
+                                          height: 6,
+                                          fill: '#0099ff',
+                                      }, hovered: {
+                                        height: 8,
+                                          fill: '#0099ff'
+                                      }, selected: {
+                                        height: 10,
+                                          fill: '#0099ff'
+                                      }, shape: "square"}
+
+                                      new_data2['nodes'].push(temp_node_dir);
+                                        // var num_green = 0;
+                                        // iterate for graph nodes in current node. 
+                                            for(var i in temp_new_dat){
+                                              from = key;
+                                              to = temp_new_dat[i][0];
+                                              type_ = temp_new_dat[i][1];
+                                              var run = 0;
+                                              //  Check if exist in older version.
+                                                for(var k in temp_new_dat2){
+                                                      tp = temp_new_dat2[k][0];
+                                                            if(to == tp){
+                                                              // alert("true" + tp);
+
+                                                              if(type_ == "funcDef"){
+
+                                                                    temp_node_dir2 = {id: to, group: 'func_Def', normal: {
+                                                                            height: 8,
+                                                                            fill: '#030e4efa',
+                                                                        }, hovered: {
+                                                                          height: 10,
+                                                                            fill: '#030e4efa'
+                                                                        }, selected: {
+                                                                          height: 12,
+                                                                            fill: '#030e4efa'
+                                                                        }, shape: "square"}
+
+                                                                        new_data2['nodes'].push(temp_node_dir2);
+                                                                    }
+                                                            // if(type_ == "ClassDef"){
+
+                                                            //     temp_node_dir2 = {id: to, group: 'class_Def', normal: {
+                                                            //             height: 8,
+                                                            //             fill: '#633974',
+                                                            //         }, hovered: {
+                                                            //           height: 10,
+                                                            //             fill: '#633974'
+                                                            //         }, selected: {
+                                                            //           height: 12,
+                                                            //             fill: '#633974'
+                                                            //         }, shape: "circle"}
+
+                                                            //         new_data2['nodes'].push(temp_node_dir2);
+                                                            //     }
+
+                                                            if(type_ == "func"){
+
+                                                            temp_node_dir2 = {id: to, group: 'func_Call', normal: {
+                                                                    height: 6,
+                                                                    fill: '#e27979',
+                                                                }, hovered: {
+                                                                  height: 8,
+                                                                    fill: '#e27979'
+                                                                }, selected: {
+                                                                  height: 10,
+                                                                    fill: '#e27979'
+                                                                }, shape: "square"}
+
+                                                                new_data2['nodes'].push(temp_node_dir2);
+                                                            }
+
+                                                            // if(type_ == "module"){
+
+                                                            //   temp_node_dir2 = {id: to, group: 'module', normal: {
+                                                            //           height: 3,
+                                                            //           fill: '#2980B9',
+                                                            //       }, hovered: {
+                                                            //         height: 4,
+                                                            //           fill: '#2980B9'
+                                                            //       }, selected: {
+                                                            //         height: 5,
+                                                            //           fill: '#2980B9'
+                                                            //       }, shape: "square"}
+
+                                                            //       new_data2['nodes'].push(temp_node_dir2);
+                                                            //   }
+
+                                                              if(type_ == "file"){
+
+                                                  temp_node_dir2 = {id: to, group: 'file', normal: {
+                                                          height: 3,
+                                                          fill: '#c1e04d',
+                                                      }, hovered: {
+                                                        height: 4,
+                                                          fill: '#c1e04d'
+                                                      }, selected: {
+                                                        height: 5,
+                                                          fill: '#c1e04d'
+                                                      }, shape: "square"}
+
+                                                      new_data2['nodes'].push(temp_node_dir2);
+                                                  }
+
+
+                                                          temp_edge_dir = {'from': from, 'to':to}
+                                                          new_data2['edges'].push(temp_edge_dir);
+
+                                                            run = 1;
+                                                            break;
+                                                            }
+                                                    }
+                                                      // If doesnt exist in older version color green.
+                                                    if(run==0) {
+
+
+
+                                                      if(type_ == "funcDef"){
+
+                                                        temp_node_dir2 = {id: to, group: 'func_Def', normal: {
+                                                                height: 8,
+                                                                fill: '#0be016',
+                                                            }, hovered: {
+                                                              height: 10,
+                                                                fill: '#0be016'
+                                                            }, selected: {
+                                                              height: 12,
+                                                                fill: '#0be016'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+                                                        // if(type_ == "ClassDef"){
+
+                                                        //     temp_node_dir2 = {id: to,group: 'class_Def', normal: {
+                                                        //             height: 8,
+                                                        //             fill: '#2ECC71',
+                                                        //         }, hovered: {
+                                                        //           height: 10,
+                                                        //             fill: '#2ECC71'
+                                                        //         }, selected: {
+                                                        //           height: 12,
+                                                        //             fill: '#2ECC71'
+                                                        //         }, shape: "circle"}
+
+                                                        //         new_data2['nodes'].push(temp_node_dir2);
+                                                        //     }
+
+                                                        if(type_ == "func"){
+
+                                                        temp_node_dir2 = {id: to, group: 'func_Call', normal: {
+                                                                height: 6,
+                                                                fill: '#0be016',
+                                                            }, hovered: {
+                                                              height: 8,
+                                                                fill: '#0be016'
+                                                            }, selected: {
+                                                              height: 10,
+                                                                fill: '#0be016'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+                                                        // if(type_ == "module"){
+
+                                                        //   temp_node_dir2 = {id: to, group: 'module', normal: {
+                                                        //           height: 3,
+                                                        //           fill: '#2ECC71',
+                                                        //       }, hovered: {
+                                                        //         height: 4,
+                                                        //           fill: '#2ECC71'
+                                                        //       }, selected: {
+                                                        //         height: 5,
+                                                        //           fill: '#2ECC71'
+                                                        //       }, shape: "square"}
+
+                                                        //       new_data2['nodes'].push(temp_node_dir2);
+                                                        //   }
+
+                                                          if(type_ == "file"){
+
+                                                            temp_node_dir2 = {id: to, group: 'file', normal: {
+                                                            height: 3,
+                                                            fill: '#0be016',
+                                                            }, hovered: {
+                                                            height: 4,
+                                                            fill: '#0be016'
+                                                            }, selected: {
+                                                            height: 5,
+                                                            fill: '#0be016'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+
+                                                        temp_edge_dir = {'from': from, 'to':to}
+                                                        new_data2['edges'].push(temp_edge_dir);
+                                                    }
+                                                   
+
+                                            }
+
+                                            // alert(num_green);
+
+
+                                            // Iterate through older nodes.
+                                          // var num_red = 0;
+                                          for(var k in temp_new_dat2){
+                                              from = key;
+                                              to = temp_new_dat2[i][0];
+                                              type_ = temp_new_dat2[i][1];
+                                              run = 0;
+                                              //  Iterate through current nodes.
+                                              for(var i in temp_new_dat){
+                                                tp = temp_new_dat[k][0];
+                                                if (tp == to){
+                                                  run = 1;
+                                                  break;
+                                                }
+                                              }
+                                              //  Add red if present in older and not present in current.
+                                              if(run == 0){
+                                                
+                                                
+                                                if(type_ == "funcDef"){
+
+                                                        temp_node_dir2 = {id: to, normal: {
+                                                                height: 8,
+                                                                fill: '#f50a0a',
+                                                            }, hovered: {
+                                                              height: 10,
+                                                                fill: '#f50a0a'
+                                                            }, selected: {
+                                                              height: 12,
+                                                                fill: '#f50a0a'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+                                                        // if(type_ == "ClassDef"){
+
+                                                        //     temp_node_dir2 = {id: to, normal: {
+                                                        //             height: 8,
+                                                        //             fill: '#FF0000',
+                                                        //         }, hovered: {
+                                                        //           height: 10,
+                                                        //             fill: '#FF0000'
+                                                        //         }, selected: {
+                                                        //           height: 12,
+                                                        //             fill: '#FF0000'
+                                                        //         }, shape: "circle"}
+
+                                                        //         new_data2['nodes'].push(temp_node_dir2);
+                                                        //     }
+
+                                                        if(type_ == "func"){
+
+                                                        temp_node_dir2 = {id: to, normal: {
+                                                                height: 6,
+                                                                fill: '#f50a0a',
+                                                            }, hovered: {
+                                                              height: 8,
+                                                                fill: '#f50a0a'
+                                                            }, selected: {
+                                                              height: 10,
+                                                                fill: '#f50a0a'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+                                                        // if(type_ == "module"){
+
+                                                        //   temp_node_dir2 = {id: to, normal: {
+                                                        //           height: 3,
+                                                        //           fill: '#FF0000',
+                                                        //       }, hovered: {
+                                                        //         height: 4,
+                                                        //           fill: '#FF0000'
+                                                        //       }, selected: {
+                                                        //         height: 5,
+                                                        //           fill: '#FF0000'
+                                                        //       }, shape: "square"}
+
+                                                        //       new_data2['nodes'].push(temp_node_dir2);
+                                                        //   }
+
+                                                          if(type_ == "file"){
+
+                                                        temp_node_dir2 = {id: to, normal: {
+                                                        height: 3,
+                                                        fill: '#f50a0a',
+                                                        }, hovered: {
+                                                        height: 4,
+                                                        fill: '#f50a0a'
+                                                        }, selected: {
+                                                        height: 5,
+                                                        fill: '#f50a0a'
+                                                        }, shape: "square"}
+
+                                                        new_data2['nodes'].push(temp_node_dir2);
+                                                        }
+
+
+                                                        temp_edge_dir = {'from': from, 'to':to}
+                                                        new_data2['edges'].push(temp_edge_dir);
+
+
+                                              }
+
+
+                                            }
+                                            // alert(num_red);
+
+                                    }
+
+                        }
+                }
+              // If the file doesnt exist in older version.
+      }else{
+        group = file;    
+        for (var key in new_temp) {
+                  if (new_temp.hasOwnProperty(key)){
+                          temp_new_dat = Object.values(new_temp[key]);
+                      
+                            from = key;
+                            // Adding 'from' node
+                            temp_node_dir = {id: from, group: 'python_File(.py)', normal: {
+                                height: 6,
+                                fill: '#0be016',
+                            }, hovered: {
+                              height: 8,
+                                fill: '#0be016'
+                            }, selected: {
+                              height: 10,
+                                fill: '#0be016'
+                            }, shape: "square"}
+
+                            new_data2['nodes'].push(temp_node_dir);
+
+
+
+                                  for(var i in temp_new_dat){
+                                    from = key;
+                                    to = temp_new_dat[i][0];
+                                    type_ = temp_new_dat[i][1];
+
+                                    //  Check if exist in older version.
+                                        
+                                          // If doesnt exist in older version color green.
+
+                                          if(type_ == "funcDef"){
+
+                                            temp_node_dir2 = {id: to, group: 'func_Def',normal: {
+                                                    height: 8,
+                                                    fill: '#0be016',
+                                                }, hovered: {
+                                                  height: 10,
+                                                    fill: '#0be016'
+                                                }, selected: {
+                                                  height: 12,
+                                                    fill: '#0be016'
+                                                }, shape: "square"}
+
+                                                new_data2['nodes'].push(temp_node_dir2);
+                                            }
+
+                                            // if(type_ == "ClassDef"){
+
+                                            //     temp_node_dir2 = {id: to, group: 'class_Def', normal: {
+                                            //             height: 8,
+                                            //             fill: '#2ECC71',
+                                            //         }, hovered: {
+                                            //           height: 10,
+                                            //             fill: '#2ECC71'
+                                            //         }, selected: {
+                                            //           height: 12,
+                                            //             fill: '#2ECC71'
+                                            //         }, shape: "circle"}
+
+                                            //         new_data2['nodes'].push(temp_node_dir2);
+                                            //     }
+
+                                            if(type_ == "func"){
+
+                                            temp_node_dir2 = {id: to, group: 'func_Call', normal: {
+                                                    height: 6,
+                                                    fill: '#0be016',
+                                                }, hovered: {
+                                                  height: 8,
+                                                    fill: '#0be016'
+                                                }, selected: {
+                                                  height: 10,
+                                                    fill: '#0be016'
+                                                }, shape: "square"}
+
+                                                new_data2['nodes'].push(temp_node_dir2);
+                                            }
+
+                                            // if(type_ == "module"){
+
+                                            //   temp_node_dir2 = {id: to, group: 'module', normal: {
+                                            //           height: 3,
+                                            //           fill: '#2ECC71',
+                                            //       }, hovered: {
+                                            //         height: 4,
+                                            //           fill: '#2ECC71'
+                                            //       }, selected: {
+                                            //         height: 5,
+                                            //           fill: '#2ECC71'
+                                            //       }, shape: "square"}
+
+                                            //       new_data2['nodes'].push(temp_node_dir2);
+                                            //   }
+
+                                              if(type_ == "file"){
+
+                                            temp_node_dir2 = {id: to, group: 'file', normal: {
+                                            height: 3,
+                                            fill: '#0be016',
+                                            }, hovered: {
+                                            height: 4,
+                                            fill: '#0be016'
+                                            }, selected: {
+                                            height: 5,
+                                            fill: '#0be016'
+                                            }, shape: "square"}
+
+                                            new_data2['nodes'].push(temp_node_dir2);
+                                            }
+
+
+                                            temp_edge_dir = {'from': from, 'to':to}
+                                            new_data2['edges'].push(temp_edge_dir);
+
+
+                                  }
+
+
+                        }
+                }
+              
+        
+      }
+
+
+        });
+
+        console.log("testing2")
+        console.log(new_data2);
+
+        const myNode2 = document.getElementById("container2");
+        myNode2.innerHTML = '';
+        
+
+        var chart = anychart.graph(new_data2);
+      // set the container id
+        chart.container("container2");
+        chart.layout().iterationCount(2000);
+        // chart.nodes().labels().enabled(true);
+        // chart.nodes().labels().fontSize(10);
+        // chart.nodes().labels().fontWeight(300);
+        // initiate drawing the chart
+        chart.nodes().tooltip().useHtml(true);
+        chart.nodes().tooltip().format(
+          "<span style='font-weight:bold'>{{ '{%id}' }} </span><br>type: {{ '{%group}' }}"
+        );
+
+        chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
+        chart.interactivity().hoverGap(30);    
+        chart.draw();
+        chart.title("Collab graphs in 2_: " + curr2);
+  
+  
+}
+
+document.getElementById('dir_view0').onclick = function() {
+  
+  prev_lev = stack.pop();
+  // alert(prev_lev);
+  stack.push(prev_lev);
+  level(prev_lev, "container" , "no");
+
+
+}
+
+document.getElementById('collab_view0').onclick = function() {
+
+    var new_data = {'nodes': [], 'edges':[]}
+
+    cur_sup_files.forEach((file) => {
+      console.log(file);
+      new_temp = calls[file];
+      console.log("testing");
+      console.log(new_temp);
+      // File
+      group = file;
+
+      
+      // console.log(new_temp);
+      // for( var i = 0; i < new_temp.length ; i++){
+      //   console.log(new_temp[i]);
+      // }
+
+      for (var key in new_temp) {
+        if (new_temp.hasOwnProperty(key)){
+          temp_new_dat = Object.values(new_temp[key]);
+          console.log(temp_new_dat);
+          
+          for(var i in temp_new_dat){
+            from = key;
+            to = temp_new_dat[i][0];
+            type_ = temp_new_dat[i][1];
+            console.log(from + " : " + to);
+
+
+
+            temp_node_dir = {id: from, group:'python_File(.py)', normal: {
+                height: 8,
+                fill: '#0099ff',
+            }, hovered: {
+              height: 10,
+                fill: '#0099ff'
+            }, selected: {
+              height: 12,
+                fill: '#0099ff'
+            }, shape: "square"}
+
+            new_data['nodes'].push(temp_node_dir);
+
+
+            
+            // if(type_ == "funcDef"){
+
+            //       temp_node_dir2 = {id: to, group:'func_Def', normal: {
+            //               height: 8,
+            //               fill: '#2C3E50',
+            //           }, hovered: {
+            //             height: 10,
+            //               fill: '#2C3E50'
+            //           }, selected: {
+            //             height: 12,
+            //               fill: '#2C3E50'
+            //           }, shape: "square"}
+
+            //           new_data['nodes'].push(temp_node_dir2);
+            //       }
+
+                  if(type_ == "ClassDef"){
+
+                      temp_node_dir2 = {id: to,group:'class_Def', normal: {
+                              height: 8,
+                              fill: '#920be0',
+                          }, hovered: {
+                            height: 10,
+                              fill: '#920be0'
+                          }, selected: {
+                            height: 12,
+                              fill: '#920be0'
+                          }, shape: "circle"}
+
+                          new_data['nodes'].push(temp_node_dir2);
+                      }
+
+                  // if(type_ == "func"){
+
+                  // temp_node_dir2 = {id: to, group:'func_Call',normal: {
+                  //         height: 6,
+                  //         fill: '#76D7C4',
+                  //     }, hovered: {
+                  //       height: 8,
+                  //         fill: '#76D7C4'
+                  //     }, selected: {
+                  //       height: 10,
+                  //         fill: '#76D7C4'
+                  //     }, shape: "square"}
+
+                  //     new_data['nodes'].push(temp_node_dir2);
+                  // }
+
+                  if(type_ == "module"){
+
+                    temp_node_dir2 = {id: to,group:'module', normal: {
+                            height: 3,
+                            fill: '#e71fc6',
+                        }, hovered: {
+                          height: 4,
+                            fill: '#e71fc6'
+                        }, selected: {
+                          height: 5,
+                            fill: '#e71fc6'
+                        }, shape: "square"}
+
+                        new_data['nodes'].push(temp_node_dir2);
+                    }
+
+
+                    if(type_ == "file"){
+
+                      temp_node_dir2 = {id: to, group:'file',normal: {
+                              height: 3,
+                              fill: '#c1e04d',
+                          }, hovered: {
+                            height: 4,
+                              fill: '#c1e04d'
+                          }, selected: {
+                            height: 5,
+                              fill: '#c1e04d'
+                          }, shape: "square"}
+
+                          new_data['nodes'].push(temp_node_dir2);
+                      }
+
+
+
+
+            temp_edge_dir = {'from': from, 'to':to}
+            new_data['edges'].push(temp_edge_dir);
+            
+
+
+
+
+          }
+        }
+      }
+
+
+    });
+
+    console.log("testing2")
+    console.log(new_data);
+
+    const myNode2 = document.getElementById("container");
+    myNode2.innerHTML = '';
+
+
+    var chart = anychart.graph(new_data);
+    // set the container id
+    chart.container("container");
+    chart.layout().iterationCount(2000);
+    // chart.nodes().labels().enabled(true);
+    // chart.nodes().labels().fontSize(10);
+    // chart.nodes().labels().fontWeight(300);
+    // initiate drawing the chart
+    chart.nodes().tooltip().useHtml(true);
+        chart.nodes().tooltip().format(
+          "<span style='font-weight:bold'>{{ '{%id}' }} </span><br>type: {{ '{%group}' }}"
+        );
+        chart.interactivity().hoverGap(30);  
+        chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
+    chart.draw();
+    chart.title("Call graphs in : " + curr);
+
+
+
+}
+
+document.getElementById('call_view0').onclick = function() {
+  var new_data = {'nodes': [], 'edges':[]}
+
+    cur_sup_files.forEach((file) => {
+      console.log(file);
+      new_temp = calls[file];
+      console.log("testing");
+      console.log(new_temp);
+      // File
+      group = file;
+
+      
+      // console.log(new_temp);
+      // for( var i = 0; i < new_temp.length ; i++){
+      //   console.log(new_temp[i]);
+      // }
+
+      for (var key in new_temp) {
+        if (new_temp.hasOwnProperty(key)){
+          temp_new_dat = Object.values(new_temp[key]);
+          console.log(temp_new_dat);
+          
+          for(var i in temp_new_dat){
+            from = key;
+            to = temp_new_dat[i][0];
+            type_ = temp_new_dat[i][1];
+            console.log(from + " : " + to);
+
+
+
+            temp_node_dir = {id: from, group:'python_File(.py)', normal: {
+                height: 8,
+                fill: '#0099ff',
+            }, hovered: {
+              height: 10,
+                fill: '#0099ff'
+            }, selected: {
+              height: 12,
+                fill: '#0099ff'
+            }, shape: "square"}
+
+            new_data['nodes'].push(temp_node_dir);
+
+
+            
+            if(type_ == "funcDef"){
+
+                  temp_node_dir2 = {id: to, group:'func_Def', normal: {
+                          height: 8,
+                          fill: '#030e4efa',
+                      }, hovered: {
+                        height: 10,
+                          fill: '#030e4efa'
+                      }, selected: {
+                        height: 12,
+                          fill: '#030e4efa'
+                      }, shape: "square"}
+
+                      new_data['nodes'].push(temp_node_dir2);
+                  }
+
+                  // if(type_ == "ClassDef"){
+
+                  //     temp_node_dir2 = {id: to,group:'class_Def', normal: {
+                  //             height: 8,
+                  //             fill: '#633974',
+                  //         }, hovered: {
+                  //           height: 10,
+                  //             fill: '#633974'
+                  //         }, selected: {
+                  //           height: 12,
+                  //             fill: '#633974'
+                  //         }, shape: "circle"}
+
+                  //         new_data['nodes'].push(temp_node_dir2);
+                  //     }
+
+                  if(type_ == "func"){
+
+                  temp_node_dir2 = {id: to, group:'func_Call',normal: {
+                          height: 6,
+                          fill: '#e27979',
+                      }, hovered: {
+                        height: 8,
+                          fill: '#e27979'
+                      }, selected: {
+                        height: 10,
+                          fill: '#e27979'
+                      }, shape: "square"}
+
+                      new_data['nodes'].push(temp_node_dir2);
+                  }
+
+                  // if(type_ == "module"){
+
+                  //   temp_node_dir2 = {id: to,group:'module', normal: {
+                  //           height: 3,
+                  //           fill: '#2980B9',
+                  //       }, hovered: {
+                  //         height: 4,
+                  //           fill: '#2980B9'
+                  //       }, selected: {
+                  //         height: 5,
+                  //           fill: '#2980B9'
+                  //       }, shape: "square"}
+
+                  //       new_data['nodes'].push(temp_node_dir2);
+                  //   }
+
+
+                    if(type_ == "file"){
+
+                      temp_node_dir2 = {id: to, group:'file',normal: {
+                              height: 3,
+                              fill: '#c1e04d',
+                          }, hovered: {
+                            height: 4,
+                              fill: '#c1e04d'
+                          }, selected: {
+                            height: 5,
+                              fill: '#c1e04d'
+                          }, shape: "square"}
+
+                          new_data['nodes'].push(temp_node_dir2);
+                      }
+
+
+
+
+            temp_edge_dir = {'from': from, 'to':to}
+            new_data['edges'].push(temp_edge_dir);
+            
+
+
+
+
+          }
+        }
+      }
+
+
+    });
+
+    console.log("testing2")
+    console.log(new_data);
+
+    const myNode2 = document.getElementById("container");
+    myNode2.innerHTML = '';
+
+
+    var chart = anychart.graph(new_data);
+  // set the container id
+    chart.container("container");
+    chart.layout().iterationCount(2000);
+    // chart.nodes().labels().enabled(true);
+    // chart.nodes().labels().fontSize(10);
+    // chart.nodes().labels().fontWeight(300);
+    // initiate drawing the chart
+    chart.nodes().tooltip().useHtml(true);
+        chart.nodes().tooltip().format(
+          "<span style='font-weight:bold'>{{ '{%id}' }} </span><br>type: {{ '{%group}' }}"
+        );
+        chart.interactivity().hoverGap(30);  
+        chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
+    chart.draw();
+    chart.title("Call graphs in : " + curr);
+
+}
 // THE END of First View
 
 
+
+// function getdiff(a, b){
+//       var added = 0;
+//       var deleted = 0;
+
+//       var key;
+//       var key2;
+//       var key3;
+//       var key4;
+
+//       for (key in a){
+//         if(a.hasOwnProperty(key)){
+//           run = 1;
+//           val = a[key]['value']
+//           for (key2 in b){
+//               if(b.hasOwnProperty(key2)){
+//               val2 = b[key2]['value']
+//               if(val == val2){
+//                 run = 0;
+//               }
+//             }
+//           }
+//           if(run == 1){
+//             added = added + 1;
+//           }
+//         }
+//       }
+
+
+//       for (key3 in b){
+//         if(b.hasOwnProperty(key3)){
+//           run = 1;
+//           val = b[key3]['value']
+//           for (key4 in a){
+//             if(a.hasOwnProperty(key4)){
+//               val2 = a[key4]['value']
+//               if(val == val2){
+//                 run = 0;
+//               }
+//             }
+//           }
+//           if(run == 1){
+//             deleted = deleted + 1;
+//           }
+//         }
+//       }
+
+
+//     return [added, deleted]
+
+// }
+
+
+function getdiff(a, b){
+      var added = 0;
+      var ClassDef = [0, 0];
+      var funcDef = [0, 0];
+      var deleted = 0;
+      var module = [0, 0];
+      var func = [0, 0];
+      var file = [0, 0]
+
+      var key;
+      var key2;
+      var key3;
+      var key4;
+
+      for (key in a){
+        if(a.hasOwnProperty(key)){
+          run = 1;
+          val = a[key]['value']
+          for (key2 in b){
+              if(b.hasOwnProperty(key2)){
+              val2 = b[key2]['value']
+              if(val == val2){
+                run = 0;
+              }
+            }
+          }
+          if(run == 1){
+            added = added + 1;
+            // alert(a[key]['type']);
+            // if (a[key]['type'] == 'funcDef'){
+            //     funcDef[0] = funcDef[0] + 1;
+            // }
+            // if (a[key]['type'] == 'ClassDef'){
+            //   ClassDef[0] = ClassDef[0] + 1;
+            // }
+            // if (a[key]['type'] == 'func'){
+            //   func[0] = func[0] + 1;
+            // }
+            // if (a[key]['type'] == 'module'){
+            //   module[0] = module[0] + 1;
+            // }
+            // if (a[key]['type'] == 'file'){
+            //   file[0] = file[0] + 1;
+            // }
+          }
+        }
+      }
+
+
+      for (key3 in b){
+        if(b.hasOwnProperty(key3)){
+          run = 1;
+          val = b[key3]['value']
+          for (key4 in a){
+            if(a.hasOwnProperty(key4)){
+              val2 = a[key4]['value']
+              if(val == val2){
+                run = 0;
+              }
+            }
+          }
+          if(run == 1){
+            deleted = deleted + 1;
+            // if (a[key]['type'] == 'funcDef'){
+            //     funcDef[1] = funcDef[1] + 1;
+            // }
+            // if (a[key]['type'] == 'ClassDef'){
+            //   ClassDef[1] = ClassDef[1] + 1;
+            // }
+            // if (a[key]['type'] == 'func'){
+            //   func[1] = func[1] + 1;
+            // }
+            // if (a[key]['type'] == 'module'){
+            //   module[1] = module[1] + 1;
+            // }
+            // if (a[key]['type'] == 'file'){
+            //   file[1] = file[1] + 1;
+            // }
+          }
+        }
+      }
+
+
+    return [added, deleted]
+
+}
+
+// function getobjs()
+
+function set_diff(a, b){
+  document.getElementById('num_added').innerHTML = 'Added: ' + a;
+  document.getElementById('num_deleted').innerHTML = 'Removed: ' + b; 
+}
+function set_diff1(a){
+  document.getElementById('num_added').innerHTML = 'Added: ' + a;
+  document.getElementById('num_deleted').innerHTML = 'Removed: 0'; 
+}
+
+function set_diff_ult(a,b,c,d,e, f, g, h, i, j){
+
+  document.getElementById('funcDef_added').innerHTML = 'Function Defintions (Added: ' + a + ' Removed: ' + b + ')';
+
+  document.getElementById('classes_added').innerHTML = 'Class Definition (Added: ' + c + ' Removed: ' + d + ')';
+
+  document.getElementById('func_added').innerHTML = 'Function Calls (Added: ' + e + ' Removed: ' + f + ')';
+
+  document.getElementById('modules_added').innerHTML = 'Modules (Added: ' + g + ' Removed: ' + h + ')';
+
+  document.getElementById('files_added').innerHTML = 'Files (Added: ' + i + ' Removed: ' + j + ')';
+
+}
 </script>
 
 
