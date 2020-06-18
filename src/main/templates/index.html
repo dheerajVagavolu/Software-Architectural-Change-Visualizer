@@ -15,7 +15,7 @@
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Hello, world!</title>
+    <title>AC2</title>
   </head>
   <body>
 
@@ -1994,12 +1994,12 @@ document.getElementById('collab_view').onclick = function() {
                                           // var num_red = 0;
                                           for(var k in temp_new_dat2){
                                               from = key;
-                                              to = temp_new_dat2[i][0];
-                                              type_ = temp_new_dat2[i][1];
+                                              to = temp_new_dat2[k][0];
+                                              type_ = temp_new_dat2[k][1];
                                               run = 0;
                                               //  Iterate through current nodes.
                                               for(var i in temp_new_dat){
-                                                tp = temp_new_dat[k][0];
+                                                tp = temp_new_dat[i][0];
                                                 if (tp == to){
                                                   run = 1;
                                                   break;
@@ -2510,12 +2510,12 @@ document.getElementById('call_view').onclick = function() {
                                           // var num_red = 0;
                                           for(var k in temp_new_dat2){
                                               from = key;
-                                              to = temp_new_dat2[i][0];
-                                              type_ = temp_new_dat2[i][1];
+                                              to = temp_new_dat2[k][0];
+                                              type_ = temp_new_dat2[k][1];
                                               run = 0;
                                               //  Iterate through current nodes.
                                               for(var i in temp_new_dat){
-                                                tp = temp_new_dat[k][0];
+                                                tp = temp_new_dat[i][0];
                                                 if (tp == to){
                                                   run = 1;
                                                   break;
