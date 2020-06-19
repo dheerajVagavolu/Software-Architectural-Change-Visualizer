@@ -34,10 +34,10 @@ python main.py
 
 Then, open your browser to 'http://localhost:5000/'
 
-Enter a Python Github Repository link and press enter to generate annotated graphs in available views.
+##### Enter a Python Github Repository link and press enter to generate annotated graphs in available views.
 ![](head1.png)
 
-Compare two different versions of a repository by their respective annotated call graphs and collaboration graphs
+##### Compare two different versions of a repository by their respective annotated call graphs and collaboration graphs
 ![](head3.png)
 
 ## Meta
