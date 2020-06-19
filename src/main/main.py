@@ -31,7 +31,7 @@ def download():
     cmd2 = 'git tag --sort=committerdate > ../tags.txt'
 
 
-    test_dir = cur_dir+'/test'
+    test_dir = cur_dir+'/target_repo_dir'
     os.chdir(test_dir)
     os.system(cmd)
 
@@ -80,8 +80,8 @@ def download():
         
     
     os.chdir(cur_dir)
-    pickle.dump( ulti_dict, open( "ulti_dict3.dat", "wb" ))
-    pickle.dump( ulti_tree, open( "ulti_tree3.dat", "wb" ))
+    pickle.dump( ulti_dict, open( "directory_map.dat", "wb" ))
+    pickle.dump( ulti_tree, open( "ast_map.dat", "wb" ))
     
     return redirect('/run')
 
@@ -90,46 +90,19 @@ def hello_world():
     
     script_dir = os.getcwd()
 
-    # test_path = 'test/file.py'
-
-    # test_path = 'test'
-
-    new_dir = os.path.join(os.getcwd(), 'test')
+    new_dir = os.path.join(os.getcwd(), 'target_repo_dir')
 
 
     tree = dir_walk(new_dir)
-    # new_calls_tree = get_dictionary(tree)
-    
-    # print(tree)
 
-
-    # This if for engine of parsing.
-
-    ########################################################################################
-    # new_calls_tree = pickle.load( open( "test2.dat", "rb" ) )
-    ulti_dict = pickle.load( open( "ulti_dict3.dat", "rb" ) )
+    ulti_dict = pickle.load( open( "directory_map.dat", "rb" ) )
     new_ulti_dict = json.dumps(ulti_dict)
-    # print(new_ulti_dict['1']['D:\\Code\\AC2\\AC2\\src\\main\\test\\class.py'])
-    ulti_tree = pickle.load( open( "ulti_tree3.dat", "rb" ) )
-    # print(new_ulti_dict)
-    tags = open('test/tags.txt').readlines()
-
-    # print(ulti_dict['51'])
-    # print(ulti_dict['6'])
-    # print(ulti_dict['7'])
-    # print(ulti_dict['8'])
     
-
-
-    # temp_tree ,temp_mod = get_calls(i['value'])
-    # print(temp_mod)
-    
-    ########################################################################################
-            
+    ulti_tree = pickle.load( open( "ast_map.dat", "rb" ) )
+    tags = open('target_repo_dir/tags.txt').readlines()
 
 
     return render_template('index.html', tags = tags, ulti_tree = {'body': ulti_tree} ,ulti_dict = new_ulti_dict, tree = tree)
-    # return "hello_world"
 
 def get_dictionary(tree):
 
@@ -158,9 +131,6 @@ if __name__ == '__main__':
     app.run(debug = True)
 
     
-# call_list, imp_dict = get_calls(test_path)
-# print(call_list)
-# print(imp_dict)
 
 
     

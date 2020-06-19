@@ -1,5 +1,6 @@
 *.pyc
 *.pyo
-src/main/test/python-semantic-release
-src/main/test/class.py
-src/main/test/python-fire
+src/main/target_repo_dir/python-semantic-release
+src/main/target_repo_dir/class.py
+src/main/target_repo_dir/python-fire
+venv
