@@ -8,10 +8,10 @@
 One to two paragraph statement about your product and what it does.
 
 The Landing Page:
-![](head1.png)
+![](head2.png)
 
 Example Usage:
-![](head2.png)
+![](head1.png)
 
 
 ## Installation
