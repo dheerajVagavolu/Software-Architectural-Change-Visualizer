@@ -1,9 +1,6 @@
 # AC2
-> Ac2 implementation without using Dyoxygen engine.
+> Towards Understanding Architectural Changes in Python Projects
 
-One to two paragraph statement about your product and what it does.
-
-Landing Page
 ![](head2.png)
 
 
@@ -37,9 +34,11 @@ python main.py
 
 Then, open your browser to 'http://localhost:5000/'
 
-Enter a Python Github Repository link and press enter.
-Example Usage
+Enter a Python Github Repository link and press enter to generate annotated graphs in available views.
 ![](head1.png)
+
+Compare two different versions of a repository by their respective annotated call graphs and collaboration graphs
+![](head3.png)
 
 ## Meta
 
