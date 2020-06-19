@@ -862,6 +862,21 @@ function SetTag2(i){
 
 // Get calls function
 document.getElementById("integ_view").onclick = function() {
+  // <a class='row' id="funcDef_added"></a>
+  //             <a class='row' id="classes_added"></a>
+  //             <a class='row' id="func_added"></a>
+  //             <a class='row' id="modules_added"></a>
+  //             <a class='row' id="files_added"></a>
+
+  document.getElementById('funcDef_added').style.display = 'inline';
+  
+  document.getElementById('classes_added').style.display = 'inline';
+  
+  document.getElementById('func_added').style.display = 'inline';
+  
+  document.getElementById('modules_added').style.display = 'inline';
+
+  document.getElementById('files_added').style.display = 'inline';
 
   // Making the actual dict
   var numa = 0;
@@ -1845,6 +1860,16 @@ document.getElementById('dir_view').onclick = function() {
 
 document.getElementById('collab_view').onclick = function() {
 
+  document.getElementById('funcDef_added').style.display = 'none';
+  
+  document.getElementById('classes_added').style.display = 'inline';
+  
+  document.getElementById('func_added').style.display = 'none';
+  
+  document.getElementById('modules_added').style.display = 'inline';
+
+  document.getElementById('files_added').style.display = 'inline';
+
   var new_data2 = {'nodes': [], 'edges':[]}
 
 //  Got current files in this view
@@ -2349,6 +2374,16 @@ document.getElementById('collab_view').onclick = function() {
 }
 
 document.getElementById('call_view').onclick = function() {
+  
+  document.getElementById('funcDef_added').style.display = 'inline';
+  
+  document.getElementById('classes_added').style.display = 'none';
+  
+  document.getElementById('func_added').style.display = 'inline';
+  
+  document.getElementById('modules_added').style.display = 'none';
+
+  document.getElementById('files_added').style.display = 'inline';
 
   var new_data2 = {'nodes': [], 'edges':[]}
 
