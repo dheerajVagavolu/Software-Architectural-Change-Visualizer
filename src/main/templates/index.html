@@ -134,12 +134,17 @@
             <a id="num_added"></a>
             <a id="num_deleted"></a>
 
-            <!-- <a id="funcDef_added"></a>
-            <a id="classes_added"></a>
-            <a id="func_added"></a>
-            <a id="modules_added"></a>
-            <a id="files_added"></a> -->
+            <hr>
 
+            <div class="container">
+              <a class='row' id="funcDef_added"></a>
+              <a class='row' id="classes_added"></a>
+              <a class='row' id="func_added"></a>
+              <a class='row' id="modules_added"></a>
+              <a class='row' id="files_added"></a>
+
+            </div>
+            
 
           </div>
           <div class="col-lg-8">
@@ -178,6 +183,43 @@
       border-radius: 5px;
       padding: 5px;
       background-color: red;
+    }
+
+    #funcDef_added{
+      
+      border-radius: 5px;
+      padding: 5px;
+      width: fit-content;
+    }
+
+    
+    #classes_added{
+      
+      border-radius: 5px;
+      padding: 5px;
+      width: fit-content;
+    }
+
+    #func_added{
+      
+      border-radius: 5px;
+      padding: 5px;
+      width: fit-content;
+    }
+
+    
+    #modules_added{
+      
+      border-radius: 5px;
+      padding: 5px;
+      width: fit-content;
+    }
+
+    #files_added{
+      
+      border-radius: 5px;
+      padding: 5px;
+      width: fit-content;
     }
 
     .mast{
@@ -424,22 +466,6 @@ document.getElementById("integ_view0").onclick = function() {
             type_ = temp_new_dat[i][1];
             console.log(from + " : " + to);
 
-
-
-            temp_node_dir = {id: from, group:'python_File(.py)', normal: {
-                height: 8,
-                fill: '#0099ff',
-            }, hovered: {
-              height: 10,
-                fill: '#0099ff'
-            }, selected: {
-              height: 12,
-                fill: '#0099ff'
-            }, shape: "square"}
-
-            new_data['nodes'].push(temp_node_dir);
-
-
             
             if(type_ == "funcDef"){
 
@@ -522,7 +548,18 @@ document.getElementById("integ_view0").onclick = function() {
                           new_data['nodes'].push(temp_node_dir2);
                       }
 
+            temp_node_dir = {id: from, group: 'undetermined', normal: {
+                height: 8,
+                fill: '#000',
+            }, hovered: {
+              height: 10,
+                fill: '#000'
+            }, selected: {
+              height: 12,
+                fill: '#000'
+            }, shape: "square"}
 
+            new_data['nodes'].push(temp_node_dir);
 
 
             temp_edge_dir = {'from': from, 'to':to}
@@ -830,16 +867,16 @@ document.getElementById("integ_view").onclick = function() {
   var numa = 0;
   var numd = 0;
 
-  // var a_ = 0;
-  // var b_ = 0;
-  // var c_ = 0;
-  // var d_ = 0;
-  // var e_ = 0;
-  // var f_ = 0;
-  // var g_ = 0;
-  // var h_ = 0;
-  // var i_ = 0;
-  // var j_ = 0;
+  var a_ = 0;
+  var b_ = 0;
+  var c_ = 0;
+  var d_ = 0;
+  var e_ = 0;
+  var f_ = 0;
+  var g_ = 0;
+  var h_ = 0;
+  var i_ = 0;
+  var j_ = 0;
 
   var new_data2 = {'nodes': [], 'edges':[]}
 
@@ -873,37 +910,26 @@ document.getElementById("integ_view").onclick = function() {
                                       // Get the graph of previous vals too.
                                       temp_new_dat2 = Object.values(new_temp2[key]);
                                       
-                                      obje = getdiff(temp_new_dat, temp_new_dat2);
+                                      obje = getdiff2(temp_new_dat, temp_new_dat2);
 
                                       numa = numa + obje[0];
                                       numd = numd + obje[1];
 
-                                      // a_ = a_ + obje[2][0];
-                                      // b_ = b_ + obje[2][1];
-                                      // c_ = c_ + obje[3][0];
-                                      // d_ = d_ + obje[3][1];
-                                      // e_ = e_ + obje[4][0];
-                                      // f_ = f_ + obje[4][1];
-                                      // g_ = g_ + obje[5][0];
-                                      // h_ = h_ + obje[5][1];
-                                      // i_ = i_ + obje[6][0];
-                                      // j_ = j_ + obje[6][1];
+                                      a_ = a_ + obje[2][0];
+                                      b_ = b_ + obje[2][1];
+                                      c_ = c_ + obje[3][0];
+                                      d_ = d_ + obje[3][1];
+                                      e_ = e_ + obje[4][0];
+                                      f_ = f_ + obje[4][1];
+                                      g_ = g_ + obje[5][0];
+                                      h_ = h_ + obje[5][1];
+                                      i_ = i_ + obje[6][0];
+                                      j_ = j_ + obje[6][1];
 
 
                                       from = key;
                                       // Adding 'from' node
-                                      temp_node_dir = {id: from,  group: 'python_File(.py)', normal: {
-                                          height: 6,
-                                          fill: '#0099ff',
-                                      }, hovered: {
-                                        height: 8,
-                                          fill: '#0099ff'
-                                      }, selected: {
-                                        height: 10,
-                                          fill: '#0099ff'
-                                      }, shape: "square"}
 
-                                      new_data2['nodes'].push(temp_node_dir);
 
 
 
@@ -1000,6 +1026,18 @@ document.getElementById("integ_view").onclick = function() {
                                                       new_data2['nodes'].push(temp_node_dir2);
                                                   }
 
+                                                          temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                                height: 6,
+                                                                fill: '#000',
+                                                            }, hovered: {
+                                                              height: 8,
+                                                                fill: '#000'
+                                                            }, selected: {
+                                                              height: 10,
+                                                                fill: '#000'
+                                                            }, shape: "square"}
+
+                                                            new_data2['nodes'].push(temp_node_dir);
 
                                                           temp_edge_dir = {'from': from, 'to':to}
                                                           new_data2['edges'].push(temp_edge_dir);
@@ -1092,6 +1130,19 @@ document.getElementById("integ_view").onclick = function() {
 
                                                             new_data2['nodes'].push(temp_node_dir2);
                                                         }
+
+                                                        temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                              height: 6,
+                                                              fill: '#000',
+                                                          }, hovered: {
+                                                            height: 8,
+                                                              fill: '#000'
+                                                          }, selected: {
+                                                            height: 10,
+                                                              fill: '#000'
+                                                          }, shape: "square"}
+
+                                                          new_data2['nodes'].push(temp_node_dir);
 
 
                                                         temp_edge_dir = {'from': from, 'to':to}
@@ -1203,6 +1254,18 @@ document.getElementById("integ_view").onclick = function() {
                                                         new_data2['nodes'].push(temp_node_dir2);
                                                         }
 
+                                                        temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                            height: 6,
+                                                            fill: '#000',
+                                                        }, hovered: {
+                                                          height: 8,
+                                                            fill: '#000'
+                                                        }, selected: {
+                                                          height: 10,
+                                                            fill: '#000'
+                                                        }, shape: "square"}
+
+                                                        new_data2['nodes'].push(temp_node_dir);
 
                                                         temp_edge_dir = {'from': from, 'to':to}
                                                         new_data2['edges'].push(temp_edge_dir);
@@ -1229,18 +1292,7 @@ document.getElementById("integ_view").onclick = function() {
 
                             from = key;
                             // Adding 'from' node
-                            temp_node_dir = {id: from, group: 'python_File(.py)', normal: {
-                                height: 6,
-                                fill: '#0be016',
-                            }, hovered: {
-                              height: 8,
-                                fill: '#0be016'
-                            }, selected: {
-                              height: 10,
-                                fill: '#0be016'
-                            }, shape: "square"}
 
-                            new_data2['nodes'].push(temp_node_dir);
 
                             
 
@@ -1333,6 +1385,18 @@ document.getElementById("integ_view").onclick = function() {
                                             new_data2['nodes'].push(temp_node_dir2);
                                             }
 
+                                            temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                height: 6,
+                                                fill: '#000',
+                                            }, hovered: {
+                                              height: 8,
+                                                fill: '#000'
+                                            }, selected: {
+                                              height: 10,
+                                                fill: '#000'
+                                            }, shape: "square"}
+
+                                            new_data2['nodes'].push(temp_node_dir);
 
                                             temp_edge_dir = {'from': from, 'to':to}
                                             new_data2['edges'].push(temp_edge_dir);
@@ -1355,7 +1419,7 @@ document.getElementById("integ_view").onclick = function() {
 
 
         set_diff(numa, numd);
-        // set_diff_ult(a_, b_, c_, d_, e_, f_, g_, h_, i_, j_);
+        set_diff_ult(a_, b_, c_, d_, e_, f_, g_, h_, i_, j_);
         const myNode2 = document.getElementById("container2");
         myNode2.innerHTML = '';
         
@@ -3185,6 +3249,9 @@ document.getElementById('call_view0').onclick = function() {
 
 
 function getdiff(a, b){
+
+      btemp = b;
+      atemp = a;
       var added = 0;
       var ClassDef = [0, 0];
       var funcDef = [0, 0];
@@ -3232,36 +3299,22 @@ function getdiff(a, b){
         }
       }
 
-
-      for (key3 in b){
-        if(b.hasOwnProperty(key3)){
+      for (key3 in btemp){
+        if(btemp.hasOwnProperty(key3)){
           run = 1;
-          val = b[key3]['value']
-          for (key4 in a){
-            if(a.hasOwnProperty(key4)){
-              val2 = a[key4]['value']
-              if(val == val2){
+          val3 = btemp[key3]['value']
+          for (key4 in atemp){
+            if(atemp.hasOwnProperty(key4)){
+              val4 = atemp[key4]['value']
+              if(val3 == val4){
                 run = 0;
+                break;
               }
             }
           }
+
           if(run == 1){
             deleted = deleted + 1;
-            // if (a[key]['type'] == 'funcDef'){
-            //     funcDef[1] = funcDef[1] + 1;
-            // }
-            // if (a[key]['type'] == 'ClassDef'){
-            //   ClassDef[1] = ClassDef[1] + 1;
-            // }
-            // if (a[key]['type'] == 'func'){
-            //   func[1] = func[1] + 1;
-            // }
-            // if (a[key]['type'] == 'module'){
-            //   module[1] = module[1] + 1;
-            // }
-            // if (a[key]['type'] == 'file'){
-            //   file[1] = file[1] + 1;
-            // }
           }
         }
       }
@@ -3271,12 +3324,103 @@ function getdiff(a, b){
 
 }
 
+function getdiff2(a, b){
+      // btemp = b;
+      // atemp = a;
+      var added = 0;
+      var deleted = 0;
+      var ClassDef = [0, 0];
+      var funcDef = [0, 0];
+      var module = [0, 0];
+      var func = [0, 0];
+      var file = [0, 0]
+
+      var key;
+      var key2;
+      var key3;
+      var key4;
+
+      for (key in a){
+        if(a.hasOwnProperty(key)){
+          run = 1;
+          val = a[key][0]
+          for (key2 in b){
+              if(b.hasOwnProperty(key2)){
+              val2 = b[key2][0]
+              if(val == val2){
+                run = 0;
+              }
+            }
+          }
+          if(run == 1){
+            added = added + 1;
+            
+            if (a[key][1] == 'funcDef'){
+                funcDef[0] = funcDef[0] + 1;
+            }
+            if (a[key][1] == 'ClassDef'){
+              ClassDef[0] = ClassDef[0] + 1;
+            }
+            if (a[key][1] == 'func'){
+              func[0] = func[0] + 1;
+            }
+            if (a[key][1] == 'module'){
+              module[0] = module[0] + 1;
+            }
+            if (a[key][1] == 'file'){
+              file[0] = file[0] + 1;
+            }
+          }
+        }
+      }
+
+      for (key3 in b){
+        if(b.hasOwnProperty(key3)){
+          run = 1;
+          val3 = b[key3][0]
+          for (key4 in a){
+            if(a.hasOwnProperty(key4)){
+              val4 = a[key4][0]
+              if(val3 == val4){
+                run = 0;
+                break;
+              }
+            }
+          }
+
+          if(run == 1){
+            deleted = deleted + 1;
+
+            if (a[key][1] == 'funcDef'){
+                funcDef[1] = funcDef[1] + 1;
+            }
+            if (a[key][1] == 'ClassDef'){
+              ClassDef[1] = ClassDef[1] + 1;
+            }
+            if (a[key][1] == 'func'){
+              func[1] = func[1] + 1;
+            }
+            if (a[key][1] == 'module'){
+              module[1] = module[1] + 1;
+            }
+            if (a[key][1] == 'file'){
+              file[1] = file[1] + 1;
+            }
+          }
+        }
+      }
+
+
+    return [added, deleted, funcDef, ClassDef, func, module, file]
+
+}
 // function getobjs()
 
 function set_diff(a, b){
   document.getElementById('num_added').innerHTML = 'Added: ' + a;
   document.getElementById('num_deleted').innerHTML = 'Removed: ' + b; 
 }
+
 function set_diff1(a){
   document.getElementById('num_added').innerHTML = 'Added: ' + a;
   document.getElementById('num_deleted').innerHTML = 'Removed: 0'; 
