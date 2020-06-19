@@ -61,7 +61,7 @@ def download():
 
         os.chdir(test_dir)
         
-        cmdd = 'cohesion -d '+ '.\\' + github.split('/')[-1].split('.')[0] +' > ..\\static\\cohesion_'+github.split('/')[-1].split('.')[0]+'_'+i
+        cmdd = 'cohesion -d '+ '.\\' + github.split('/')[-1].split('.')[0] +' > ..\\static\\cohesion_'+github.split('/')[-1].split('.')[0]+'_'+i + '.txt'
         print(test_dir)
         print(cmdd)
         os.system(cmdd)
