@@ -1,7 +1,7 @@
 # AC2
 > Towards Understanding Architectural Changes in Python Projects
 
-![](head2.png)
+![](landing_page.png)
 
 
 ## Installation
@@ -34,11 +34,11 @@ python main.py
 
 Then, open your browser to 'http://localhost:5000/'
 
-##### Enter a Python Github Repository link and press enter to generate annotated graphs in available views.
-![](head1.png)
+> #### Enter a Python Github Repository link and press enter to generate annotated graphs in available views.
+![](demo_image_1.png)
 
-##### Compare two different versions of a repository by their respective annotated call graphs and collaboration graphs
-![](head3.png)
+> #### Compare two different versions of a repository by their respective annotated call graphs and collaboration graphs
+![](demo_image_2.png)
 
 ## Meta
 
