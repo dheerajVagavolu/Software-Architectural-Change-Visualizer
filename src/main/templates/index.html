@@ -1289,6 +1289,28 @@ document.getElementById("integ_view").onclick = function() {
                           temp_new_dat = Object.values(new_temp[key]);
 
                           numa = numa + temp_new_dat.length;
+                          
+                          for(ka in temp_new_dat){
+                              if(temp_new_dat.hasOwnProperty(ka)){
+                                
+                                if (temp_new_dat[ka][1] == 'funcDef'){
+                                      a_ = a_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'ClassDef'){
+                                    c_ = c_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'func'){
+                                    e_ = e_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'module'){
+                                    g_ = g_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'file'){
+                                    i_ = i_ + 1;
+                                  }
+                              }
+                            }
+
 
                             from = key;
                             // Adding 'from' node
