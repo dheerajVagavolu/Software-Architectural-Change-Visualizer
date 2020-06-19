@@ -2,4 +2,4 @@
 *.pyo
 src/main/test/python-semantic-release
 src/main/test/class.py
-src/main/test/tensor2tensor
+src/main/test/python-fire

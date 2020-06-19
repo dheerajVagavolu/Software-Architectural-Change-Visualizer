@@ -60,12 +60,16 @@ def download():
         
 
         os.chdir(test_dir)
-
+        
+        cmdd = 'cohesion -d '+ '.\\' + github.split('/')[-1].split('.')[0] +' > ..\\static\\cohesion_'+github.split('/')[-1].split('.')[0]+'_'+i
+        print(test_dir)
+        print(cmdd)
+        os.system(cmdd)
 
         new_dir = github.split('/')[-1].split('.')[0]
         tree = dir_walk(new_dir)
 
-        #
+        
         returned_tree = get_dictionary(tree)
 
         ulti_tree[str(num)] = tree
@@ -91,6 +95,8 @@ def hello_world():
     # test_path = 'test'
 
     new_dir = os.path.join(os.getcwd(), 'test')
+
+
     tree = dir_walk(new_dir)
     # new_calls_tree = get_dictionary(tree)
     
