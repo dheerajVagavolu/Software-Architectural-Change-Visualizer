@@ -34,11 +34,11 @@
                 </button>
                 
               <div class="dropdown-menu" id="drop_type0">
-                  <a class="dropdown-item" id="dir_view0">dir_View</a>
-                  <a class="dropdown-item" id="integ_view0">integ_View</a>
-                  <a class="dropdown-item" id="collab_view0">collab_View</a>
-                  <a class="dropdown-item" id="call_view0">call_View</a>              
-                </div>
+                  <a class="dropdown-item" id="dir_view0">Directory View</a>
+                  <a class="dropdown-item" id="integ_view0">Integrated View</a>
+                  <a class="dropdown-item" id="collab_view0">Class Collaboration View</a>
+                  <a class="dropdown-item" id="call_view0">Call Collaboration Graph</a>    
+              </div>
 
               </div>
 
@@ -105,10 +105,10 @@
                 </button>
                 
               <div class="dropdown-menu" id="drop_type">
-                  <a class="dropdown-item" id="dir_view">dir_View</a>
-                  <a class="dropdown-item" id="integ_view">integ_View</a>
-                  <a class="dropdown-item" id="collab_view">collab_View</a>
-                  <a class="dropdown-item" id="call_view">call_View</a>
+                  <a class="dropdown-item" id="dir_view">Directory View</a>
+                  <a class="dropdown-item" id="integ_view">Integrated View</a>
+                  <a class="dropdown-item" id="collab_view">Class Collaboration View</a>
+                  <a class="dropdown-item" id="call_view">Call Collaboration Graph</a>
               
                 </div>
 
@@ -598,7 +598,7 @@ document.getElementById("integ_view0").onclick = function() {
         chart.interactivity().hoverGap(30);  
         chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
     chart.draw();
-    chart.title("Call graphs in : " + curr);
+    chart.title("Integrated Call and Collaboration Graph");
 
 
 }
@@ -774,7 +774,7 @@ function level(lev, cont, yes_no){
 
     // initiate drawing the chart
     chart.draw();
-    chart.title("root : " + lev);
+    chart.title("Directory View");
 
 
 
@@ -1440,7 +1440,7 @@ document.getElementById("integ_view").onclick = function() {
         chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
         chart.interactivity().hoverGap(30);    
         chart.draw();
-        chart.title("Call graphs in 2_: " + curr2);
+        chart.title("Integrated Call and Collaboration Graph");
 
 
 }
@@ -1796,7 +1796,7 @@ if (temp[k]['type'] == 'dir'){
 
     // initiate drawing the chart
     chart.draw();
-    chart.title("root : " + lev);
+    chart.title("Directory View");
 
 
 
@@ -2321,7 +2321,7 @@ document.getElementById('collab_view').onclick = function() {
         chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
         chart.interactivity().hoverGap(30);    
         chart.draw();
-        chart.title("Collab graphs in 2_: " + curr2);
+        chart.title("Class Collaboration graph");
   
 
 }
@@ -2837,7 +2837,7 @@ document.getElementById('call_view').onclick = function() {
         chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
         chart.interactivity().hoverGap(30);    
         chart.draw();
-        chart.title("Collab graphs in 2_: " + curr2);
+        chart.title("Call Graph");
   
   
 }
@@ -3018,7 +3018,7 @@ document.getElementById('collab_view0').onclick = function() {
         chart.interactivity().hoverGap(30);  
         chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
     chart.draw();
-    chart.title("Call graphs in : " + curr);
+    chart.title("Class Collaboration Graph");
 
 
 
@@ -3189,7 +3189,7 @@ document.getElementById('call_view0').onclick = function() {
         chart.interactivity().hoverGap(30);  
         chart.edges().tooltip().format("{{ '{%from}' }} -> {{ '{%to}' }}");
     chart.draw();
-    chart.title("Call graphs in : " + curr);
+    chart.title("Call Graph");
 
 }
 // THE END of First View
