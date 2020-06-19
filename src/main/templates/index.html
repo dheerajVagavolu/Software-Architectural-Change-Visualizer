@@ -868,15 +868,15 @@ document.getElementById("integ_view").onclick = function() {
   //             <a class='row' id="modules_added"></a>
   //             <a class='row' id="files_added"></a>
 
-  document.getElementById('funcDef_added').style.display = 'inline';
+  document.getElementById('funcDef_added').style.display = '';
   
-  document.getElementById('classes_added').style.display = 'inline';
+  document.getElementById('classes_added').style.display = '';
   
-  document.getElementById('func_added').style.display = 'inline';
+  document.getElementById('func_added').style.display = '';
   
-  document.getElementById('modules_added').style.display = 'inline';
+  document.getElementById('modules_added').style.display = '';
 
-  document.getElementById('files_added').style.display = 'inline';
+  document.getElementById('files_added').style.display = '';
 
   // Making the actual dict
   var numa = 0;
@@ -1852,6 +1852,18 @@ if (temp[k]['type'] == 'dir'){
 
 
 document.getElementById('dir_view').onclick = function() {
+  
+  document.getElementById('funcDef_added').style.display = 'none';
+  
+  document.getElementById('classes_added').style.display = 'none';
+  
+  document.getElementById('func_added').style.display = 'none';
+  
+  document.getElementById('modules_added').style.display = 'none';
+
+  document.getElementById('files_added').style.display = 'none';
+
+
   prev_lev = stack2.pop();
   // alert(prev_lev);
   stack2.push(prev_lev);
@@ -1862,13 +1874,13 @@ document.getElementById('collab_view').onclick = function() {
 
   document.getElementById('funcDef_added').style.display = 'none';
   
-  document.getElementById('classes_added').style.display = 'inline';
+  document.getElementById('classes_added').style.display = '';
   
   document.getElementById('func_added').style.display = 'none';
   
-  document.getElementById('modules_added').style.display = 'inline';
+  document.getElementById('modules_added').style.display = '';
 
-  document.getElementById('files_added').style.display = 'inline';
+  document.getElementById('files_added').style.display = '';
 
   var new_data2 = {'nodes': [], 'edges':[]}
 
@@ -1904,18 +1916,7 @@ document.getElementById('collab_view').onclick = function() {
 
                                       from = key;
                                       // Adding 'from' node
-                                      temp_node_dir = {id: from,  group: 'python_File(.py)', normal: {
-                                          height: 6,
-                                          fill: '#0099ff',
-                                      }, hovered: {
-                                        height: 8,
-                                          fill: '#0099ff'
-                                      }, selected: {
-                                        height: 10,
-                                          fill: '#0099ff'
-                                      }, shape: "square"}
-
-                                      new_data2['nodes'].push(temp_node_dir);
+                                      
 
 
 
@@ -1996,6 +1997,21 @@ document.getElementById('collab_view').onclick = function() {
 
                                                       new_data2['nodes'].push(temp_node_dir2);
                                                   }
+
+
+
+                                                  temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                        height: 6,
+                                                        fill: '#000',
+                                                    }, hovered: {
+                                                      height: 8,
+                                                        fill: '#000'
+                                                    }, selected: {
+                                                      height: 10,
+                                                        fill: '#000'
+                                                    }, shape: "square"}
+
+                                                    new_data2['nodes'].push(temp_node_dir);
 
 
                                                           temp_edge_dir = {'from': from, 'to':to}
@@ -2089,6 +2105,24 @@ document.getElementById('collab_view').onclick = function() {
 
                                                             new_data2['nodes'].push(temp_node_dir2);
                                                         }
+
+
+
+                                                        temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                              height: 6,
+                                                              fill: '#000',
+                                                          }, hovered: {
+                                                            height: 8,
+                                                              fill: '#000'
+                                                          }, selected: {
+                                                            height: 10,
+                                                              fill: '#000'
+                                                          }, shape: "square"}
+
+                                                          new_data2['nodes'].push(temp_node_dir);
+
+
+                                                        
 
 
                                                         temp_edge_dir = {'from': from, 'to':to}
@@ -2201,6 +2235,20 @@ document.getElementById('collab_view').onclick = function() {
                                                         }
 
 
+                                                        temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                              height: 6,
+                                                              fill: '#000',
+                                                          }, hovered: {
+                                                            height: 8,
+                                                              fill: '#000'
+                                                          }, selected: {
+                                                            height: 10,
+                                                              fill: '#000'
+                                                          }, shape: "square"}
+
+                                                          new_data2['nodes'].push(temp_node_dir);
+
+
                                                         temp_edge_dir = {'from': from, 'to':to}
                                                         new_data2['edges'].push(temp_edge_dir);
 
@@ -2224,18 +2272,7 @@ document.getElementById('collab_view').onclick = function() {
                       
                             from = key;
                             // Adding 'from' node
-                            temp_node_dir = {id: from, group: 'python_File(.py)', normal: {
-                                height: 6,
-                                fill: '#0be016',
-                            }, hovered: {
-                              height: 8,
-                                fill: '#0be016'
-                            }, selected: {
-                              height: 10,
-                                fill: '#0be016'
-                            }, shape: "square"}
-
-                            new_data2['nodes'].push(temp_node_dir);
+                            
 
 
 
@@ -2329,6 +2366,20 @@ document.getElementById('collab_view').onclick = function() {
                                             }
 
 
+                                            temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                        height: 6,
+                                                        fill: '#000',
+                                                    }, hovered: {
+                                                      height: 8,
+                                                        fill: '#000'
+                                                    }, selected: {
+                                                      height: 10,
+                                                        fill: '#000'
+                                                    }, shape: "square"}
+
+                                                    new_data2['nodes'].push(temp_node_dir);
+
+
                                             temp_edge_dir = {'from': from, 'to':to}
                                             new_data2['edges'].push(temp_edge_dir);
 
@@ -2375,15 +2426,15 @@ document.getElementById('collab_view').onclick = function() {
 
 document.getElementById('call_view').onclick = function() {
   
-  document.getElementById('funcDef_added').style.display = 'inline';
+  document.getElementById('funcDef_added').style.display = '';
   
   document.getElementById('classes_added').style.display = 'none';
   
-  document.getElementById('func_added').style.display = 'inline';
+  document.getElementById('func_added').style.display = '';
   
   document.getElementById('modules_added').style.display = 'none';
 
-  document.getElementById('files_added').style.display = 'inline';
+  document.getElementById('files_added').style.display = '';
 
   var new_data2 = {'nodes': [], 'edges':[]}
 
@@ -2419,18 +2470,7 @@ document.getElementById('call_view').onclick = function() {
 
                                       from = key;
                                       // Adding 'from' node
-                                      temp_node_dir = {id: from,  group: 'python_File(.py)', normal: {
-                                          height: 6,
-                                          fill: '#0099ff',
-                                      }, hovered: {
-                                        height: 8,
-                                          fill: '#0099ff'
-                                      }, selected: {
-                                        height: 10,
-                                          fill: '#0099ff'
-                                      }, shape: "square"}
-
-                                      new_data2['nodes'].push(temp_node_dir);
+                                      
                                         // var num_green = 0;
                                         // iterate for graph nodes in current node. 
                                             for(var i in temp_new_dat){
@@ -2522,6 +2562,19 @@ document.getElementById('call_view').onclick = function() {
 
                                                       new_data2['nodes'].push(temp_node_dir2);
                                                   }
+
+                                                  temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                        height: 6,
+                                                        fill: '#000',
+                                                    }, hovered: {
+                                                      height: 8,
+                                                        fill: '#000'
+                                                    }, selected: {
+                                                      height: 10,
+                                                        fill: '#000'
+                                                    }, shape: "square"}
+
+                                                    new_data2['nodes'].push(temp_node_dir);
 
 
                                                           temp_edge_dir = {'from': from, 'to':to}
@@ -2615,6 +2668,20 @@ document.getElementById('call_view').onclick = function() {
 
                                                             new_data2['nodes'].push(temp_node_dir2);
                                                         }
+
+
+                                                        temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                        height: 6,
+                                                        fill: '#000',
+                                                    }, hovered: {
+                                                      height: 8,
+                                                        fill: '#000'
+                                                    }, selected: {
+                                                      height: 10,
+                                                        fill: '#000'
+                                                    }, shape: "square"}
+
+                                                    new_data2['nodes'].push(temp_node_dir);
 
 
                                                         temp_edge_dir = {'from': from, 'to':to}
@@ -2726,6 +2793,19 @@ document.getElementById('call_view').onclick = function() {
                                                         new_data2['nodes'].push(temp_node_dir2);
                                                         }
 
+                                                        temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                        height: 6,
+                                                        fill: '#000',
+                                                    }, hovered: {
+                                                      height: 8,
+                                                        fill: '#000'
+                                                    }, selected: {
+                                                      height: 10,
+                                                        fill: '#000'
+                                                    }, shape: "square"}
+
+                                                    new_data2['nodes'].push(temp_node_dir);
+
 
                                                         temp_edge_dir = {'from': from, 'to':to}
                                                         new_data2['edges'].push(temp_edge_dir);
@@ -2749,19 +2829,7 @@ document.getElementById('call_view').onclick = function() {
                           temp_new_dat = Object.values(new_temp[key]);
                       
                             from = key;
-                            // Adding 'from' node
-                            temp_node_dir = {id: from, group: 'python_File(.py)', normal: {
-                                height: 6,
-                                fill: '#0be016',
-                            }, hovered: {
-                              height: 8,
-                                fill: '#0be016'
-                            }, selected: {
-                              height: 10,
-                                fill: '#0be016'
-                            }, shape: "square"}
-
-                            new_data2['nodes'].push(temp_node_dir);
+                         
 
 
 
@@ -2853,6 +2921,20 @@ document.getElementById('call_view').onclick = function() {
 
                                             new_data2['nodes'].push(temp_node_dir2);
                                             }
+
+
+                                            temp_node_dir = {id: from,  group: 'indetermined', normal: {
+                                                        height: 6,
+                                                        fill: '#000',
+                                                    }, hovered: {
+                                                      height: 8,
+                                                        fill: '#000'
+                                                    }, selected: {
+                                                      height: 10,
+                                                        fill: '#000'
+                                                    }, shape: "square"}
+
+                                                    new_data2['nodes'].push(temp_node_dir);
 
 
                                             temp_edge_dir = {'from': from, 'to':to}
