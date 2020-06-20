@@ -3,6 +3,36 @@
 
 ![](landing_page.png)
 
+## Directory Structure
+
+# main
+
+* [file_map_engine/](.\main\file_map_engine)
+  * [ast_engine.py](.\main\file_map_engine\ast_engine.py)
+  * [ast_helper.py](.\main\file_map_engine\ast_helper.py)
+  * [call_dir.py](.\main\file_map_engine\call_dir.py)
+  * [engine.py](.\main\file_map_engine\engine.py)
+  * [test.ipynb](.\main\file_map_engine\test.ipynb)
+* [static/](.\main\static)
+  * [cohesion_python-fire_v0.1.0](.\main\static\cohesion_python-fire_v0.1.0)
+  * [cohesion_python-fire_v0.1.1](.\main\static\cohesion_python-fire_v0.1.1)
+  * [cohesion_python-fire_v0.1.2](.\main\static\cohesion_python-fire_v0.1.2)
+  * [cohesion_python-fire_v0.1.3](.\main\static\cohesion_python-fire_v0.1.3)
+  * [cohesion_python-fire_v0.2.0](.\main\static\cohesion_python-fire_v0.2.0)
+  * [cohesion_python-fire_v0.2.1](.\main\static\cohesion_python-fire_v0.2.1)
+  * [cohesion_python-fire_v0.3](.\main\static\cohesion_python-fire_v0.3)
+  * [cohesion_python-fire_v0.3.0](.\main\static\cohesion_python-fire_v0.3.0)
+  * [cohesion_python-fire_v0.3.1](.\main\static\cohesion_python-fire_v0.3.1)
+* [target_repo_dir/](.\main\target_repo_dir)
+  * [tags.txt](.\main\target_repo_dir\tags.txt)
+* [templates/](.\main\templates)
+  * [home.html](.\main\templates\home.html)
+  * [index.html](.\main\templates\index.html)
+* [ast_map.dat](.\main\ast_map.dat)
+* [directory_map.dat](.\main\directory_map.dat)
+* [main.py](.\main\main.py)
+* [requirements.txt](.\main\requirements.txt)
+
 
 ## Installation
 

@@ -1,333 +1,53 @@
-File: .\python-fire\setup.py
-File: .\python-fire\examples\cipher\cipher.py
-File: .\python-fire\examples\cipher\cipher_test.py
-  Class: CipherTest (20:0)
-    Function: testCipher 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\examples\diff\diff.py
-  Class: DiffLibWrapper (64:0)
-    Function: __init__ 6/6 100.00%
-    Function: unified_diff 6/6 100.00%
-    Function: ndiff 2/6 33.33%
-    Function: make_file 4/6 66.67%
-    Function: context_diff 6/6 100.00%
-    Total: 80.0%
-File: .\python-fire\examples\diff\difffull.py
-File: .\python-fire\examples\diff\diff_test.py
-  Class: DiffTest (23:0)
-    Function: setUp 3/3 100.00%
-    Function: testSetUp 1/3 33.33%
-    Function: testUnifiedDiff 3/3 100.00%
-    Function: testContextDiff 1/3 33.33%
-    Function: testNDiff 1/3 33.33%
-    Function: testMakeDiff 1/3 33.33%
-    Function: testDiffFull 0/3 0.00%
-    Total: 47.62%
-File: .\python-fire\examples\identity\identity.py
-File: .\python-fire\examples\widget\collector.py
-  Class: Collector (22:0)
-    Function: __init__ 2/2 100.00%
-    Function: collect_widgets 1/2 50.00%
-    Total: 75.0%
-File: .\python-fire\examples\widget\collector_test.py
-  Class: CollectorTest (21:0)
-    Function: testCollectorHasWidget 0/0 0.00%
-    Function: testCollectorWantsMoreWidgets 0/0 0.00%
-    Function: testCollectorGetsWantedWidgets 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\examples\widget\widget.py
-  Class: Widget (20:0)
-    Function: whack 0/0 0.00%
-    Function: bang 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\examples\widget\widget_test.py
-  Class: WidgetTest (20:0)
-    Function: testWidgetWhack 0/0 0.00%
-    Function: testWidgetBang 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\completion.py
-File: .\python-fire\fire\completion_test.py
-  Class: TabCompletionTest (27:0)
-    Function: testCompletionScript 0/0 0.00%
-    Function: testFnCompletions 0/0 0.00%
-    Function: testListCompletions 0/0 0.00%
-    Function: testDictCompletions 0/0 0.00%
-    Function: testDictCompletionsVerbose 0/0 0.00%
-    Function: testDeepDictCompletions 0/0 0.00%
-    Function: testDeepDictScript 0/0 0.00%
-    Function: testNonStringDictCompletions 0/0 0.00%
-    Function: testGeneratorCompletions 0/0 0.00%
-    Function: testClassCompletions 0/0 0.00%
-    Function: testObjectCompletions 0/0 0.00%
-    Function: testMethodCompletions 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\core.py
-  Class: FireError (155:0)
-    Total: 0.0%
-File: .\python-fire\fire\core_test.py
-  Class: CoreTest (27:0)
-    Function: testOneLineResult 0/0 0.00%
-    Function: testInteractiveMode 0/0 0.00%
-    Function: testInteractiveModeFullArgument 0/0 0.00%
-    Function: testInteractiveModeVariables 0/0 0.00%
-    Function: testInteractiveModeVariablesWithName 0/0 0.00%
-    Function: testImproperUseOfHelp 0/0 0.00%
-    Function: testErrorRaising 0/0 0.00%
-    Function: testFireError 0/0 0.00%
-    Function: testFireErrorMultipleValues 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\decorators.py
-File: .\python-fire\fire\decorators_test.py
-  Class: A (25:0)
-    Function: double 0/0 0.00%
-    Function: triple 0/0 0.00%
-    Function: quadruple 0/0 0.00%
-    Total: 0.0%
-  Class: B (45:0)
-    Function: example1 0/0 0.00%
-    Function: example2 0/0 0.00%
-    Total: 0.0%
-  Class: C (56:0)
-    Function: example3 0/0 0.00%
-    Total: 0.0%
-  Class: D (63:0)
-    Function: example4 0/0 0.00%
-    Function: example5 0/0 0.00%
-    Total: 0.0%
-  Class: E (74:0)
-    Function: example6 0/0 0.00%
-    Total: 0.0%
-  Class: F (84:0)
-    Function: example7 0/0 0.00%
-    Total: 0.0%
-  Class: FireDecoratorsTest (91:0)
-    Function: testSetParseFnsNamedArgs 0/0 0.00%
-    Function: testSetParseFnsPositionalArgs 0/0 0.00%
-    Function: testSetParseFnsFnWithPositionalArgs 0/0 0.00%
-    Function: testSetParseFnsDefaultsFromPython 0/0 0.00%
-    Function: testSetParseFnsDefaultsFromFire 0/0 0.00%
-    Function: testSetParseFnsNamedDefaultsFromPython 0/0 0.00%
-    Function: testSetParseFnsNamedDefaultsFromFire 0/0 0.00%
-    Function: testSetParseFnsPositionalAndNamed 0/0 0.00%
-    Function: testSetParseFnsOnlySomeTypes 0/0 0.00%
-    Function: testSetParseFnsForKeywordArgs 0/0 0.00%
-    Function: testSetParseFn 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\fire_import_test.py
-  Class: FireImportTest (20:0)
-    Function: testFire 0/0 0.00%
-    Function: testFireMethods 0/0 0.00%
-    Function: testNoPrivateMethods 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\fire_test.py
-  Class: FireTest (26:0)
-    Function: testFire 0/0 0.00%
-    Function: testFireNoArgs 0/0 0.00%
-    Function: testFireExceptions 0/0 0.00%
-    Function: testFireNamedArgs 0/0 0.00%
-    Function: testFireNamedArgsWithEquals 0/0 0.00%
-    Function: testFireAllNamedArgs 0/0 0.00%
-    Function: testFireAllNamedArgsOneMissing 0/0 0.00%
-    Function: testFirePartialNamedArgs 0/0 0.00%
-    Function: testFirePartialNamedArgsOneMissing 0/0 0.00%
-    Function: testFireProperties 0/0 0.00%
-    Function: testFireRecursion 0/0 0.00%
-    Function: testFireVarArgs 0/0 0.00%
-    Function: testFireVarArgsWithNamedArgs 0/0 0.00%
-    Function: testFireKeywordArgs 0/0 0.00%
-    Function: testFireKeywordArgsWithMissingPositionalArgs 0/0 0.00%
-    Function: testFireObject 0/0 0.00%
-    Function: testFireDict 0/0 0.00%
-    Function: testFireObjectWithDict 0/0 0.00%
-    Function: testFireList 0/0 0.00%
-    Function: testFireObjectWithList 0/0 0.00%
-    Function: testFireObjectWithTuple 0/0 0.00%
-    Function: testFireNoComponent 0/0 0.00%
-    Function: testFireUnderscores 0/0 0.00%
-    Function: testFireUnderscoresInArg 0/0 0.00%
-    Function: testBoolParsing 0/0 0.00%
-    Function: testBoolParsingContinued 0/0 0.00%
-    Function: testBoolParsingLessExpectedCases 0/0 0.00%
-    Function: testBoolParsingWithNo 0/0 0.00%
-    Function: testTraceFlag 0/0 0.00%
-    Function: testHelpFlag 0/0 0.00%
-    Function: testHelpFlagAndTraceFlag 0/0 0.00%
-    Function: testTabCompletionNoName 0/0 0.00%
-    Function: testTabCompletion 0/0 0.00%
-    Function: testTabCompletionWithDict 0/0 0.00%
-    Function: testBasicSeparator 0/0 0.00%
-    Function: testExtraSeparators 0/0 0.00%
-    Function: testSeparatorForChaining 0/0 0.00%
-    Function: testFloatForExpectedInt 0/0 0.00%
-    Function: testClassInstantiation 0/0 0.00%
-    Function: testTraceErrors 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\helputils.py
-File: .\python-fire\fire\helputils_test.py
-  Class: HelpUtilsTest (26:0)
-    Function: testHelpStringClass 0/0 0.00%
-    Function: testHelpStringObject 0/0 0.00%
-    Function: testHelpStringFunction 0/0 0.00%
-    Function: testHelpStringFunctionWithDefaults 0/0 0.00%
-    Function: testHelpStringBuiltin 0/0 0.00%
-    Function: testHelpStringIntType 0/0 0.00%
-    Function: testHelpStringEmptyList 0/0 0.00%
-    Function: testHelpStringShortList 0/0 0.00%
-    Function: testHelpStringInt 0/0 0.00%
-    Function: testHelpClassNoInit 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\inspectutils.py
-File: .\python-fire\fire\inspectutils_test.py
-  Class: InspectUtilsTest (26:0)
-    Function: testGetArgSpecReturnType 0/0 0.00%
-    Function: testGetArgSpec 0/0 0.00%
-    Function: testGetArgSpecBuiltin 0/0 0.00%
-    Function: testGetArgSpecSlotWrapper 0/0 0.00%
-    Function: testGetArgSpecClassNoInit 0/0 0.00%
-    Function: testGetArgSpecMethod 0/0 0.00%
-    Function: testInfoOne 0/0 0.00%
-    Function: testInfoClass 0/0 0.00%
-    Function: testInfoClassNoInit 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\interact.py
-File: .\python-fire\fire\interact_test.py
-  Class: InteractTest (25:0)
-    Function: testInteract 0/0 0.00%
-    Function: testInteractVariables 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\parser.py
-File: .\python-fire\fire\parser_fuzz_test.py
-  Class: ParserFuzzTest (30:0)
-    Function: testDefaultParseValueFuzz 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\parser_test.py
-  Class: ParserTest (24:0)
-    Function: testCreateParser 0/0 0.00%
-    Function: testSeparateFlagArgs 0/0 0.00%
-    Function: testDefaultParseValueStrings 0/0 0.00%
-    Function: testDefaultParseValueQuotedStrings 0/0 0.00%
-    Function: testDefaultParseValueSpecialStrings 0/0 0.00%
-    Function: testDefaultParseValueNumbers 0/0 0.00%
-    Function: testDefaultParseValueStringNumbers 0/0 0.00%
-    Function: testDefaultParseValueQuotedStringNumbers 0/0 0.00%
-    Function: testDefaultParseValueOtherNumbers 0/0 0.00%
-    Function: testDefaultParseValueLists 0/0 0.00%
-    Function: testDefaultParseValueBareWordsLists 0/0 0.00%
-    Function: testDefaultParseValueDict 0/0 0.00%
-    Function: testDefaultParseValueNone 0/0 0.00%
-    Function: testDefaultParseValueBool 0/0 0.00%
-    Function: testDefaultParseValueBareWordsTuple 0/0 0.00%
-    Function: testDefaultParseValueNestedContainers 0/0 0.00%
-    Function: testDefaultParseValueComments 0/0 0.00%
-    Function: testDefaultParseValueBadLiteral 0/0 0.00%
-    Function: testDefaultParseValueSyntaxError 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\test_components.py
-  Class: Empty (26:0)
-    Total: 0.0%
-  Class: OldStyleEmpty (30:0)
-    Total: 0.0%
-  Class: WithInit (34:0)
-    Function: __init__ 0/0 0.00%
-    Total: 0.0%
-  Class: NoDefaults (40:0)
-    Function: double 0/0 0.00%
-    Function: triple 0/0 0.00%
-    Total: 0.0%
-  Class: WithDefaults (49:0)
-    Function: double 0/0 0.00%
-    Function: triple 0/0 0.00%
-    Total: 0.0%
-  Class: OldStyleWithDefaults (58:0)
-    Function: double 0/0 0.00%
-    Function: triple 0/0 0.00%
-    Total: 0.0%
-  Class: MixedDefaults (67:0)
-    Function: ten 0/0 0.00%
-    Function: sum 0/0 0.00%
-    Function: identity 0/0 0.00%
-    Total: 0.0%
-  Class: TypedProperties (79:0)
-    Function: __init__ 6/6 100.00%
-    Total: 100.0%
-  Class: VarArgs (96:0)
-    Function: cumsums 0/0 0.00%
-    Function: varchars 0/0 0.00%
-    Total: 0.0%
-  Class: Underscores (114:0)
-    Function: __init__ 1/1 100.00%
-    Function: underscore_function 0/1 0.00%
-    Total: 50.0%
-  Class: BoolConverter (123:0)
-    Function: as_bool 0/0 0.00%
-    Total: 0.0%
-  Class: ReturnsObj (129:0)
-    Function: get_obj 0/0 0.00%
-    Total: 0.0%
-  Class: NumberDefaults (136:0)
-    Function: reciprocal 0/0 0.00%
-    Function: integer_reciprocal 0/0 0.00%
-    Total: 0.0%
-  Class: InstanceVars (145:0)
-    Function: __init__ 2/2 100.00%
-    Function: run 2/2 100.00%
-    Total: 100.0%
-  Class: Kwargs (155:0)
-    Function: props 0/0 0.00%
-    Function: upper 0/0 0.00%
-    Function: run 0/0 0.00%
-    Total: 0.0%
-  Class: ErrorRaiser (167:0)
-    Function: fail 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\test_components_test.py
-  Class: TestComponentsTest (24:0)
-    Function: testTestComponents 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\trace.py
-  Class: FireTrace (42:0)
-    Function: __init__ 6/6 100.00%
-    Function: GetResult 0/6 0.00%
-    Function: GetLastHealthyElement 1/6 16.67%
-    Function: HasError 1/6 16.67%
-    Function: AddAccessedProperty 1/6 16.67%
-    Function: AddCalledRoutine 1/6 16.67%
-    Function: AddInstantiatedClass 1/6 16.67%
-    Function: AddCompletionScript 1/6 16.67%
-    Function: AddInteractiveMode 1/6 16.67%
-    Function: AddError 1/6 16.67%
-    Function: AddSeparator 1/6 16.67%
-    Function: _Quote 0/6 0.00%
-    Function: GetCommand 3/6 50.00%
-    Function: NeedsSeparator 0/6 0.00%
-    Function: __str__ 1/6 16.67%
-    Total: 21.11%
-  Class: FireTraceElement (237:0)
-    Function: __init__ 9/9 100.00%
-    Function: HasError 1/9 11.11%
-    Function: HasCapacity 1/9 11.11%
-    Function: HasSeparator 1/9 11.11%
-    Function: AddSeparator 1/9 11.11%
-    Function: __str__ 5/9 55.56%
-    Total: 33.33%
-File: .\python-fire\fire\trace_test.py
-  Class: FireTraceTest (24:0)
-    Function: testFireTraceInitialization 0/0 0.00%
-    Function: testFireTraceGetResult 0/0 0.00%
-    Function: testFireTraceHasError 0/0 0.00%
-    Function: testAddAccessedProperty 0/0 0.00%
-    Function: testAddCalledRoutine 0/0 0.00%
-    Function: testAddInstantiatedClass 0/0 0.00%
-    Function: testAddCompletionScript 0/0 0.00%
-    Function: testAddInteractiveMode 0/0 0.00%
-    Function: testGetCommand 0/0 0.00%
-    Function: testGetCommandWithQuotes 0/0 0.00%
-    Function: testGetCommandWithFlagQuotes 0/0 0.00%
-    Total: 0.0%
-  Class: FireTraceElementTest (103:0)
-    Function: testFireTraceElementHasError 0/0 0.00%
-    Function: testFireTraceElementAsStringNoMetadata 0/0 0.00%
-    Function: testFireTraceElementAsStringWithTarget 0/0 0.00%
-    Function: testFireTraceElementAsStringWithTargetAndLineNo 0/0 0.00%
-    Total: 0.0%
-File: .\python-fire\fire\__init__.py
+
+Calculating LCOM using LCOM4
++----------------------------------------------------------+------+
+| Method                                                   | LCOM |
++----------------------------------------------------------+------+
+| python-fire.examples.cipher.cipher_test.CipherTest       | 1    |
+| python-fire.examples.diff.diff.DiffLibWrapper            | 1    |
+| python-fire.examples.diff.diff_test.DiffTest             | 2    |
+| python-fire.examples.widget.collector.Collector          | 1    |
+| python-fire.examples.widget.collector_test.CollectorTest | 2    |
+| python-fire.examples.widget.widget.Widget                | 0    |
+| python-fire.examples.widget.widget_test.WidgetTest       | 1    |
+| python-fire.fire.completion_test.TabCompletionTest       | 2    |
+| python-fire.fire.core.FireError                          | 0    |
+| python-fire.fire.core_test.CoreTest                      | 4    |
+| python-fire.fire.decorators_test.A                       | 0    |
+| python-fire.fire.decorators_test.B                       | 0    |
+| python-fire.fire.decorators_test.C                       | 0    |
+| python-fire.fire.decorators_test.D                       | 0    |
+| python-fire.fire.decorators_test.E                       | 0    |
+| python-fire.fire.decorators_test.F                       | 0    |
+| python-fire.fire.decorators_test.FireDecoratorsTest      | 1    |
+| python-fire.fire.fire_import_test.FireImportTest         | 2    |
+| python-fire.fire.fire_test.FireTest                      | 2    |
+| python-fire.fire.helputils_test.HelpUtilsTest            | 1    |
+| python-fire.fire.inspectutils_test.InspectUtilsTest      | 1    |
+| python-fire.fire.interact_test.InteractTest              | 1    |
+| python-fire.fire.parser_fuzz_test.ParserFuzzTest         | 1    |
+| python-fire.fire.parser_test.ParserTest                  | 2    |
+| python-fire.fire.test_components.BoolConverter           | 0    |
+| python-fire.fire.test_components.Empty                   | 0    |
+| python-fire.fire.test_components.ErrorRaiser             | 0    |
+| python-fire.fire.test_components.InstanceVars            | 1    |
+| python-fire.fire.test_components.Kwargs                  | 0    |
+| python-fire.fire.test_components.MixedDefaults           | 0    |
+| python-fire.fire.test_components.NoDefaults              | 0    |
+| python-fire.fire.test_components.NumberDefaults          | 0    |
+| python-fire.fire.test_components.OldStyleEmpty           | 0    |
+| python-fire.fire.test_components.OldStyleWithDefaults    | 0    |
+| python-fire.fire.test_components.ReturnsObj              | 0    |
+| python-fire.fire.test_components.TypedProperties         | 0    |
+| python-fire.fire.test_components.Underscores             | 0    |
+| python-fire.fire.test_components.VarArgs                 | 0    |
+| python-fire.fire.test_components.WithDefaults            | 0    |
+| python-fire.fire.test_components.WithInit                | 0    |
+| python-fire.fire.test_components_test.TestComponentsTest | 1    |
+| python-fire.fire.trace.FireTrace                         | 1    |
+| python-fire.fire.trace.FireTraceElement                  | 3    |
+| python-fire.fire.trace_test.FireTraceElementTest         | 2    |
+| python-fire.fire.trace_test.FireTraceTest                | 3    |
++----------------------------------------------------------+------+
+| Average                                                  | 0.80 |
++----------------------------------------------------------+------+
