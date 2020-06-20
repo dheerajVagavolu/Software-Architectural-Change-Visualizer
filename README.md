@@ -21,6 +21,13 @@
 * [main.py](.\main\main.py)
 * [requirements.txt](.\main\requirements.txt)
 
+## Cohesion value interpretation (Using lcom)
+
+Score:
+
+- ``==1`` - indicates a cohesive class, which is the "good" class;
+- ``>=2`` - indicates a problem. The class should be split into so many smaller classes;
+- ``==0`` - happens when there are no methods in a class. This is also a "bad" class.
 
 ## Installation
 
