@@ -178,10 +178,9 @@
             </div>
 
             <h4><span class="badge badge-secondary" id="metric_a2a">Architectural Similarity: </span></h4>
-              <h4><span class="badge badge-secondary" id="metric_c2c0">Function Similarity: </span></h4>
-              <h4><span class="badge badge-secondary" id="metric_c2c1">Function Definition Similarity: </span></h4>
-              <h4><span class="badge badge-secondary" id="metric_c2c2">Class Similarity: </span></h4>
-              <h4><span class="badge badge-secondary" id="metric_c2c3">Module Similarity: </span></h4>
+              <h4><span class="badge badge-secondary" id="metric_c2c0">Functional Similarity: </span></h4>
+              <h4><span class="badge badge-secondary" id="metric_c2c1">Class Similarity: </span></h4>
+              <h4><span class="badge badge-secondary" id="metric_c2c2">Module Similarity: </span></h4>
             
 
           </div>
@@ -498,11 +497,10 @@ function display_metric(){
   temp_metc = metric_c2c['body'][prev_tag][cur_tag]; 
   // alert(temp_met)
   
-  document.getElementById('metric_a2a').innerHTML = "Architectural Similarity: " + temp_met;
-  document.getElementById('metric_c2c0').innerHTML = "Function Similarity: " + temp_metc[0];
-  document.getElementById('metric_c2c1').innerHTML = "Function Definition Similarity: " + temp_metc[1];
-  document.getElementById('metric_c2c2').innerHTML = "Class Similarity: " + temp_metc[2];
-  document.getElementById('metric_c2c3').innerHTML = "Module Similarity: " + temp_metc[3];
+  document.getElementById('metric_a2a').innerHTML = "Architectural Similarity: " + temp_met + "%";
+  document.getElementById('metric_c2c0').innerHTML = "Functional Similarity: " + temp_metc[0]+ "%";
+  document.getElementById('metric_c2c1').innerHTML = "Class Similarity: " + temp_metc[1]+ "%";
+  document.getElementById('metric_c2c2').innerHTML = "Module Similarity: " + temp_metc[2]+ "%";
   
 }
 
