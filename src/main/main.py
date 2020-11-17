@@ -94,7 +94,7 @@ def download():
 
     # ulti_tree = pickle.load( open( "ast_map.dat", "rb" ) )
     # ulti_dict = pickle.load( open( "directory_map.dat", "rb" ))
-    # new_ulti_dict = json.dumps(ulti_dict)
+    # # new_ulti_dict = json.dumps(ulti_dict)
 
     # a2a = metric_a2a(ulti_tree)
     # c2c = metric_c2c(ulti_dict)
