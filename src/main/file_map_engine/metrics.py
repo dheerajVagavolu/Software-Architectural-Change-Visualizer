@@ -14,23 +14,20 @@ def Diff(li1, li2):
 def metric_c2c(in_tree):
 
     keys = list(in_tree.keys())
-    values = {i:{k:{0:0,1:0,2:0,3:0} for k in range(len(keys))} for i in range(len(keys))}
+    values = {i:{k:{0:0,1:0,2:0} for k in range(len(keys))} for i in range(len(keys))}
 
     for i in range(len(keys)):
         for j in range(i,len(keys)):
-            func = c2c(in_tree[keys[i]], in_tree[keys[j]], 'func')
-            funcDef = c2c(in_tree[keys[i]], in_tree[keys[j]], 'funcDef')
-            clas = c2c(in_tree[keys[i]], in_tree[keys[j]], 'ClassDef')
-            mode = c2c(in_tree[keys[i]], in_tree[keys[j]], 'module')
+            func = c2c(in_tree[keys[i]], in_tree[keys[j]], ['func', 'funcDef'])
+            clas = c2c(in_tree[keys[i]], in_tree[keys[j]], ['ClassDef'])
+            mode = c2c(in_tree[keys[i]], in_tree[keys[j]], ['module'])
 
             values[i][j][0] = round(func,2)
             values[j][i][0] = round(func,2)
-            values[i][j][1] = round(funcDef, 2)
-            values[j][i][1] = round(funcDef, 2)
-            values[i][j][2] = round(clas, 2)
-            values[j][i][2] = round(clas, 2)
-            values[i][j][3] = round(mode, 2)
-            values[j][i][3] = round(mode, 2)
+            values[i][j][1] = round(clas, 2)
+            values[j][i][1] = round(clas, 2)
+            values[i][j][2] = round(mode, 2)
+            values[j][i][2] = round(mode, 2)
 
     print(values)    
     return values
@@ -44,7 +41,7 @@ def c2c(c1, c2, str):
         for l in c1[k]:
             for j in c1[k][l]:
                 print(j)
-                if(j[1] == str):
+                if(j[1] in str):
                     # print(j)
                     ver_1.append(j[0])
     
@@ -52,7 +49,7 @@ def c2c(c1, c2, str):
         for l in c2[k]:
             for j in c2[k][l]:
                 print(j)
-                if(j[1] == str):
+                if(j[1] in str):
                     # print(j)
                     ver_2.append(j[0])
 
