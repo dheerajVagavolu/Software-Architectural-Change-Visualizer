@@ -67,44 +67,57 @@
             
             
             <div class="container mast" id="mast1">
-              <span class="PFile">(.py) File</span>
-
-              <span class="File">File</span>
-              <span class="HomeDir">Root Directory</span>
-              <span class="Directory">Directory</span>
+              <span class="PFile"><span id="diamond"></span>&nbsp (.py) File</span>
+              <span class="File"><span id="square"></span>&nbsp &nbsp &nbsp File</span>
+              <span class="HomeDir"><span id="triangle"></span>&nbsp &nbsp &nbsp Root Directory</span>
+              <span class="Directory"><span id="triangle"></span>&nbsp &nbsp &nbsp Directory</span>
               <span class="Added">Added</span>
               <span class="Deleted">Deleted</span>
+
+
+              
             </div>
 
             <!-- Dynamic Labels -->
 
             <div class="container mast2" id="mast2">
-              <span class="PFile">(.py) File</span>
-              <span class="Func">Function Call</span>
-         
-              <span class="HomeDir">Root Directory</span>
-              <span class="Directory">Directory</span>
+              <span class="PFile"><span id="diamond"></span>&nbsp (.py) File</span>
+              <span class="Func"><span id="triangle"></span>&nbsp &nbsp &nbsp Function Call</span>
+              <!-- <span class="Func">Function Call</span> -->
+              <span class="FuncDef"><span id="square"></span>&nbsp &nbsp &nbsp Function Definition</span>
+              <span class="Class"><span id="square"></span>&nbsp &nbsp &nbsp Class Definition</span>
+              <!-- <span class="HomeDir">Root Directory</span>
+              <span class="Directory">Directory</span> -->
+              <span class="Module"><span id="square"></span>&nbsp &nbsp &nbsp Module</span>
               <span class="Added">Added</span>
               <span class="Deleted">Deleted</span>
             </div>
 
             <div class="container mast3" id="mast3">
-             
-              <span class="Module">Module</span>
-              <span class="File">File</span>
-              <span class="HomeDir">Root Directory</span>
-              <span class="Directory">Directory</span>
+              <span class="Module"><span id="square"></span>&nbsp &nbsp &nbsp Module</span>
+              <span class="PFile"><span id="square"></span>&nbsp &nbsp &nbsp (.py) File</span>
+              <span class="Class"><span id="square"></span>&nbsp &nbsp &nbsp Class Definition</span>
+              <!-- <span class="Module">Module</span>
+              <span class="File">File</span> -->
+              <!-- <span class="HomeDir">Root Directory</span>
+              <span class="Directory">Directory</span> -->
               <span class="Added">Added</span>
               <span class="Deleted">Deleted</span>
             </div>
 
 
             <div class="container mast4" id="mast4">
-              <span class="PFile">(.py) File</span>
+              <!-- <span class="PFile">(.py) File</span>
               <span class="Func">Function Call</span>
               <span class="FuncDef">Function Definition</span>
               <span class="Class">Class Definition</span>
-              <span class="Module">Module</span>
+              <span class="Module">Module</span> -->
+              
+              <span class="PFile"><span id="square"></span>&nbsp &nbsp &nbsp (.py) File</span>
+              <span class="Func"><span id="triangle"></span>&nbsp &nbsp &nbsp Function Call</span>
+              <span class="FuncDef"><span id="square"></span>&nbsp &nbsp &nbsp Function Definition</span>
+              <!-- <span class="Class"><span id="square"></span>&nbsp &nbsp &nbsp Class Definition</span> -->
+              <span class="Module"><span id="square"></span>&nbsp &nbsp &nbsp Module</span>
               
             </div>
 
@@ -206,6 +219,52 @@
 
 
   <style>
+
+#diamond {
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-bottom-color: white;
+      position: relative;
+      top: -20px;
+    }
+    #diamond:after {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 30px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-top-color: white;
+    }
+
+    #triangle {
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 20px solid white;
+      /* top: -10px; */
+      /* margin-right: 20px; */
+    }
+
+    #circle {
+      width: 100px;
+      height: 100px;
+      background: red;
+      border-radius: 50%
+    }
+
+    #square {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 10px solid white;
+      /* background: red; */
+    }
+  
 
     #num_added{
       color: white;
@@ -633,13 +692,13 @@ document.getElementById("integ_view0").onclick = function() {
                       }, selected: {
                         height: 10,
                           fill: '#e27979'
-                      }, shape: "square"}
+                      }, shape: "triangle"}
 
                       // new_data['nodes'].push(temp_node_dir2);
                      
 
                     if(completed.indexOf(to) === -1){
-                      new_data['nodes'].push({id: to, physics:false, label: to, size: 5, title:"Function Call", color: "#e27979", shape:"square"});
+                      new_data['nodes'].push({id: to, physics:false, label: to, size: 5, title:"Function Call", color: "#e27979", shape:"triangle"});
                       completed.push(to);
                     }
 
@@ -1321,14 +1380,14 @@ document.getElementById("integ_view").onclick = function() {
                                                                 }, selected: {
                                                                   height: 10,
                                                                     fill: '#e27979'
-                                                                }, shape: "square"}
+                                                                }, shape: "triangle"}
 
                                                                 // new_data2['nodes'].push(temp_node_dir2);
 
                                                                 if(completed.indexOf(to) === -1){
                                                                     new_data2['nodes'].push({id: to, physics:false, 
                                                                       label: to, size: 5, title:"Function Call", 
-                                                                      color: "#e27979", shape:"square"});
+                                                                      color: "#e27979", shape:"triangle"});
                                                                     completed.push(to);
                                                                   }
                                                             }
@@ -1476,14 +1535,14 @@ document.getElementById("integ_view").onclick = function() {
                                                             }, selected: {
                                                               height: 10,
                                                                 fill: '#0be016'
-                                                            }, shape: "square"}
+                                                            }, shape: "triangle"}
 
                                                             // new_data2['nodes'].push(temp_node_dir2);
 
                                                             if(completed.indexOf(to) === -1){
                                                                     new_data2['nodes'].push({id: to, physics:false, 
                                                                       label: to, size: 7, title:"Function Call", 
-                                                                      color: "#0be016", shape:"square"});
+                                                                      color: "#0be016", shape:"triangle"});
                                                                     completed.push(to);
                                                                   }
                                                         }
@@ -1650,13 +1709,13 @@ document.getElementById("integ_view").onclick = function() {
                                                             }, selected: {
                                                               height: 10,
                                                                 fill: '#f50a0a'
-                                                            }, shape: "square"}
+                                                            }, shape: "triangle"}
 
                                                             // new_data2['nodes'].push(temp_node_dir2);
                                                             if(completed.indexOf(to) === -1){
                                                                     new_data2['nodes'].push({id: to, physics:false, 
                                                                       label: to, size: 7, title:"Function Call", 
-                                                                      color: "#f50a0a", shape:"square"});
+                                                                      color: "#f50a0a", shape:"triangle"});
                                                                     completed.push(to);
                                                                   }
                                                         }
@@ -1850,14 +1909,14 @@ document.getElementById("integ_view").onclick = function() {
                                                 }, selected: {
                                                   height: 10,
                                                     fill: '#0be016'
-                                                }, shape: "square"}
+                                                }, shape: "triangle"}
 
                                                 // new_data2['nodes'].push(temp_node_dir2);
 
                                                 if(completed.indexOf(to) === -1){
                                                     new_data2['nodes'].push({id: to, physics:false, 
                                                       label: to, size: 7, title:"Function Call", 
-                                                      color: "#0be016", shape:"square"});
+                                                      color: "#0be016", shape:"triangle"});
                                                     completed.push(to);
                                                   }
                                             }
@@ -3441,14 +3500,14 @@ document.getElementById('call_view').onclick = function() {
                                                                 }, selected: {
                                                                   height: 10,
                                                                     fill: '#e27979'
-                                                                }, shape: "square"}
+                                                                }, shape: "triangle"}
 
                                                                 // new_data2['nodes'].push(temp_node_dir2);
 
                                                                 if(completed.indexOf(to) === -1){
                                                                     new_data2['nodes'].push({id: to, physics:false, label: to,
                                                                     size: 5, title:"Function Call", color: "#e27979",
-                                                                    shape:"square"});
+                                                                    shape:"triangle"});
                                                                   completed.push(to);
                                                                 }
                                                             }
@@ -3580,14 +3639,14 @@ document.getElementById('call_view').onclick = function() {
                                                             }, selected: {
                                                               height: 10,
                                                                 fill: '#0be016'
-                                                            }, shape: "square"}
+                                                            }, shape: "triangle"}
 
                                                             // new_data2['nodes'].push(temp_node_dir2);
 
                                                             if(completed.indexOf(to) === -1){
                                                                     new_data2['nodes'].push({id: to, physics:false, label: to,
                                                                     size: 7, title:"Function Call", color: "#0be016",
-                                                                    shape:"square"});
+                                                                    shape:"triangle"});
                                                                   completed.push(to);
                                                                 }
                                                         }
@@ -3739,14 +3798,14 @@ document.getElementById('call_view').onclick = function() {
                                                             }, selected: {
                                                               height: 10,
                                                                 fill: '#f50a0a'
-                                                            }, shape: "square"}
+                                                            }, shape: "triangle"}
 
                                                             // new_data2['nodes'].push(temp_node_dir2);
 
                                                             if(completed.indexOf(to) === -1){
                                                                     new_data2['nodes'].push({id: to, physics:false, label: to,
                                                                     size: 7, title:"Function Call", color: "#f50a0a",
-                                                                    shape:"square"});
+                                                                    shape:"triangle"});
                                                                   completed.push(to);
                                                                 }
                                                         }
@@ -3898,14 +3957,14 @@ document.getElementById('call_view').onclick = function() {
                                                 }, selected: {
                                                   height: 10,
                                                     fill: '#0be016'
-                                                }, shape: "square"}
+                                                }, shape: "triangle"}
 
                                                 // new_data2['nodes'].push(temp_node_dir2);
 
                                                 if(completed.indexOf(to) === -1){
                                                           new_data2['nodes'].push({id: to, physics:false, label: to,
                                                           size: 7, title:"Function Call", color: "#0be016",
-                                                          shape:"square"});
+                                                          shape:"triangle"});
                                                         completed.push(to);
                                                       }
                                             }
@@ -4445,7 +4504,7 @@ document.getElementById('call_view0').onclick = function() {
                       }, selected: {
                         height: 10,
                           fill: '#e27979'
-                      }, shape: "square"}
+                      }, shape: "triangle"}
 
                       // new_data['nodes'].push(temp_node_dir2);
 
@@ -4453,7 +4512,7 @@ document.getElementById('call_view0').onclick = function() {
                                 new_data['nodes'].push({id: to, 
                                 physics:false, label: to, 
                                 size: 5, title:"Function Call", color: "#e27979", 
-                                shape:"square"});
+                                shape:"triangle"});
                                 completed.push(to);
                             }
                   }
