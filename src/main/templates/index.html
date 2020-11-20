@@ -82,6 +82,7 @@
 
             <div class="container mast2" id="mast2">
               <span class="PFile"><span id="diamond"></span>&nbsp (.py) File</span>
+              <span class="File"><span id="square"></span>&nbsp &nbsp &nbsp File</span>
               <span class="Func"><span id="triangle"></span>&nbsp &nbsp &nbsp Function Call</span>
               <!-- <span class="Func">Function Call</span> -->
               <span class="FuncDef"><span id="square"></span>&nbsp &nbsp &nbsp Function Definition</span>
@@ -96,6 +97,7 @@
             <div class="container mast3" id="mast3">
               <span class="Module"><span id="square"></span>&nbsp &nbsp &nbsp Module</span>
               <span class="PFile"><span id="square"></span>&nbsp &nbsp &nbsp (.py) File</span>
+              <span class="File"><span id="square"></span>&nbsp &nbsp &nbsp File</span>
               <span class="Class"><span id="square"></span>&nbsp &nbsp &nbsp Class Definition</span>
               <!-- <span class="Module">Module</span>
               <span class="File">File</span> -->
@@ -114,6 +116,7 @@
               <span class="Module">Module</span> -->
 
               <span class="PFile"><span id="square"></span>&nbsp &nbsp &nbsp (.py) File</span>
+              <span class="File"><span id="square"></span>&nbsp &nbsp &nbsp File</span>
               <span class="Func"><span id="triangle"></span>&nbsp &nbsp &nbsp Function Call</span>
               <span class="FuncDef"><span id="square"></span>&nbsp &nbsp &nbsp Function Definition</span>
               <!-- <span class="Class"><span id="square"></span>&nbsp &nbsp &nbsp Class Definition</span> -->
@@ -1327,7 +1330,11 @@ document.getElementById("integ_view").onclick = function() {
 
                                                             temp_node_dir2 = {id: to, group: 'func_Def', normal: {
                                                                     height: 8,
+<<<<<<< HEAD
                                                                     fill: '#0e4efa',
+=======
+                                                                    fill: '#0e4efa', 
+>>>>>>> upstream/master
                                                                 }, hovered: {
                                                                   height: 10,
                                                                     fill: '#0e4efa'
@@ -1339,8 +1346,13 @@ document.getElementById("integ_view").onclick = function() {
                                                                 // new_data2['nodes'].push(temp_node_dir2);
 
                                                                 if(completed.indexOf(to) === -1){
+<<<<<<< HEAD
                                                                     new_data2['nodes'].push({id: to, physics:false,
                                                                       label: to, size: 5, title:"Function Definition",
+=======
+                                                                    new_data2['nodes'].push({id: to, physics:false, 
+                                                                      label: to, size: 5, title:"Function Definition", 
+>>>>>>> upstream/master
                                                                       color: "#0e4efa", shape:"square"});
                                                                     completed.push(to);
                                                                   }
@@ -2826,7 +2838,7 @@ document.getElementById('collab_view').onclick = function() {
                                                     if(completed.indexOf(from) === -1){
                                                                     new_data2['nodes'].push({id: from, physics:false,
                                                                       label: from, size: 5,
-                                                                      color: "#c1e04d", shape:"square"});
+                                                                      color: "#999", shape:"square"});
                                                                     completed.push(from);
                                                                   }
 
@@ -4469,9 +4481,15 @@ document.getElementById('call_view0').onclick = function() {
                       // new_data['nodes'].push(temp_node_dir2);
 
                       if(completed.indexOf(to) === -1){
+<<<<<<< HEAD
                                 new_data['nodes'].push({id: to,
                                 physics:false, label: to,
                                 size: 5, title:"Function Definition", color: "#0e4efa",
+=======
+                                new_data['nodes'].push({id: to, 
+                                physics:false, label: to, 
+                                size: 5, title:"Function Definition", color: "#0e4efa", 
+>>>>>>> upstream/master
                                 shape:"triangle"});
                                 completed.push(to);
                             }
