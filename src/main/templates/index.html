@@ -2019,7 +2019,7 @@ document.getElementById("integ_view").onclick = function() {
 
 
         set_diff(numa, numd);
-        // set_diff_ult(a_, b_, c_, d_, e_, f_, g_, h_, i_, j_);
+        set_diff_ult(a_, b_, c_, d_, e_, f_, g_, h_, i_, j_);
         const myNode2 = document.getElementById("container2");
         myNode2.innerHTML = '';
 
@@ -2676,6 +2676,20 @@ document.getElementById('collab_view').onclick = function() {
 
   var completed = [];
 
+  var numa = 0;
+  var numd = 0;
+
+  var a_ = 0;
+  var b_ = 0;
+  var c_ = 0;
+  var d_ = 0;
+  var e_ = 0;
+  var f_ = 0;
+  var g_ = 0;
+  var h_ = 0;
+  var i_ = 0;
+  var j_ = 0;
+
 //  Got current files in this view
     cur_sup_files2.forEach((file) => {
       console.log(file);
@@ -2705,6 +2719,22 @@ document.getElementById('collab_view').onclick = function() {
                                     if (new_temp2.hasOwnProperty(key)){
                                       // Get the graph of previous vals too.
                                       temp_new_dat2 = Object.values(new_temp2[key]);
+
+                                      obje = getdiff2(temp_new_dat, temp_new_dat2);
+
+                                      numa = numa + obje[0];
+                                      numd = numd + obje[1];
+
+                                      a_ = a_ + obje[2][0];
+                                      b_ = b_ + obje[2][1];
+                                      c_ = c_ + obje[3][0];
+                                      d_ = d_ + obje[3][1];
+                                      e_ = e_ + obje[4][0];
+                                      f_ = f_ + obje[4][1];
+                                      g_ = g_ + obje[5][0];
+                                      h_ = h_ + obje[5][1];
+                                      i_ = i_ + obje[6][0];
+                                      j_ = j_ + obje[6][1];
 
                                       from = key;
                                       // Adding 'from' node
@@ -3167,6 +3197,29 @@ document.getElementById('collab_view').onclick = function() {
         for (var key in new_temp) {
                   if (new_temp.hasOwnProperty(key)){
                           temp_new_dat = Object.values(new_temp[key]);
+
+                          numa = numa + temp_new_dat.length;
+                          
+                          for(ka in temp_new_dat){
+                              if(temp_new_dat.hasOwnProperty(ka)){
+                                
+                                if (temp_new_dat[ka][1] == 'funcDef'){
+                                      a_ = a_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'ClassDef'){
+                                    c_ = c_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'func'){
+                                    e_ = e_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'module'){
+                                    g_ = g_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'file'){
+                                    i_ = i_ + 1;
+                                  }
+                              }
+                            }
                       
                             from = key;
                             // Adding 'from' node
@@ -3332,6 +3385,9 @@ document.getElementById('collab_view').onclick = function() {
         console.log("testing2")
         console.log(new_data2);
 
+        set_diff(numa, numd);
+        set_diff_ult(a_, b_, c_, d_, e_, f_, g_, h_, i_, j_);
+
         const myNode2 = document.getElementById("container2");
         myNode2.innerHTML = '';
 
@@ -3409,6 +3465,20 @@ document.getElementById('call_view').onclick = function() {
 
   var completed = [];
 
+  var numa = 0;
+  var numd = 0;
+
+  var a_ = 0;
+  var b_ = 0;
+  var c_ = 0;
+  var d_ = 0;
+  var e_ = 0;
+  var f_ = 0;
+  var g_ = 0;
+  var h_ = 0;
+  var i_ = 0;
+  var j_ = 0;
+
 //  Got current files in this view
     cur_sup_files2.forEach((file) => {
       console.log(file);
@@ -3433,11 +3503,29 @@ document.getElementById('call_view').onclick = function() {
                       if (new_temp.hasOwnProperty(key)){
                         // The graph of current file
                         temp_new_dat = Object.values(new_temp[key]);
+
+                        
                         
                         // Check if the node (.py file) is also present in the previous version of call graphs
                                     if (new_temp2.hasOwnProperty(key)){
                                       // Get the graph of previous vals too.
                                       temp_new_dat2 = Object.values(new_temp2[key]);
+
+                                      obje = getdiff2(temp_new_dat, temp_new_dat2);
+
+                                      numa = numa + obje[0];
+                                      numd = numd + obje[1];
+
+                                      a_ = a_ + obje[2][0];
+                                      b_ = b_ + obje[2][1];
+                                      c_ = c_ + obje[3][0];
+                                      d_ = d_ + obje[3][1];
+                                      e_ = e_ + obje[4][0];
+                                      f_ = f_ + obje[4][1];
+                                      g_ = g_ + obje[5][0];
+                                      h_ = h_ + obje[5][1];
+                                      i_ = i_ + obje[6][0];
+                                      j_ = j_ + obje[6][1];
 
                                       from = key;
                                       // Adding 'from' node
@@ -3897,6 +3985,30 @@ document.getElementById('call_view').onclick = function() {
         for (var key in new_temp) {
                   if (new_temp.hasOwnProperty(key)){
                           temp_new_dat = Object.values(new_temp[key]);
+
+                          numa = numa + temp_new_dat.length;
+
+                          for(ka in temp_new_dat){
+                              if(temp_new_dat.hasOwnProperty(ka)){
+                                
+                                if (temp_new_dat[ka][1] == 'funcDef'){
+                                      a_ = a_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'ClassDef'){
+                                    c_ = c_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'func'){
+                                    e_ = e_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'module'){
+                                    g_ = g_ + 1;
+                                  }
+                                  if (temp_new_dat[ka][1] == 'file'){
+                                    i_ = i_ + 1;
+                                  }
+                              }
+                            }
+
                       
                             from = key;
 
@@ -4057,6 +4169,9 @@ document.getElementById('call_view').onclick = function() {
 
         console.log("testing2")
         console.log(new_data2);
+
+        set_diff(numa, numd);
+        set_diff_ult(a_, b_, c_, d_, e_, f_, g_, h_, i_, j_);
 
         const myNode2 = document.getElementById("container2");
         myNode2.innerHTML = '';
