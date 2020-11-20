@@ -27,100 +27,124 @@ def new_page():
 
 @app.route('/download_data', methods=['POST'])
 def download():
-    # github = request.form['github']
-    # print(github)
+    github = request.form['github']
+    print(github)
 
-    # cmd = "git clone "+github
-    # cmd2 = 'git tag --sort=committerdate > ../tags.txt'
+    cmd = "git clone "+github
+    cmd2 = 'git tag --sort=committerdate > ../tags'
 
 
-    # test_dir = cur_dir+'/target_repo_dir'
-    # os.chdir(test_dir)
-    # os.system(cmd)
+    test_dir = cur_dir+'/target_repo_dir'
+    os.chdir(test_dir)
+    os.system(cmd)
 
-    # cur = os.getcwd()
-    # repo_dir = cur + '\\' + github.split('/')[-1].split('.')[0]
-    # os.chdir(repo_dir)
-    # os.system(cmd2)
-    # os.chdir(test_dir)
+    cur = os.getcwd()
+    try:
+        repo_dir = cur + '/' + github.split('/')[-1].split('.')[0]
+        os.chdir(repo_dir)
+    except:
+        repo_dir = cur + '\\' + github.split('/')[-1].split('.')[0]
+        os.chdir(repo_dir)
 
-    # tags = open('tags.txt').readlines()
+    os.system(cmd2)
+    os.chdir(test_dir)
 
-    # os.chdir(repo_dir)
-    
-    # ulti_dict = {}
-    # ulti_tree = {}
-    
-    # num = 0
+    tags = open('tags').readlines()
 
-    # for i in tags:
-    #     num += 1
-    #     print("\n\n\n New Tag: ", i, "\n\n")
+    os.chdir(repo_dir)
 
-        
-    #     cmd3 = 'git checkout ' + i
-    #     os.system(cmd3)
-        
+    ulti_dict = {}
+    ulti_tree = {}
 
-    #     os.chdir(test_dir)
-        
-        # cmdd = 'lcom '+ '.\\' + github.split('/')[-1].split('.')[0] +' > ..\\static\\cohesion_'+github.split('/')[-1].split('.')[0]+'_'+i + '.txt'
-        # print(test_dir)
-        # print(cmdd)
-        # os.system(cmdd)
+    num = 0
 
-    #     new_dir = github.split('/')[-1].split('.')[0]
-    #     tree = dir_walk(new_dir)
+    for i in tags:
+        num += 1
+        print("\n\n\n New Tag: ", i, "\n\n")
 
-        
-    #     returned_tree = get_dictionary(tree)
 
-    #     ulti_tree[str(num)] = tree
-    #     ulti_dict[str(num)] = returned_tree
+        cmd3 = 'git checkout ' + i
+        os.system(cmd3)
 
-    #     if debug == 1:
-    #         print(tree)
-    #         print("------------------------------")
-    #         print(returned_tree)
-    #         print("------------------------------")
-        
-    #     os.chdir(repo_dir)
-    
-        
-    
-    # os.chdir(cur_dir)
-    # pickle.dump( ulti_dict, open( "directory_map.dat", "wb" ))
-    # pickle.dump( ulti_tree, open( "ast_map.dat", "wb" ))
 
+        os.chdir(test_dir)
+        try:
+            cmdd = 'lcom '+ './' + github.split('/')[-1].split('.')[0] +' > ../static/cohesion_'+github.split('/')[-1].split('.')[0]+'_'+i
+            print(test_dir)
+            print(cmdd)
+            os.system(cmdd)
+        except:
+            cmdd = 'lcom '+ '.\\' + github.split('/')[-1].split('.')[0] +' > ..\\static\\cohesion_'+github.split('/')[-1].split('.')[0]+'_'+i + '.txt'
+            print(test_dir)
+            print(cmdd)
+            os.system(cmdd)
+
+        new_dir = github.split('/')[-1].split('.')[0]
+        tree = dir_walk(new_dir)
+
+
+        returned_tree = get_dictionary(tree)
+        ulti_tree[str(num)] = tree
+        ulti_dict[str(num)] = returned_tree
+
+        if debug == 1:
+            print(tree)
+            print("------------------------------")
+            print(returned_tree)
+            print("------------------------------")
+        os.chdir(repo_dir)
+
+
+
+    os.chdir(cur_dir)
+    try:
+        pickle.dump( ulti_dict, open( "./directory_map.dat", "wb" ))
+        pickle.dump( ulti_tree, open( "./ast_map.dat", "wb" ))
+    except:
+        pickle.dump( ulti_dict, open( "directory_map.dat", "wb" ))
+        pickle.dump( ulti_tree, open( "ast_map.dat", "wb" ))
     # ulti_tree = pickle.load( open( "ast_map.dat", "rb" ) )
     # ulti_dict = pickle.load( open( "directory_map.dat", "rb" ))
-    # # new_ulti_dict = json.dumps(ulti_dict)
+    # new_ulti_dict = json.dumps(ulti_dict)
 
-    # a2a = metric_a2a(ulti_tree)
-    # c2c = metric_c2c(ulti_dict)
-    # pickle.dump( a2a, open( "metric_a2a.dat", "wb" ))
-    # pickle.dump( c2c, open( "metric_c2c.dat", "wb" ))
+    a2a = metric_a2a(ulti_tree)
+    c2c = metric_c2c(ulti_dict)
+    try:
+        pickle.dump( a2a, open( "./metric_a2a.dat", "wb" ))
+        pickle.dump( c2c, open( "./metric_c2c.dat", "wb" ))
+    except:
+        pickle.dump( a2a, open( "metric_a2a.dat", "wb" ))
+        pickle.dump( c2c, open( "metric_c2c.dat", "wb" ))
 
     return redirect('/run')
 
 @app.route('/run')
 def hello_world():
-    
+
     script_dir = os.getcwd()
 
     new_dir = os.path.join(os.getcwd(), 'target_repo_dir')
 
 
     tree = dir_walk(new_dir)
-
-    ulti_dict = pickle.load( open( "directory_map.dat", "rb" ))
+    try:
+        ulti_dict = pickle.load( open( "./directory_map.dat", "rb" ))
+    except:
+        ulti_dict = pickle.load( open( "directory_map.dat", "rb" ))
     new_ulti_dict = json.dumps(ulti_dict)
-    
-    ulti_tree = pickle.load( open( "ast_map.dat", "rb" ) )
+
+    try:
+        ulti_tree = pickle.load( open( "./ast_map.dat", "rb" ) )
+    except:
+        ulti_tree = pickle.load( open( "ast_map.dat", "rb" ) )
     tags = open('target_repo_dir/tags.txt').readlines()
 
-    metric_a2a = pickle.load( open( "metric_a2a.dat", "rb" ) )
-    metric_c2c = pickle.load( open( "metric_c2c.dat", "rb" ) )
+    try:
+        metric_a2a = pickle.load( open( "./metric_a2a.dat", "rb" ) )
+        metric_c2c = pickle.load( open( "./metric_c2c.dat", "rb" ) )
+    except:
+        metric_a2a = pickle.load( open( "metric_a2a.dat", "rb" ) )
+        metric_c2c = pickle.load( open( "metric_c2c.dat", "rb" ) )
 
     return render_template('index.html', tags = tags, ulti_tree = {'body': ulti_tree} ,ulti_dict = new_ulti_dict, tree = tree, metric_a2a = {'body':metric_a2a}, metric_c2c = {'body':metric_c2c})
 
@@ -141,16 +165,11 @@ def get_dictionary(tree):
                     print("successful")
                     if i['value'] not in new_calls_tree.keys():
                         new_calls_tree[i['value']] = dict(final_obj)
-    
+
     # pickle.dump( new_calls_tree, open( "test2.dat", "wb" ))
 
     return new_calls_tree
 
 if __name__ == '__main__':
 
-    app.run(debug = True)
-
-    
-
-
-    
+    app.run(debug = False)
