@@ -1,33 +1,34 @@
 # AC2
+
 > Towards Understanding Architectural Changes in Python Projects
 
 ![](landing_page.png)
 
 ## Directory Structure
 
-* [file_map_engine/](.\main\file_map_engine)
-  * [ast_engine.py](.\main\file_map_engine\ast_engine.py)
-  * [ast_helper.py](.\main\file_map_engine\ast_helper.py)
-  * [call_dir.py](.\main\file_map_engine\call_dir.py)
-  * [engine.py](.\main\file_map_engine\engine.py)
-  * [test.ipynb](.\main\file_map_engine\test.ipynb)
-* [static/](.\main\static)
-  * [This directory contains the cohesion data for the target repository]
-* [target_repo_dir/](.\main\target_repo_dir)
-  * [tags.txt](.\main\target_repo_dir\tags.txt)
-* [templates/](.\main\templates)
-  * [home.html](.\main\templates\home.html)
-  * [index.html](.\main\templates\index.html)
-* [main.py](.\main\main.py)
-* [requirements.txt](.\main\requirements.txt)
+- [file_map_engine/](.\main\file_map_engine)
+  - [ast_engine.py](.\main\file_map_engine\ast_engine.py)
+  - [ast_helper.py](.\main\file_map_engine\ast_helper.py)
+  - [call_dir.py](.\main\file_map_engine\call_dir.py)
+  - [engine.py](.\main\file_map_engine\engine.py)
+  - [test.ipynb](.\main\file_map_engine\test.ipynb)
+- [static/](.\main\static)
+  - [This directory contains the cohesion data for the target repository]
+- [target_repo_dir/](.\main\target_repo_dir)
+  - [tags.txt](.\main\target_repo_dir\tags.txt)
+- [templates/](.\main\templates)
+  - [home.html](.\main\templates\home.html)
+  - [index.html](.\main\templates\index.html)
+- [main.py](.\main\main.py)
+- [requirements.txt](.\main\requirements.txt)
 
 ## Cohesion value interpretation (Using lcom)
 
 Score:
 
-- ``==1`` - indicates a cohesive class, which is the "good" class;
-- ``>=2`` - indicates a problem. The class should be split into so many smaller classes;
-- ``==0`` - happens when there are no methods in a class. This is also a "bad" class.
+- `==1` - indicates a cohesive class, which is the "good" class;
+- `>=2` - indicates a problem. The class should be split into so many smaller classes;
+- `==0` - happens when there are no methods in a class. This is also a "bad" class.
 
 ## Installation
 
@@ -60,21 +61,18 @@ python main.py
 Then, open your browser to 'http://localhost:5000/'
 
 > #### Enter a Python Github Repository link and press enter to generate annotated graphs in available views.
-![](demo_image_1.png)
+>
+> ![](demo_image_1_new.png)
 
 > #### Compare two different versions of a repository by their respective annotated call graphs and collaboration graphs
-![](demo_image_2.png)
 
 ## Meta
 
 Developed by:
-DHEERAJ VAGAVOLU 
+DHEERAJ VAGAVOLU
 (cs17b028@iittp.ac.in)
 
 Research in Intelligent Software and Human Analytics (RISHA) Lab, Indian Institute of Technology Tirupati
 
 Team:
 Dheeraj Vagavolu, A Eashaan Rao and Sridhar Chimalakonda
-
-
-
