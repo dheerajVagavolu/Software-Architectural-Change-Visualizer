@@ -69,7 +69,7 @@ Then, open your browser to 'http://localhost:5000/'
 
 Developed by:
 DHEERAJ VAGAVOLU 
-dheerajrox98@gmail.com
+(cs17b028@iittp.ac.in)
 
 Research in Intelligent Software and Human Analytics (RISHA) Lab, Indian Institute of Technology Tirupati
 
