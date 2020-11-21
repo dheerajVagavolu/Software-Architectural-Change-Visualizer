@@ -69,7 +69,7 @@ Then, open your browser to 'http://localhost:5000/'
 > ![](demo_image_last.png)
 ## How to Contact?
 
-For more information about the project and support requests, feel free to contact A Eashaan Rao(cs19s501@iittp.ac.in), Dheeraj V(cs17b028@iittp.ac.in) and Sridhar Chimalakonda(ch@iittp.ac.in). Please open an issue or pull request if you find any bug or have an idea for enhancement.
+For more information about the project and support requests, feel free to contact A Eashaan Rao(cs19s501@iittp.ac.in), Dheeraj Vagavolu(cs17b028@iittp.ac.in) and Sridhar Chimalakonda(ch@iittp.ac.in). Please open an issue or pull request if you find any bug or have an idea for enhancement.
 
 
 Research in Intelligent Software and Human Analytics (RISHA) Lab, Indian Institute of Technology Tirupati
