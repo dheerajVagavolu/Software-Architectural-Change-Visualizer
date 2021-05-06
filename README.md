@@ -67,6 +67,12 @@ Then, open your browser to 'http://localhost:5000/'
 > #### Compare two different versions of a repository by their respective annotated call graphs and collaboration graphs
 >
 > ![](demo_image_last.png)
+
+
+## Results
+We have evaluated 10 repositories using AC2. For each repository, we have compared its first release with its subsequent releases.
+
+
 ## How to Contact?
 
 For more information about the project and support requests, feel free to contact A Eashaan Rao(cs19s501@iittp.ac.in), Dheeraj Vagavolu(cs17b028@iittp.ac.in) and Sridhar Chimalakonda(ch@iittp.ac.in). Please open an issue or pull request if you find any bug or have an idea for enhancement.
