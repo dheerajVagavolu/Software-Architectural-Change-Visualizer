@@ -6,21 +6,21 @@
 
 ## Directory Structure
 
-- [file_map_engine/](.src/main/file_map_engine)
-  - [ast_engine.py](.src/main/file_map_engine/ast_engine.py)
-  - [ast_helper.py](.src/main/file_map_engine/ast_helper.py)
-  - [call_dir.py](.src/main/file_map_engine/call_dir.py)
-  - [engine.py](.src/main/file_map_engine/engine.py)
-  - [test.ipynb](.src/main/file_map_engine/test.ipynb)
-- [static/](.src/main/static)
+- [file_map_engine/](src/main/file_map_engine)
+  - [ast_engine.py](src/main/file_map_engine/ast_engine.py)
+  - [ast_helper.py](src/main/file_map_engine/ast_helper.py)
+  - [call_dir.py](src/main/file_map_engine/call_dir.py)
+  - [engine.py](src/main/file_map_engine/engine.py)
+  - [test.ipynb](src/main/file_map_engine/test.ipynb)
+- [static/](src/main/static)
   - [This directory contains the cohesion data for the target repository]
-- [target_repo_dir/](.src/main/target_repo_dir)
-  - [tags.txt](.src/main/target_repo_dir/tags.txt)
-- [templates/](.src/main/templates)
-  - [home.html](.src/main/templates/home.html)
-  - [index.html](.src/main/templates/index.html)
-- [main.py](.src/main/main.py)
-- [requirements.txt](.src/main/requirements.txt)
+- [target_repo_dir/](src/main/target_repo_dir)
+  - [tags.txt](src/main/target_repo_dir/tags.txt)
+- [templates/](src/main/templates)
+  - [home.html](src/main/templates/home.html)
+  - [index.html](src/main/templates/index.html)
+- [main.py](src/main/main.py)
+- [requirements.txt](src/main/requirements.txt)
 
 ## Cohesion value interpretation (Using lcom)
 
