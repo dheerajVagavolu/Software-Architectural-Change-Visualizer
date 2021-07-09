@@ -30,6 +30,10 @@ Score:
 - `>=2` - indicates a problem. The class should be split into so many smaller classes;
 - `==0` - happens when there are no methods in a class. This is also a "bad" class.
 
+## Overview
+
+The tool has been tested on windows 64bit and ubuntu 64bit. Currently, AC2 only supports python3 projects.
+
 ## Installation
 
 Clone or download this github repository:
